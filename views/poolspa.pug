@@ -1,0 +1,160 @@
+extends layout
+
+append head
+append style
+
+append content
+    #poolTempModal.modal.fade(tabindex='-1' aria-labelledby='poolTempModal' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                button.btn-close(type='button' aria-label='Close')
+                .modal-body.text-center
+                    h2 Set Pool Temp
+                    br
+                    br
+                    #poolSlider.text-center.mx-auto
+                    br
+                    br
+                    br
+                    p
+                    button#poolTempOnOff.btn.btn-lg.btn-secondary(data-bs-toggle='button')
+                        i.fa-solid.fa-power-off
+                        |  On
+    #spaTempModal.modal.fade(tabindex='-1' aria-labelledby='spaTempModal' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                button.btn-close(type='button' aria-label='Close')
+                .modal-body.text-center
+                    h2 Set Spa Temp
+                    br
+                    br
+                    #spaSlider.text-center.mx-auto
+                    br
+                    br
+                    br
+                    p
+                    button#spaTempOnOff.btn.btn-lg.btn-secondary(data-bs-toggle='button')
+                        i.fa-solid.fa-power-off
+                        |  On
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-swim.px-3.py-2
+        a.navbar-brand(href='#') Desert Poolside
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#collapsibleNavbar')
+            span.navbar-toggler-icon
+        #collapsibleNavbar.collapse.navbar-collapse
+            ul.navbar-nav.ms-auto
+                li.nav-item
+                    a.nav-link.mx-2(href='/') Home
+                li.nav-item
+                    a.nav-link.mx-2.active(href='poolspa') Pool & Spa
+                li.nav-item
+                    a.nav-link.mx-2(href='grill') Grill
+                li.nav-item
+                    a.nav-link.mx-2(href='cooling') Cooling
+                li.nav-item
+                    a.nav-link.mx-2(href='media') Audio/Video   
+
+    .container
+        h1.text-center.mt-3.mb-4.h-title #{title}
+        .row
+            .card.card-bigg.shadow.border.mb-4.py-3.px-3
+                .card-body.p-0
+                    .card-title.py-2
+                        h2.text-center.pb-0 Pool Controls
+                    .container-fluid.poolSpecCont
+                        .row.text-center.row-cols-1.row-cols-lg-4.row-cols-md-2.g-2
+                            .col.px-2
+                                .card.card-smm.text-decoration-none
+                                    #poolCirculation.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                        h3
+                                            img(src='/images/circulate.png' alt='Circulation on' width='40' height='34')
+                                            span#poOn  Pool On
+                                        a#pool-circulate.stretched-link(href='#' role='button' data-bs-toggle='button' aria-disabled='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #poolLight.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3 &#x1F4A1; Lights
+                                        a#pool_light.stretched-link(href='#' role='button' data-bs-toggle='button' aria-pressed='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #fount.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3 &#x1F4A6; Fountains
+                                        a#fountain.stretched-link(href='#' role='button' data-bs-toggle='button' aria-disabled='true')
+                            .col.px-2
+                                .card.card-smm.text-decoration-none
+                                    #poolTempLink.card-body.py-0.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text.m-0
+                                            h3.mb-1 &#x1F321;&#xFE0F; Set Temp
+                                            a#poolTempBtn.stretched-link(href='#' role='button' data-bs-toggle='button' aria-disabled='true')
+                                            h6
+                                                p.mb-0
+                                                    small
+                                                        span Is now: 
+                                                        span#poolCurrentTemps
+                                                        span &deg; F
+                                                        br
+                                                        span Set for: 
+                                                        span#poolSetTemps.m-1
+                                                        h2.pFlake &#x2744;&#xFE0F;
+                                                        h2.pFlame &#x1F525;
+        .row
+            .card.card-bigg.shadow.border.mb-4.py-3.px-3
+                .card-body.p-0
+                    .card-title.py-2
+                        h2.text-center.pb-0 Spa Controls
+                    .container-fluid
+                        .row.text-center.row-cols-1.row-cols-lg-3.row-cols-md-2.g-2
+                            .col.px-2
+                                .card.card-smm.text-decoration-none
+                                    #spaCirculation.card-body.align-items-center.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3
+                                                img(src='/images/circulate.png' alt='Circulation on' width='40' height='34')
+                                                span#spOn  Spa On
+                                        a#spa-circulate.stretched-link(href='#' role='button' data-bs-toggle='button' aria-pressed='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #spaLight.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3 &#x1F4A1; Lights
+                                        a#spa_light.stretched-link(href='#' role='button' data-bs-toggle='button' aria-pressed='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #blowsHard.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3 &#x1FAE7; Blowers
+                                        a#blower.stretched-link(href='#' role='button' data-bs-toggle='button' aria-pressed='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #spaJets.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3
+                                                i.fa-solid.fa-water
+                                                |  Jets
+                                        a#spa_jets.stretched-link(href='#' role='button' data-bs-toggle='button' aria-pressed='true')
+                            .col.px-2
+                                .card.card-smm.text-center.text-decoration-none
+                                    #spaTempLink.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text.swall.m-0
+                                            h3.mb-1 &#x1F321;&#xFE0F; Set Temp
+                                            a#spaTempBtn.stretched-link(href='#' role='button' data-bs-toggle='button' aria-disabled='true')
+                                            h6
+                                                p.mb-0
+                                                    small
+                                                        span Is now: 
+                                                        span#spaCurrentTemps
+                                                        span &deg; F
+                                                        br
+                                                        span Set for: 
+                                                        span#spaSetTemps
+                                                        br
+                                                        h2.sFlake &#x2744;&#xFE0F;
+                                                        h2.sFlame &#x1F525;
+            p
+                h2.text-center.mb-4.h-title
+                    em * Only one body of water (Pool or Spa) can run and be heated/cooled at a time.
+
+        include foot
+append script

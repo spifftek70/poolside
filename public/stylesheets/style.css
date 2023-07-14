@@ -1,0 +1,195 @@
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("/images/IMG_0224.jpeg");
+  color: white; text-shadow: rgb(43, 43, 43) 0.1em 0.1em 0.3em;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+#poolTempLink > p:nth-child(8){
+    margin: 0px !important;
+    margin-bottom: 0px;
+}
+
+.navbar{
+  font-size: 20px;
+}
+
+.bg-swim {
+  --bs-bg-opacity: 1;
+  background-color:#1c4b56 !important;
+}
+
+.text-bg-swim {
+  color: #fff !important;
+  background-color: #1c4b56 (--bs-bg-opacity, 1) !important;
+}
+
+
+#poolTempLink > p:nth-child(7){
+    margin: 0px !important;
+}
+
+#poolTempLink{
+    padding-bottom: 0px !important;
+}
+
+.txtUs{
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.poolSpecCont{
+    min-height: 180px;
+}
+
+h3{
+    margin: 0px;
+}
+
+iframe{
+  border-radius: 25px;
+}
+
+.dtps{
+  border-radius: 25px;
+  background-color: #1c4b56; 
+}
+
+#poolTempLink > p:nth-child(8){
+  margin: 0px !important;
+  margin-bottom: 0px;
+}
+
+#poolTempLink > p:nth-child(7){
+  margin: 0px !important;
+}
+
+#poolTempLink{
+  padding-bottom: 0px !important;
+  color:#fff;
+}
+
+.card-bigg{
+  background-color: #98bebe;
+  border-radius: 25px; 
+}
+
+.abbc{
+  background-color: #98bebe;
+  border-radius: 25px; 
+}
+
+.container-fluid{
+  min-height: 180px;
+}
+
+.accd{
+  height: 100%;
+}
+
+.col{
+   background: none;
+   text-align: center;
+   border: none;
+   height: 180px;
+}
+
+.card-smm{
+   background: none;
+   text-align: center;
+   border: none;
+   min-height: 98%;
+}
+
+.btn-circ{
+  --bs-btn-color: #000;
+  --bs-btn-bg: aquamarine;
+  --bs-btn-border-color: #aquamarine;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: rgb(109, 235, 193);
+  --bs-btn-hover-border-color: rgb(109, 235, 193);
+  --bs-btn-focus-shadow-rgb: 11, 172, 204;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #3dd5f3;
+  --bs-btn-active-border-color: rgb(109, 235, 193);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: aquamarine;
+  --bs-btn-disabled-border-color: aquamarine;
+}
+
+.card-text{
+  padding-top: 35px;
+}
+
+.swall{
+  padding-top: 15px;
+}
+
+.modal-body{
+  background-color: #98bebe;
+}
+
+h3{
+  margin: 0px;
+}
+
+#spaSlider .rs-range-color  {
+  background: conic-gradient(from 120deg, rgb(117, 9, 9) 0%, rgb(207, 120, 124) 34%, rgb(135, 151, 219) 66%, rgb(28, 58, 166) 100%) !important;
+ background-repeat: no-repeat;
+}
+#spaSlider .rs-handle .rs-first {
+ background: radial-gradient(ellipse at center, rgb(239, 172, 172) 0%, rgb(219, 97, 97) 34%, rgb(197, 23, 23) 100%) !important;
+}
+#spaSlider .rs-handle .rs-second  {
+ background: radial-gradient(ellipse at center, rgb(151, 169, 236) 0%, rgb(73, 98, 198) 34%, rgb(10, 23, 142) 100%) !important;
+}
+#spaSlider .rs-border  {
+ border-color: rgb(47, 31, 75) !important;
+}
+
+#spaSlider > div > div.rs-inner-container > div > span > div{
+ background-color: #98bebe;
+}
+#spaSlider > div > div.rs-bar.rs-transition.rs-first > div{
+ background: radial-gradient(ellipse at center, rgb(239, 172, 172) 0%, rgb(219, 97, 97) 34%, rgb(197, 23, 23) 100%);
+}
+#spaSlider > div > div.rs-bar.rs-transition.rs-second > div{
+ background: radial-gradient(ellipse at center, rgb(151, 169, 236) 0%, rgb(73, 98, 198) 34%, rgb(10, 23, 142) 100%)
+}
+
+
+#poolSlider .rs-range-color  {
+   background: conic-gradient(from 120deg, rgb(117, 9, 9) 0%, rgb(207, 120, 124) 34%, rgb(135, 151, 219) 66%, rgb(28, 58, 166) 100%) !important;
+  background-repeat: no-repeat;
+}
+#poolSlider .rs-handle .rs-first {
+  background: radial-gradient(ellipse at center, rgb(239, 172, 172) 0%, rgb(219, 97, 97) 34%, rgb(197, 23, 23) 100%) !important;
+}
+#poolSlider .rs-handle .rs-second  {
+  background: radial-gradient(ellipse at center, rgb(151, 169, 236) 0%, rgb(73, 98, 198) 34%, rgb(10, 23, 142) 100%) !important;
+}
+#poolSlider .rs-border  {
+  border-color: rgb(47, 31, 75) !important;
+}
+
+#poolSlider > div > div.rs-inner-container > div > span > div{
+  background-color: #98bebe;
+}
+#poolSlider > div > div.rs-bar.rs-transition.rs-first > div{
+  /* background-color: red; */
+  background: radial-gradient(ellipse at center, rgb(239, 172, 172) 0%, rgb(219, 97, 97) 34%, rgb(197, 23, 23) 100%);
+}
+#poolSlider > div > div.rs-bar.rs-transition.rs-second > div{
+  /* background-color: blue; */
+  background: radial-gradient(ellipse at center, rgb(151, 169, 236) 0%, rgb(73, 98, 198) 34%, rgb(10, 23, 142) 100%)
+}
+
+
+#poolSlider > div > span{
+  font-size: 20px;
+}
+#spaSlider > div > span{
+  font-size: 20px;
+} 

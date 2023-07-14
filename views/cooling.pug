@@ -1,0 +1,49 @@
+extends layout
+
+append head
+append style
+
+append content
+
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-swim.px-3.py-2
+    a.navbar-brand(href='#') Desert Poolside
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#collapsibleNavbar')
+      span.navbar-toggler-icon
+    #collapsibleNavbar.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        li.nav-item
+          a.nav-link.mx-2(href='/') Home
+        li.nav-item
+          a.nav-link.mx-2(href='poolspa') Pool & Spa
+        li.nav-item
+          a.nav-link.mx-2(href='grill') Grill
+        li.nav-item
+          a.nav-link.mx-2.active(href='cooling') Cooling
+        li.nav-item
+          a.nav-link.mx-2(href='media') Audio/Video   
+  .container.mb-3
+    h1.text-center.mt-3.mb-4.h-title #{title}
+    .row.abbc.shadow.border.mb-4.py-3.px-3
+      //- .card.card-bigg.shadow.border.mb-4.py-3.px-3
+      //-   .card-body.p-0
+      //-     .card-title.py-2
+      p
+        h2.text-center.pb-3 Finding & Using the Misting System
+        .container-fluid
+          .row.ratio.ratio-16x9.pb-3.text-center.g-2
+            iframe.embed-responsive-item(src='https://www.youtube.com/embed/3x6jotXV3O4' title='YouTube video player' frameborder='0' allowfullscreen='')
+              //- h2.text-center.mb-4.h-title
+              //-   em * Please don&apos;t forget to turn off the Misting System at the end of your time!!!
+    .row.abbc.shadow.border.mb-4.py-3.px-3
+      //- .card.card-bigg.shadow.border.mb-4.py-3.px-3
+      //-   .card-body.p-0
+      //-     .card-title.py-2
+      p
+        h2.text-center.pb-3 Using the Evaporator
+        .container-fluid
+          .row.ratio.ratio-16x9.pb-3.text-center.g-2
+            iframe.embed-responsive-item(src='https://www.youtube.com/embed/mJ8CvHHmDKI' title='YouTube video player' frameborder='0' allowfullscreen='')
+              //- h2.text-center.mb-4.h-title
+              //-   em * Please don&apos;t forget to turn off the Misting System at the end of your time!!!
+    include foot
+append script
