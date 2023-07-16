@@ -65,9 +65,17 @@ iframe{
   margin: 0px !important;
 }
 
-#poolTempLink{
+/* #poolTempLink{
   padding-bottom: 0px !important;
   color:#fff;
+} */
+
+#poolDelay{
+  font-size: 18px;
+}
+
+#spaDelay{
+  font-size: 18px;
 }
 
 .card-bigg{

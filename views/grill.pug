@@ -6,21 +6,21 @@ append style
 append content
 
   nav.navbar.navbar-expand-lg.navbar-dark.bg-swim.px-3.py-2
-    a.navbar-brand(href='#') Desert Poolside
-    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#collapsibleNavbar')
+    a.navbar-brand(href='/') #[image(src='images/dpspalms.png' alt='AirPlay' style='width:40px; height:40px;')] Desert Poolside
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#collapsibleNavbar') 
       span.navbar-toggler-icon
     #collapsibleNavbar.collapse.navbar-collapse
       ul.navbar-nav.ms-auto
         li.nav-item
-          a.nav-link.mx-2(href='/') Home
+          a.nav-link.mx-2(href='/') Welcome
         li.nav-item
           a.nav-link.mx-2(href='poolspa') Pool & Spa
         li.nav-item
           a.nav-link.mx-2.active(href='grill') Grill
         li.nav-item
-          a.nav-link.mx-2(href='cooling') Cooling
+          a.nav-link.mx-2(href='cooling') Cooling 
         li.nav-item
-          a.nav-link.mx-2(href='media') Audio/Video   
+          a.nav-link.mx-2(href='media') Audio/Video  
   .container.mb-3
     h1.text-center.mt-3.mb-4.h-title #{title}
     .row.abbc.shadow.border.mb-4.py-3.px-3

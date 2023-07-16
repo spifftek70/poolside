@@ -9,7 +9,7 @@ $(function(){
   //     'Message from server: ' + event.data + "<br>";
   // };
 
-  $(".pFlame, .pFlake, .sFlame, .sFlake").hide();
+  $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay" ).hide();
 
   $( '#topheader .navbar-nav a' ).on( 'click', function () {
     $( '#collapsibleNavbar > ul' ).find( 'a.active' ).removeClass( 'active' );
@@ -139,6 +139,7 @@ $(function(){
 
   $('#poolCirculation').on('click', function(e){
     e.preventDefault();
+    $this = $(this);
     if ($(this).hasClass('btn-info')){
       data1 = {"id":6,"state":true};
       data2 = {"id":2,"state":true};
@@ -146,22 +147,46 @@ $(function(){
       data1 = {"id":6,"state":false};
       data2 = {"id":2,"state":false};
       }
-    $("#poolCirculation").toggleClass("btn-info btn-circ")
     setPool(data1);
     setTimeout(500);
     setPool(data2);
-    });
+    var elem = $('#poolDelay');
+    countingDn(elem, $this);
+  });
 
   $('#spaCirculation').on('click', function(e){
     e.preventDefault();
-    if ($(this).hasClass('btn-info')){
+    $this = $(this);
+    if ($this.hasClass('btn-info')){
       data = {"id":1,"state":true}
       } else {
       data = {"id":1,"state":false}
       }
-      $("#spaCirculation").toggleClass("btn-info btn-circ");
-      setPool(data);
-    });
+    setPool(data);
+    var elem = $('#spaDelay');
+    countingDn(elem, $this);
+  });
+
+  function countingDn(a, b){
+    var timeLeft = 25;
+    var timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+      if (timeLeft == -1) {
+          clearTimeout(timerId);
+          doSomething();
+        } else {
+          a.show();
+          a.html(timeLeft + ' sec remaining');
+          timeLeft--;
+        }
+      }
+
+    function doSomething() {
+      a.hide();
+      b.toggleClass("btn-info btn-circ");
+    } 
+  }
 
   $("#poolLight").on('click', function(e){
     e.preventDefault();
@@ -522,7 +547,8 @@ function bothOff(){
     } else return;
   }
 
-  setInterval(function(e){    getStatus();
+  setInterval(function(e){    
+    getStatus();
   }, 5000);
   
 });
