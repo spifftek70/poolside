@@ -151,7 +151,9 @@ $(function(){
     setTimeout(500);
     setPool(data2);
     var elem = $('#poolDelay');
-    countingDn(elem, $this);
+    cntdown(elem, $this);
+    setTimeout(25000);
+    $this.toggleClass("btn-info btn-circ");
   });
 
   $('#spaCirculation').on('click', function(e){
@@ -164,27 +166,38 @@ $(function(){
       }
     setPool(data);
     var elem = $('#spaDelay');
-    countingDn(elem, $this);
+    cntdown(elem, $this);
+    setTimeout(25000);
+    $this.toggleClass("btn-info btn-circ");
   });
 
-  function countingDn(a, b){
-    var timeLeft = 25;
-    var timerId = setInterval(countdown, 1000);
+  function cntdown(a, b){
+    b.addClass("disabled");
+    a.empty();
+    if (!timerId) {
+      var timeLeft = 25;
+      var timerId = setInterval(countdown, 1000);
+    } else {
+      // clearTimeout(timerId);
+      clearInterval(timerId);
+      timerId = null;
+    } 
 
     function countdown() {
-      if (timeLeft == -1) {
-          clearTimeout(timerId);
+      if (timeLeft <= 0) {
+          // clearTimeout(timerId);
+          clearInterval(timerId);
           doSomething();
         } else {
           a.show();
-          a.html(timeLeft + ' sec remaining');
+          a.html(timeLeft + ' sec delay');
           timeLeft--;
         }
       }
 
     function doSomething() {
       a.hide();
-      b.toggleClass("btn-info btn-circ");
+      b.removeClass("disabled");
     } 
   }
 
