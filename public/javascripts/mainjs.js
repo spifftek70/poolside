@@ -2,7 +2,7 @@
 
 $(function(){
 
-  // const webSocket = new WebSocket('ws://autopool.lan:4200/');
+  // const webSocket = new WebSocket('ws://192.168.68.166:4200/');
   // webSocket.onmessage = (event) => {
   //   console.log(event)
   //   $('#messages').html();
@@ -88,7 +88,7 @@ $(function(){
     }
     $.ajax({
       type: 'PUT',
-      url: 'http://autopool.lan:4200/state/body/heatMode',
+      url: 'http://192.168.68.166:4200/state/body/heatMode',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(tempData),
@@ -118,7 +118,7 @@ $(function(){
     }
     $.ajax({
       type: 'PUT',
-      url: 'http://autopool.lan:4200/state/body/heatMode',
+      url: 'http://192.168.68.166:4200/state/body/heatMode',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(tempData),
@@ -280,7 +280,7 @@ $(function(){
   function setPool(jdata){
     $.ajax({
       type: 'PUT',
-      url: 'http://autopool.lan:4200/state/circuit/setState',
+      url: 'http://192.168.68.166:4200/state/circuit/setState',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(jdata),
@@ -304,7 +304,7 @@ function getStatus(){
   var poolCoolSetpt;
   var poolChil;
   var spaChil;
-  $.getJSON("http://autopool.lan:4200/state/all", function(json){
+  $.getJSON("http://192.168.68.166:4200/state/all", function(json){
     var circ = json.circuits;
     var teps = json.temps;
     var heaters = json.heaters;
@@ -466,7 +466,7 @@ function bothOff(){
   function setPoolCond(data){
     $.ajax({
       type: 'PUT',
-      url: 'http://autopool.lan:4200/state/body/setPoint',
+      url: 'http://192.168.68.166:4200/state/body/setPoint',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(data),
