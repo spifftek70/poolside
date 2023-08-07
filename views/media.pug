@@ -23,44 +23,55 @@ append content
           a.nav-link.mx-2.active(href='media') Audio/Video 
         li.nav-item
           a.nav-link.mx-2(role='button' href='sms:15015157182') Contact Us 
-  .container.mb-3
+  .container
     h1.text-center.mt-3.mb-4.h-title #{title}
-    h3.text-center.bg-warning Must be connected to WiFi!
-    .row.abbc.shadow.border.mb-4.py-3.px-3
-        h2.text-center.pb-3 Connecting to Speakers
-        .container-fluid.p-3.mb-4.dtps
-            h3.text-center.pb-3 Connecting to an iPhone or iPad
-            .row.pb-3.text-center.g-2
-                p
-                    h4.pb-3
-                        | You may connect your iPhone to "Patio Speakers" using  <br>
-                        | Airplay Audio #[image(src='images/audio_ap.png' alt='AirPlay' style='width:30px; height:30px;')] from within your music app of preference (i.e. Apple Music,
-                        | Spotify, Pandora, Amazon Music, etc..)
-        .container-fluid.p-3.dtps
-            h3.text-center.pb-3 Connecting to an Android Phone or Tablet
-            .row.pb-3.text-center.g-2
-                p
-                    h4.pb-3
-                        | You may connect your iPhone or iPad to "Patio Speakers" using the <br>
-                        | #[a(href='https://play.google.com/store/apps/details?id=com.evotap.airplay&hl=en_US&gl=US' target="_blank" style="text-decoration:none") AirPlay App] or other such app #[image(src='images/gg_ap.png' alt='AirPlay' style='width:40px; height:40px;')].
-    .row.abbc.shadow.border.mb-4.py-3.px-3
-        h2.text-center.pb-3 Connecting to TV
-        .container-fluid.p-3.mb-4.dtps
-            h3.text-center.pb-3 Connecting to an iPhone or iPad
-            .row.pb-3.text-center.g-2
-                p
-                    h4.pb-3
-                        | You may connect your iPhone to "Desert Poolside" using <br> 
-                        | Airplay Video #[image(src='images/video_ap.png' alt='AirPlay' style='width:30px; height:30px;')] from within your video app of preference ( i.e. Apple TV,
-                        | Netflix, Hulu +, Amazon Prime, etc..)
-        .container-fluid.p-3.dtps
-            h3.text-center.pb-3 Connecting to an Android Phone or Tablet
-            .row.pb-3.text-center.g-2
-                p
-                    h4.pb-3
-                        | You may connect your smartphone to "Desert Poolside" using <br> 
-                        | #[a(href='https://play.google.com/store/apps/details?id=com.evotap.airplay&hl=en_US&gl=US' target="_blank" style="text-decoration:none") AirPlay App] or other such app #[image(src='images/gg_ap.png' alt='AirPlay' style='width:40px; height:40px;')].
-                        
-      
+    h3.text-center.bg-warning.mb-1 Must be connected to WiFi!
+    .row
+        .card.card-bigg.shadow.med.border.mb-3.py-3.px-3
+            .card-body.p-0
+                .card-title.py-0
+                    h2.text-center.pb-2 Connecting to Speakers
+                .container-fluid.meck
+                    .row.text-center.row-cols-1.row-cols-lg-2.row-cols-md-1
+                        .col.px-2
+                            .card.card-smm.text-decoration-none
+                                .card-body.shadow.border.dtps.mb-2
+                                    h3.pb-2
+                                      | iPhone or iPad
+                                    h4
+                                      | Connect to "Desert Poolside" using
+                                      | Airplay Audio #[image(src='images/audio_ap.png' alt='AirPlay' style='width:30px; height:30px;')] from within your music app of preference.
+                        .col.px-2
+                            .card.card-smm.text-decoration-none
+                                .card-body.shadow.border.dtps.mb-2
+                                    h3.pb-2
+                                      | Android Devices
+                                    h4
+                                      | Connect to "Desert Poolside" using
+                                      | #[a(href='https://play.google.com/store/apps/details?id=com.evotap.airplay&hl=en_US&gl=US' target="_blank" style="text-decoration:none") AirPlay App] or other such app #[image(src='images/gg_ap.png' alt='AirPlay' style='width:40px; height:40px;')]. 
+    .row
+        .card.card-bigg.shadow.border.med.mb-3.py-3.px-3
+            .card-body.p-0
+                .card-title.py-1
+                    h2.text-center.pb-0 Connecting to TV
+                .container-fluid.meck
+                    .row.text-center.row-cols-1.row-cols-lg-2.row-cols-md-1
+                        .col.px-2
+                            .card.card-smm.text-decoration-none
+                                .card-body.align-items-center.shadow.border.dtps.mb-2
+                                    h3.pb-2
+                                      | iPhone or iPad
+                                    h4
+                                      | Connect to "Desert Poolside ATV" using
+                                      | Airplay Video #[image(src='images/video_ap.png' alt='AirPlay' style='width:30px; height:30px;')] from within your video app of preference.
+                        .col.px-2
+                            .card.card-smm.text-decoration-none
+                                .card-body.align-items-center.shadow.border.dtps.mb-2
+                                    h3.pb-2
+                                      | Android Devices
+                                    h4
+                                      | Connect to "Desert Poolside ATV" using
+                                      | #[a(href='https://play.google.com/store/apps/details?id=com.evotap.airplay&hl=en_US&gl=US' target="_blank" style="text-decoration:none") AirPlay App] or other such app #[image(src='images/gg_ap.png' alt='AirPlay' style='width:40px; height:40px;')].
+     
     include foot
 append script

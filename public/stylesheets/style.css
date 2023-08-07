@@ -54,6 +54,7 @@ iframe{
 .dtps{
   border-radius: 25px;
   background-color: #1c4b56; 
+  color: white;
 }
 
 #poolTempLink > p:nth-child(8){
@@ -83,18 +84,26 @@ iframe{
   border-radius: 25px; 
 }
 
+.meck{
+  height: 355px;
+}
+
+.med{
+  min-height: 98%;
+}
+
 .abbc{
   background-color: #98bebe;
   border-radius: 25px; 
 }
 
 .container-fluid{
-  min-height: 180px;
-}
-
-.accd{
   height: 100%;
 }
+
+/* .accd{
+  height: 100%;
+} */
 
 .col{
    background: none;
