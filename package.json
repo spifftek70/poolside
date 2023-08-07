@@ -24,7 +24,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "description": "Website created to use for Swimpy Hosts. `poolspa` page provides interface to controll you pool and hot tub through NodeJS PoolController Nixie. # poolside",
+  "description": "Website created to use for Swimply Hosts. `poolspa` page provides interface to controll you pool and hot tub through NodeJS PoolController Nixie. # poolside",
   "main": "app.js",
   "author": "",
   "license": "ISC"
