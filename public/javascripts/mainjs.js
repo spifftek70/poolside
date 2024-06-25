@@ -48,6 +48,71 @@ $(function(){
     $('#poolTempModal, #spaTempModal').modal('hide');
   });
 
+  let logWs;
+
+  function connectLogWebSocket() {
+      if (logWs && logWs.readyState === WebSocket.OPEN) {
+          logWs.onclose = function () {}; // Prevent reconnect attempt on manual close
+          logWs.close(); // Close existing WebSocket properly
+      }
+      logWs = new WebSocket('ws://0.0.0.0:4200');
+
+      logWs.onopen = function () {
+          console.log("WebSocket connection established.");
+      };
+
+      logWs.onmessage = function(event) {
+          try {
+              const data = JSON.parse(event.data);
+              if (data.message) {
+                  let messageContent = data.message;
+                  // Attempt to parse if the message is expected to be in JSON format
+                  if (messageContent.includes("progress update")) {
+                      // Manually correct common JSON format issues before parsing
+                      // messageContent = messageContent.replace(/'/g, '"'); // Replace single quotes with double quotes
+                      console.log("msg content: ", messageContent);
+                  //     const startIndex = messageContent.indexOf('{');
+                  //     const endIndex = messageContent.lastIndexOf('}') + 1;
+                  //     const currentImgData = messageContent.match(/\{.*\}/)[0];
+                  //     const jsonString = messageContent.slice(startIndex, endIndex);
+
+                  //     try {
+                  //         const progressData = JSON.parse(jsonString);
+                  //         const currentImgName = JSON.parse(currentImgData);
+                  //         if (progressData.description && progressData.description === 'Image Files') {
+                  //             updateProgressBar(progressData.current, progressData.total);
+                  //         } else if (currentImgName.description.includes('Current file:')) {
+                  //             updateCurrentFile(currentImgName.description);
+                  //         }
+                      // } catch (parseError) {
+                      //     console.error('Error parsing progress data:', parseError);
+                      // }
+                  } else if (messageContent.includes("progress completion")) {
+                      completeProgress();
+                  } else {
+                      updateLog(messageContent);
+                  }
+              }
+          } catch (error) {
+              console.error('Error processing WebSocket message:', error);
+          }
+      };
+
+      logWs.onclose = function(e) {
+          if (!e.wasClean) {
+              console.log('WebSocket is closed. Reconnect will be attempted in 2 seconds.', e.reason);
+              setTimeout(connectLogWebSocket, 2000);
+          }
+      };
+
+      logWs.onerror = function(err) {
+          console.error('WebSocket encountered error: ', err.message, 'Closing socket');
+          logWs.close();
+      };
+  }
+
+  connectLogWebSocket();
+
   $("#poolSlider").roundSlider({
       stop: function () {
         var poolHeatTo = $("#poolSlider").roundSlider("getValue", 1);

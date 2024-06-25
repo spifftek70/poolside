@@ -1,5 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
+const https = require('https');
+const fs = require('fs');
 var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -31,6 +33,18 @@ app.use('/javascripts', express.static(path.join(__dirname, 'public/javascripts/
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+const options = {
+  key: fs.readFileSync('~/certs/server.key'), // replace it with your key path
+  cert: fs.readFileSync('~/certs/server.crt'), // replace it with your certificate path
+}
+
+https.createServer(options, (req, res) => {
+  res.writeHead(200);
+  res.end('Hello, HTTPS World!');
+}).listen(443, () => {
+console.log('Server is running on port 443');
+});node
 
 // error handler
 app.use(function(err, req, res, next) {
