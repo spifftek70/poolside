@@ -35,8 +35,8 @@ app.use(function(req, res, next) {
 });
 
 const options = {
-  key: fs.readFileSync('~/certs/server.key'), // replace it with your key path
-  cert: fs.readFileSync('~/certs/server.crt'), // replace it with your certificate path
+  key: fs.readFileSync('/home/pi/certs/server.key'), // replace it with your key path
+  cert: fs.readFileSync('/home/pi/certs/server.crt'), // replace it with your certificate path
 }
 
 https.createServer(options, (req, res) => {
