@@ -1,12 +1,15 @@
 var createError = require('http-errors');
-var express = require('express');
-const https = require('https');
-const fs = require('fs');
-var app = express();
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var jsdom = require('jsdom');
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const jsdom = require('jsdom');
+const WebSocket = require('ws');
+
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,26 +27,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use('/stylesheets', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
-app.use('/javascripts', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
-app.use('/javascripts', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
-app.use('/javascripts', express.static(path.join(__dirname, 'public/javascripts/appCalls')))
+app.use('/stylesheets', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+app.use('/javascripts', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+app.use('/javascripts', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+app.use('/javascripts', express.static(path.join(__dirname, 'public/javascripts/appCalls')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-const options = {
-  key: fs.readFileSync('/home/pi/certs/server.key'), // replace it with your key path
-  cert: fs.readFileSync('/home/pi/certs/server.crt'), // replace it with your certificate path
-}
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
-https.createServer(options, (req, res) => {
-  res.writeHead(200);
-  res.end('Hello, HTTPS World!');
-}).listen(443, () => {
-console.log('Server is running on port 443');
+// Start the Express server on port 3000
+server.listen(3000, 'autopool.local', () => {
+  console.log('Express server listening on autopool.local:3000');
+});
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+
+  ws.on('message', (message) => {
+    console.log(`Received message => ${message}`);
+    // Broadcast the received message to all clients
+    wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(message);
+        }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
 });
 
 // error handler

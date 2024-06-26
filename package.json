@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
+    "start": "node app.js",
+    "devstart": "nodemon app.js",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "dependencies": {
@@ -19,7 +19,7 @@
     "ngx-bootstrap": "^10.2.0",
     "pug": "^3.0.2",
     "sockjs": "^0.3.24",
-    "ws": "^8.13.0"
+    "ws": "^8.17.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

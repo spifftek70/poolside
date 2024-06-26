@@ -16,7 +16,7 @@
  var http_port = 3000;
 
  var port = normalizePort(process.env.PORT || http_port);
- app.set('port', port);
+//  app.set('port', port);
  const cors = require('cors');
 
 // use middleware
