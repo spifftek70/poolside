@@ -1,5 +1,6 @@
 const express = require('express');
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -7,7 +8,13 @@ const createError = require('http-errors');
 const { Server } = require('socket.io');
 
 const app = express();
-const server = http.createServer(app);
+
+// Load SSL certificate and key
+const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'), 'utf8');
+const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+const server = https.createServer(credentials, app);
 const io = new Server(server, {
   path: '/socket.io', // default path
   transports: ['websocket'], // ensures it uses WebSocket

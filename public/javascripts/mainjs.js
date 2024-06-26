@@ -1,4 +1,27 @@
-$(document).ready(function() {
+// $(document).ready(function() {
+//   const socket = io('ws://autopool.local:4200', {
+//     path: '/socket.io',
+//     transports: ['websocket']
+//   });
+
+//   socket.on('connect', function() {
+//     console.log('Connected to WebSocket server');
+//   });
+
+//   socket.on('message', function(message) {
+//     console.log('Received message:', message);
+//   });
+
+//   socket.on('disconnect', function() {
+//     console.log('Disconnected from WebSocket server');
+//   });
+
+//   // Send a message to the server
+//   socket.send('Hello from client');
+// });
+
+$(function(){
+
   const socket = io('ws://autopool.local:4200', {
     path: '/socket.io',
     transports: ['websocket']
@@ -18,16 +41,6 @@ $(document).ready(function() {
 
   // Send a message to the server
   socket.send('Hello from client');
-});
-
-$(function(){
-
-  // const webSocket = new WebSocket('ws://autopool.local:4200/');
-  // webSocket.onmessage = (event) => {
-  //   console.log(event)
-  //   $('#messages').html();
-  //     'Message from server: ' + event.data + "<br>";
-  // };
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay" ).hide();
 
