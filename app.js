@@ -8,9 +8,9 @@ const logger = require('morgan');
 const { Server } = require('socket.io');
 
 // Load SSL certificate
-const privateKey = fs.readFileSync('/path/to/your/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/path/to/your/cert.pem', 'utf8');
-const ca = fs.readFileSync('/path/to/your/chain.pem', 'utf8');
+const privateKey = fs.readFileSync('/ssl/key.pem', 'utf8');
+const certificate = fs.readFileSync('/ssl/cert.pem', 'utf8');
+const ca = fs.readFileSync('/ssl/csr.pem', 'utf8');
 
 const credentials = {
   key: privateKey,
