@@ -1,8 +1,6 @@
-$(function() {
-  // Log WebSocket connection
+$(function () {
   const logSocket = connectLogWebSocket();
 
-  // Main WebSocket connection
   const mainSocket = io("https://autopool.local:4200", {
     path: "/socket.io",
     transports: ["websocket"],
@@ -20,7 +18,6 @@ $(function() {
     console.log("Disconnected from WebSocket server");
   });
 
-  // Send a message to the server
   mainSocket.send("Hello from client");
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
@@ -62,18 +59,16 @@ $(function() {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  let logWs;
-
   function connectLogWebSocket() {
     const socket = io("https://autopool.local:4200", {
       path: "/socket.io",
       transports: ["websocket"],
     });
-  
+
     socket.on("connect", function () {
       console.log("WebSocket connection established.");
     });
-  
+
     socket.on("message", function (message) {
       try {
         const data = JSON.parse(message);
@@ -91,15 +86,15 @@ $(function() {
         console.error("Error processing WebSocket message:", error);
       }
     });
-  
+
     socket.on("disconnect", function (e) {
       console.log("Disconnected from WebSocket server");
     });
-  
+
     socket.on("error", function (err) {
       console.error("WebSocket encountered error: ", err.message);
     });
-  
+
     return socket;
   }
 
@@ -181,7 +176,6 @@ $(function() {
     });
     return true;
   });
-
   $("#spaTempOnOff").on("click", function (e) {
     e.preventDefault();
     var $this = $(this);
@@ -431,7 +425,7 @@ $(function() {
     var poolCoolSetpt;
     var poolChil;
     var spaChil;
-    var json = connectLogWebSocket()
+    var json = connectLogWebSocket();
     // $.getJSON("https://autopool.local:4200/state/all", function (json) {
     var circ = json.circuits;
     var teps = json.temps;
@@ -473,7 +467,7 @@ $(function() {
     $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
     $("#spaCurrentTemps").text(spaChil);
     $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
-  // });
+    // });
   }
 
   function makeChanges(bb, hh, iSS) {
@@ -499,7 +493,6 @@ $(function() {
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").removeClass("btn-danger");
     $("#poolTempLink").addClass("btn-info");
-
     $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> On');
     $("#poolTempOnOff").addClass("btn-secondary");
     $("#poolTempOnOff").removeClass("btn-primary");
