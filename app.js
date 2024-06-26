@@ -7,10 +7,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { Server } = require('socket.io');
 
-// Load SSL certificate
-const privateKey = fs.readFileSync('/ssl/key.pem', 'utf8');
-const certificate = fs.readFileSync('/ssl/cert.pem', 'utf8');
-const ca = fs.readFileSync('/ssl/csr.pem', 'utf8');
+// // Load SSL certificate
+// const privateKey = fs.readFileSync('/ssl/key.pem', 'utf8');
+// const certificate = fs.readFileSync('/ssl/cert.pem', 'utf8');
+// const ca = fs.readFileSync('/ssl/csr.pem', 'utf8');
+
+const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'), 'utf8');
+const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'utf8');
+const ca = fs.readFileSync(path.join(__dirname, 'ssl', 'csr.pem'), 'utf8');
 
 const credentials = {
   key: privateKey,
