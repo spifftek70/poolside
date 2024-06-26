@@ -1,4 +1,24 @@
+$(document).ready(function() {
+  const socket = io('ws://autopool.local:4200', {
+    path: '/socket.io',
+    transports: ['websocket']
+  });
 
+  socket.on('connect', function() {
+    console.log('Connected to WebSocket server');
+  });
+
+  socket.on('message', function(message) {
+    console.log('Received message:', message);
+  });
+
+  socket.on('disconnect', function() {
+    console.log('Disconnected from WebSocket server');
+  });
+
+  // Send a message to the server
+  socket.send('Hello from client');
+});
 
 $(function(){
 

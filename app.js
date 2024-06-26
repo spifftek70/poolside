@@ -1,15 +1,17 @@
-var createError = require('http-errors');
 const express = require('express');
 const http = require('http');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const jsdom = require('jsdom');
-const WebSocket = require('ws');
+const createError = require('http-errors');
+const { Server } = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const io = new Server(server, {
+  path: '/socket.io', // default path
+  transports: ['websocket'], // ensures it uses WebSocket
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -46,20 +48,17 @@ server.listen(3000, 'autopool.local', () => {
   console.log('Express server listening on autopool.local:3000');
 });
 
-wss.on('connection', (ws) => {
+// WebSocket handling
+io.on('connection', (socket) => {
   console.log('Client connected');
 
-  ws.on('message', (message) => {
+  socket.on('message', (message) => {
     console.log(`Received message => ${message}`);
     // Broadcast the received message to all clients
-    wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(message);
-        }
-    });
+    socket.broadcast.send(message);
   });
 
-  ws.on('close', () => {
+  socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
 });
