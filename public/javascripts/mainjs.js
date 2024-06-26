@@ -1,7 +1,10 @@
 $(function () {
-  const logSocket = connectLogWebSocket();
-
   const mainSocket = io("https://autopool.local:4200", {
+    path: "/socket.io",
+    transports: ["websocket"],
+  });
+  
+  const logSocket = io("https://autopool.local:4200", {
     path: "/socket.io",
     transports: ["websocket"],
   });

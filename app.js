@@ -1,21 +1,26 @@
+const express = require('express');
+const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const express = require('express');
-const https = require('https');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const createError = require('http-errors');
 const { Server } = require('socket.io');
 
+// Load SSL certificate
+const privateKey = fs.readFileSync('/path/to/your/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/path/to/your/cert.pem', 'utf8');
+const ca = fs.readFileSync('/path/to/your/chain.pem', 'utf8');
+
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: ca
+};
+
 const app = express();
-
-// SSL certificate
-const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-
-const server = https.createServer(credentials, app);
-const io = new Server(server, {
+const httpsServer = https.createServer(credentials, app);
+const io = new Server(httpsServer, {
   path: '/socket.io',
   transports: ['websocket'],
 });
@@ -50,9 +55,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Start the Express server on port 3000
-server.listen(3000, 'autopool.local', () => {
-  console.log('Express server listening on autopool.local:3000');
+// Start the HTTPS server on port 3000
+httpsServer.listen(3000, () => {
+  console.log('Express server listening on port 3000');
 });
 
 // WebSocket handling
