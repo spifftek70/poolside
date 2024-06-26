@@ -8,6 +8,7 @@ $(function () {
 
   mainSocket.on("connect", function () {
     console.log("Connected to WebSocket server");
+    mainSocket.send("Hello from client");
   });
 
   mainSocket.on("message", function (message) {
@@ -17,8 +18,6 @@ $(function () {
   mainSocket.on("disconnect", function () {
     console.log("Disconnected from WebSocket server");
   });
-
-  mainSocket.send("Hello from client");
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
 
@@ -98,7 +97,70 @@ $(function () {
     return socket;
   }
 
-  connectLogWebSocket();
+  function getStatus() {
+    // Listen for status updates from the WebSocket
+    logSocket.on("message", function (message) {
+      try {
+        const json = JSON.parse(message);
+        var aa;
+        var bb;
+        var cc;
+        var cnom;
+        var poolVals;
+        var spaVals;
+        var spaSetPt;
+        var spaCoolSetpt;
+        var poolSetPts;
+        var poolCoolSetpt;
+        var poolChil;
+        var spaChil;
+
+        var circ = json.circuits;
+        var teps = json.temps;
+        var heaters = json.heaters;
+        $.each(circ, function (i, field) {
+          aa = field.id;
+          bb = field.isOn;
+          $.each(teps.bodies, function (i, eid) {
+            cc = eid.temp;
+            dd = eid.heatStatus;
+            ee = eid.heatMode;
+            cnom = eid.name;
+            if (cnom == "Spa") {
+              spaChil = cc;
+              spaSetPt = eid.setPoint;
+              spaCoolSetpt = eid.coolSetpoint;
+              spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+              $("#spaSlider").roundSlider("setValue", spaVals);
+              $("#spaCurrentTemps").text(spaChil);
+            }
+            if (cnom == "Pool") {
+              poolChil = cc;
+              poolSetPts = eid.setPoint;
+              poolCoolSetpt = eid.coolSetpoint;
+              poolVals =
+                poolSetPts.toString() + ", " + poolCoolSetpt.toString();
+              $("#poolSlider").roundSlider("setValue", poolVals);
+              $("#poolCurrentTemps").text(poolChil);
+            }
+            statusUpdate(aa, bb);
+          });
+        });
+        $.each(heaters, function (i, hett) {
+          var bID = hett.bodyId;
+          var hID = hett.isOn;
+          var isCool = hett.isCooling;
+          makeChanges(bID, hID, isCool);
+        });
+        $("#poolCurrentTemps").text(poolChil);
+        $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
+        $("#spaCurrentTemps").text(spaChil);
+        $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
+      } catch (error) {
+        console.error("Error processing status update:", error);
+      }
+    });
+  }
 
   $("#poolSlider").roundSlider({
     stop: function () {
@@ -113,10 +175,10 @@ $(function () {
         coolSetpoint: poolCoolTo,
       };
       setPoolCond(tmpdataLow);
-      setTimeout(500);
-      setPoolCond(tmpdataHi);
+      setTimeout(function () {
+        setPoolCond(tmpdataHi);
+      }, 500);
       $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
-      setTimeout(500);
     },
   });
 
@@ -133,11 +195,10 @@ $(function () {
         heatSetpoint: spaCoolTo,
       };
       setPoolCond(tmpdataLow);
-      setTimeout(500);
-      setPoolCond(tmpdataHi);
-
-      $("#spaSetTemps").text(spaHeatTo + "° - " + spaHeatTo + "°F");
-      setTimeout(500);
+      setTimeout(function () {
+        setPoolCond(tmpdataHi);
+      }, 500);
+      $("#spaSetTemps").text(spaHeatTo + "° - " + spaCoolTo + "°F");
     },
   });
 
@@ -176,6 +237,7 @@ $(function () {
     });
     return true;
   });
+
   $("#spaTempOnOff").on("click", function (e) {
     e.preventDefault();
     var $this = $(this);
@@ -214,8 +276,9 @@ $(function () {
 
   $("#poolCirculation").on("click", function (e) {
     e.preventDefault();
-    $this = $(this);
-    if ($(this).hasClass("btn-info")) {
+    var $this = $(this);
+    var data1, data2;
+    if ($this.hasClass("btn-info")) {
       data1 = {
         id: 6,
         state: true,
@@ -235,17 +298,20 @@ $(function () {
       };
     }
     setPool(data1);
-    setTimeout(500);
-    setPool(data2);
+    setTimeout(function () {
+      setPool(data2);
+    }, 500);
     var elem = $("#poolDelay");
     cntdown(elem, $this);
-    setTimeout(25000);
-    $this.toggleClass("btn-info btn-circ");
+    setTimeout(function () {
+      $this.toggleClass("btn-info btn-circ");
+    }, 25000);
   });
 
   $("#spaCirculation").on("click", function (e) {
     e.preventDefault();
-    $this = $(this);
+    var $this = $(this);
+    var data;
     if ($this.hasClass("btn-info")) {
       data = {
         id: 1,
@@ -260,8 +326,9 @@ $(function () {
     setPool(data);
     var elem = $("#spaDelay");
     cntdown(elem, $this);
-    setTimeout(25000);
-    $this.toggleClass("btn-info btn-circ");
+    setTimeout(function () {
+      $this.toggleClass("btn-info btn-circ");
+    }, 25000);
   });
 
   function cntdown(a, b) {
@@ -274,7 +341,6 @@ $(function () {
       clearInterval(timerId);
       timerId = null;
     }
-
     function countdown() {
       if (timeLeft <= 0) {
         clearInterval(timerId);
@@ -361,7 +427,6 @@ $(function () {
       };
     }
     $("#blowsHard").toggleClass("btn-info btn-light");
-
     setPool(data);
   });
 
@@ -409,65 +474,6 @@ $(function () {
         return data;
       },
     });
-    // return true;
-  }
-
-  function getStatus() {
-    var aa;
-    var bb;
-    var cc;
-    var cnom;
-    var poolVals;
-    var spaVals;
-    var spaSetPt;
-    var spaCoolSetpt;
-    var poolSetPts;
-    var poolCoolSetpt;
-    var poolChil;
-    var spaChil;
-    var json = connectLogWebSocket();
-    // $.getJSON("https://autopool.local:4200/state/all", function (json) {
-    var circ = json.circuits;
-    var teps = json.temps;
-    var heaters = json.heaters;
-    $.each(circ, function (i, field) {
-      aa = field.id;
-      bb = field.isOn;
-      $.each(teps.bodies, function (i, eid) {
-        cc = eid.temp;
-        dd = eid.heatStatus;
-        ee = eid.heatMode;
-        cnom = eid.name;
-        if (cnom == "Spa") {
-          spaChil = cc;
-          spaSetPt = eid.setPoint;
-          spaCoolSetpt = eid.coolSetpoint;
-          spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
-          $("#spaSlider").roundSlider("setValue", spaVals);
-          $("#spaCurrentTemps").text(spaChil);
-        }
-        if (cnom == "Pool") {
-          poolChil = cc;
-          poolSetPts = eid.setPoint;
-          poolCoolSetpt = eid.coolSetpoint;
-          poolVals = poolSetPts.toString() + ", " + poolCoolSetpt.toString();
-          $("#poolSlider").roundSlider("setValue", poolVals);
-          $("#poolCurrentTemps").text(poolChil);
-        }
-        statusUpdate(aa, bb);
-      });
-    });
-    $.each(heaters, function (i, hett) {
-      var bID = hett.bodyId;
-      var hID = hett.isOn;
-      var isCool = hett.isCooling;
-      makeChanges(bID, hID, isCool);
-    });
-    $("#poolCurrentTemps").text(poolChil);
-    $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
-    $("#spaCurrentTemps").text(spaChil);
-    $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
-    // });
   }
 
   function makeChanges(bb, hh, iSS) {
@@ -493,10 +499,9 @@ $(function () {
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").removeClass("btn-danger");
     $("#poolTempLink").addClass("btn-info");
-    $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> On');
+    $("#poolTempOnOff").html(" On");
     $("#poolTempOnOff").addClass("btn-secondary");
     $("#poolTempOnOff").removeClass("btn-primary");
-
     $(".pFlake").hide();
     $(".pFlame").hide();
   }
@@ -505,7 +510,6 @@ $(function () {
     $("#poolTempLink").removeClass("btn-info");
     $("#poolTempLink").removeClass("btn-danger");
     $("#poolTempLink").addClass("btn-primary");
-
     $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> off');
     $("#poolTempOnOff").addClass("btn-primary");
     $("#poolTempOnOff").removeClass("btn-secondary");
@@ -518,7 +522,6 @@ $(function () {
     $("#poolTempLink").removeClass("btn-info");
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").addClass("btn-danger");
-
     $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> off');
     $("#poolTempOnOff").addClass("btn-primary");
     $("#poolTempOnOff").removeClass("btn-secondary");
@@ -530,11 +533,9 @@ $(function () {
     $("#spaTempLink").removeClass("btn-primary");
     $("#spaTempLink").removeClass("btn-danger");
     $("#spaTempLink").addClass("btn-info");
-
-    $("#spaTempOnOff").html('<i class="fa-solid fa-power-off"></i> On');
+    $("#spaTempOnOff").html(" On");
     $("#spaTempOnOff").addClass("btn-secondary");
     $("#spaTempOnOff").removeClass("btn-primary");
-
     $(".pFlake").hide();
     $(".pFlame").hide();
   }
@@ -543,8 +544,7 @@ $(function () {
     $("#spaTempLink").removeClass("btn-info");
     $("#spaTempLink").removeClass("btn-danger");
     $("#spaTempLink").addClass("btn-primary");
-
-    $("#spaTempOnOff").html('<i class="fa-solid fa-power-off"></i> Off');
+    $("#spaTempOnOff").html(" Off");
     $("#spaTempOnOff").removeClass("btn-secondary");
     $("#spaTempOnOff").addClass("btn-primary");
     $(".sFlame").hide();
@@ -555,8 +555,7 @@ $(function () {
     $("#spaTempLink").removeClass("btn-info");
     $("#spaTempLink").removeClass("btn-primary");
     $("#spaTempLink").addClass("btn-danger");
-
-    $("#spaTempOnOff").html('<i class="fa-solid fa-power-off"></i> Off');
+    $("#spaTempOnOff").html(" Off");
     $("#spaTempOnOff").removeClass("btn-secondary");
     $("#spaTempOnOff").addClass("btn-primary");
     $(".sFlake").hide();
@@ -567,16 +566,13 @@ $(function () {
     $("#spaTempLink").removeClass("btn-danger");
     $("#spaTempLink").removeClass("btn-primary");
     $("#spaTempLink").addClass("btn-info");
-
     $("#poolTempLink").removeClass("btn-danger");
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").addClass("btn-info");
-
-    $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> On');
+    $("#poolTempOnOff").html(" On");
     $("#poolTempOnOff").removeClass("btn-primary");
     $("#poolTempOnOff").addClass("btn-secondary");
-
-    $("#spaTempOnOff").html('<i class="fa-solid fa-power-off"></i> On');
+    $("#spaTempOnOff").html(" On");
     $("#spaTempOnOff").removeClass("btn-primary");
     $("#spaTempOnOff").addClass("btn-secondary");
     $(".pFlake, .pFlame, .sFlake, .sFlame").hide();
@@ -586,7 +582,7 @@ $(function () {
     $.ajax({
       type: "PUT",
       url: "https://autopool.local:4200/state/body/setPoint",
-      contentType: "applicationjson; charset=utf-8",
+      contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(data),
       success: function (dataz) {
@@ -595,6 +591,7 @@ $(function () {
     });
     return true;
   }
+
   var ck1;
   var aC1;
   var ck2;
