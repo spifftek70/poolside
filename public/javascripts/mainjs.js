@@ -83,6 +83,7 @@ $(function () {
           } else {
             updateLog(messageContent);
           }
+          return message;
         }
       } catch (error) {
         console.error("Error processing WebSocket message:", error);
@@ -121,6 +122,7 @@ $(function () {
         var circ = json.circuits;
         var teps = json.temps;
         var heaters = json.heaters;
+        var field = connectLogWebSocket()
         $.each(circ, function (i, field) {
           aa = field.id;
           bb = field.isOn;
