@@ -3,11 +3,6 @@ $(function () {
     path: "/socket.io",
     transports: ["websocket"],
   });
-  
-  const logSocket = io("https://autopool.local:4200", {
-    path: "/socket.io",
-    transports: ["websocket"],
-  });
 
   mainSocket.on("connect", function () {
     console.log("Connected to WebSocket server");
