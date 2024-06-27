@@ -9,12 +9,11 @@ const { Server } = require('socket.io');
 // Load SSL certificate
 const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'), 'utf8');
 const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'utf8');
-const ca = fs.readFileSync(path.join(__dirname, 'ssl', 'chain.pem'), 'utf8');
 
 const credentials = {
   key: privateKey,
-  cert: certificate,
-  ca: ca
+  cert: certificate
+  // ca is omitted
 };
 
 const app = express();
