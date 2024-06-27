@@ -13,6 +13,7 @@ const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'ut
 const credentials = {
   key: privateKey,
   cert: certificate
+  // ca is omitted
 };
 
 const app = express();

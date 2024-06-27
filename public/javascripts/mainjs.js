@@ -3,6 +3,11 @@ $(function () {
     path: "/socket.io",
     transports: ["websocket"],
   });
+  
+  const logSocket = io("https://autopool.local:4200", {
+    path: "/socket.io",
+    transports: ["websocket"],
+  });
 
   mainSocket.on("connect", function () {
     console.log("Connected to WebSocket server");
@@ -78,7 +83,6 @@ $(function () {
           } else {
             updateLog(messageContent);
           }
-          return message;
         }
       } catch (error) {
         console.error("Error processing WebSocket message:", error);
@@ -113,12 +117,11 @@ $(function () {
         var poolCoolSetpt;
         var poolChil;
         var spaChil;
-        var rtn = connectLogWebSocket();
-        console.log(rtn);
-        var circ = rtn.circuits;
-        var teps = rtn.temps;
-        var heaters = rtn.heaters;
-        console.log("circ", circ, "teps", teps, "heaters", heaters);
+
+        var circ = json.circuits;
+        var teps = json.temps;
+        var heaters = json.heaters;
+        var field = connectLogWebSocket()
         $.each(circ, function (i, field) {
           aa = field.id;
           bb = field.isOn;
