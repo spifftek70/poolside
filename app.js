@@ -1,24 +1,13 @@
 const express = require('express');
-const https = require('https');
-const fs = require('fs');
+const http = require('http');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { Server } = require('socket.io');
 
-// Load SSL certificate
-const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'), 'utf8');
-
-const credentials = {
-  key: privateKey,
-  cert: certificate
-  // ca is omitted
-};
-
 const app = express();
-const httpsServer = https.createServer(credentials, app);
-const io = new Server(httpsServer, {
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
   path: '/socket.io',
   transports: ['websocket'],
 });
@@ -53,8 +42,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Start the HTTPS server on port 3000
-httpsServer.listen(3000, () => {
+// Start the HTTP server on port 3000
+httpServer.listen(3000, () => {
   console.log('Express server listening on port 3000');
 });
 
