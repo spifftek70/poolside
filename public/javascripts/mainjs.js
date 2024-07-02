@@ -54,7 +54,7 @@ $(function () {
     max: "104",
   });
 
-  getStatus();
+  // getStatus();
 
   $(".closers").on("click", function (e) {
     e.preventDefault();
