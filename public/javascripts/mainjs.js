@@ -4,10 +4,10 @@ $(function () {
     transports: ["websocket"],
   });
   
-  const logSocket = io("http://autopool.local:4200", {
-    path: "/socket.io",
-    transports: ["websocket"],
-  });
+  // const logSocket = io("http://autopool.local:4200", {
+  //   path: "/socket.io",
+  //   transports: ["websocket"],
+  // });
 
   mainSocket.on("connect", function () {
     console.log("Connected to WebSocket server");
@@ -102,7 +102,7 @@ $(function () {
 
   function getStatus() {
     // Listen for status updates from the WebSocket
-    logSocket.on("message", function (message) {
+    mainSocket.on("message", function (message) {
       try {
         const json = JSON.parse(message);
         var aa;
