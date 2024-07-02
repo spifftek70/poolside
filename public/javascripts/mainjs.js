@@ -5,37 +5,37 @@ $(function () {
   });
 
   mainSocket.on("connect", function () {
-    console.log("Connected to WebSocket server");
+    // console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
   mainSocket.on("disconnect", function () {
-    console.log("Disconnected from WebSocket server");
+    // console.log("Disconnected from WebSocket server");
   });
 
   // Example of specific event handling based on your provided data
   mainSocket.on("pump", function (message) {
-    console.log("Pump message: ", message);
+    // console.log("Pump message: ", message);
     parseMsg(message);
   });
 
   mainSocket.on("body", function (message) {
-    console.log("Body message: ", message);
+    // console.log("Body message: ", message);
     parseMsg(message);
   });
 
   mainSocket.on("temps", function (message) {
-    console.log("Temps message: ", message);
+    // console.log("Temps message: ", message);
     parseMsg(message);
   });
 
   mainSocket.on("heater", function (message) {
-    console.log("Heater message: ", message);
+    // console.log("Heater message: ", message);
     parseMsg(message);
   });
 
   mainSocket.on("controller", function (message) {
-    console.log("Controller message: ", message);
+    // console.log("Controller message: ", message);
     parseMsg(message);
   });
 
@@ -83,6 +83,7 @@ $(function () {
       aa = field.id;
       bb = field.isOn;
       if (field.name == "Pool") {
+        console.log("POOLTIME: ", field);
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
         poolSetPt = field.setPoint;
@@ -102,6 +103,7 @@ $(function () {
         }
       }
       if (field.name == "Spa") {
+        console.log("HOTTER THAN SPATIME: ", field);
         $("#spaCurrentTemps").text(field.temp);
         spaCoolSetpt = field.coolSetpoint;
         spaSetPt = field.setPoint;
