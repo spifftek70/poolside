@@ -137,7 +137,6 @@ $(function () {
       const bb = data.isOn;
       console.log("Temps: ", data.name);
       if (data.name === "Pool") {
-        console.log("temps: ", temps);
         $("#poolCurrentTemps").text(data.temp);
         const poolCoolSetpt = data.coolSetpoint;
         const poolSetPt = data.setPoint;
