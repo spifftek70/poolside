@@ -99,8 +99,8 @@ $(function () {
     $.each(bods, function (i, field) {
       if (field.name == "Pool") {
         $("#poolCurrentTemps").text(field.temp);
-        field.setPoint
-      // }
+        // field.setPoint
+      }
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
       }
