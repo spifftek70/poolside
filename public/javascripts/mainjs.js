@@ -108,7 +108,7 @@ $(function () {
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
         spaCoolSetpt = field.coolSetpoint;
-        spaSetPt = field.setCoolPoint;
+        spaSetPt = field.setPoint;
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
       }
