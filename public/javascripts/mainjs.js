@@ -105,7 +105,7 @@ $(function () {
     mainSocket.on("message", function (message) {
       try {
         const json = JSON.parse(message);
-        console.log("json: ", json);
+        console.log("message: ", message);
         var aa;
         var bb;
         var cc;
