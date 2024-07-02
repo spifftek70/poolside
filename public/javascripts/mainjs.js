@@ -16,7 +16,7 @@ $(function () {
   // Example of specific event handling based on your provided data
   mainSocket.on("pump", function (message) {
     // console.log("Pump message: ", message);
-    parseMsg(message);
+    // parseMsg(message);
   });
 
   mainSocket.on("body", function (message) {
@@ -31,12 +31,12 @@ $(function () {
 
   mainSocket.on("heater", function (message) {
     // console.log("Heater message: ", message);
-    parseMsg(message);
+    // parseMsg(message);
   });
 
   mainSocket.on("controller", function (message) {
     // console.log("Controller message: ", message);
-    parseMsg(message);
+    // parseMsg(message);
   });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
