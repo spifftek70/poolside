@@ -679,7 +679,7 @@ $(function () {
     } else return;
   }
 
-  setInterval(function (e) {
-    getStatus();
-  }, 5000);
+  // setInterval(function (e) {
+  //   getStatus();
+  // }, 5000);
 });
