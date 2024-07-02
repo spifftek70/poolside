@@ -699,14 +699,14 @@ $(function () {
       aC2 = false;
     }
     if (a === 1 && b === true) {
-      $("#spaCirculation").removeClass("btn-info");
-      $("#spaCirculation").addClass("btn-circ");
-      $("#spOn").text(" Spa Off");
+      $("#poolCirculation").removeClass("btn-info");
+      $("#poolCirculation").addClass("btn-circ");
+      $("#poOn").text(" Spa Off");
     }
     if (a === 1 && b === false) {
-      $("#spaCirculation").removeClass("btn-circ");
-      $("#spaCirculation").addClass("btn-info");
-      $("#spOn").text(" Spa On");
+      $("#poolCirculation").removeClass("btn-circ");
+      $("#poolCirculation").addClass("btn-info");
+      $("#poOn").text(" Spa On");
     }
     if (aC1 === true || aC2 === true) {
       $("#poolCirculation").removeClass("btn-info");
