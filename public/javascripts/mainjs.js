@@ -98,21 +98,27 @@ $(function () {
     bods = data.bodies;
     $.each(bods, function (i, field) {
       if (field.name == "Pool") {
+        aa = field.id;
+        bb = field.isOn;
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
         poolSetPt = field.setPoint;
         poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
+        statusUpdate(aa, bb);
         // field.setPoint
       }
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
+        aa = field.id;
+        bb = field.isOn;
         spaCoolSetpt = field.coolSetpoint;
         spaSetPt = field.setPoint;
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
+        statusUpdate(aa, bb);
       }
     });
   }
@@ -500,24 +506,24 @@ $(function () {
     });
   }
 
-  function makeChanges(bb, hh, iSS) {
-    if (bb == 0) {
-      bothOff();
-      return true;
-    }
-    if (bb == 2 && hh == true && iSS == false) {
-      spaHot();
-    } else if (bb == 2 && hh == true && iSS == true) {
-      spaCool();
-    } else if (bb == 1 && hh == true && iSS == false) {
-      poolWarm();
-    } else if (bb == 1 && hh == true && iSS == true) {
-      poolCold();
-    } else {
-      return true;
-    }
-    return true;
-  }
+  // function makeChanges(bb, hh, iSS) {
+  //   if (bb == 0) {
+  //     bothOff();
+  //     return true;
+  //   }
+  //   if (bb == 2 && hh == true && iSS == false) {
+  //     spaHot();
+  //   } else if (bb == 2 && hh == true && iSS == true) {
+  //     spaCool();
+  //   } else if (bb == 1 && hh == true && iSS == false) {
+  //     poolWarm();
+  //   } else if (bb == 1 && hh == true && iSS == true) {
+  //     poolCold();
+  //   } else {
+  //     return true;
+  //   }
+  //   return true;
+  // }
 
   function poolOff() {
     $("#poolTempLink").removeClass("btn-primary");
