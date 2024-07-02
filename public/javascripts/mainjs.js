@@ -79,7 +79,7 @@ $(function () {
   });
 
   function parsebodies(message) {
-    const bodies = message.bodies;
+    const bodies = message.body;
     // console.log("bodies: ", bodies);
     $.each(bodies, function (i, field) {
       const aa = field.id;
@@ -128,8 +128,8 @@ $(function () {
   }
   
   function parseTemps(data) {
-    // const temps = data.temps;
-    // $.each(temps, function (i, data) {
+    const temps = data.temps;
+    $.each(temps, function (i, data) {
       const aa = data.id;
       const bb = data.isOn;
       console.log("POOLTIME: ", data.name);
@@ -173,7 +173,7 @@ $(function () {
         }
       }
       statusUpdate(aa, bb);
-    // });
+    });
   }
 
   // function getStatus() {
