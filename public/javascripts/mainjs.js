@@ -128,29 +128,7 @@ $(function () {
 
   // function parseController(data) {}
 
-  // function parsePump(data) {}
-
-  function updatePoolTemps(data) {}
-  {
-    if (data == "Heating") {
-      poolWarm();
-    } else if (data == "Cooling") {
-      poolCold();
-    } else {
-      poolOff();
-    }
-  }
-
-  function updateSpaTemps(data) {}
-  {
-    if (data == "Heating") {
-      spaHot();
-    } else if (data == "Cooling") {
-      spaCool();
-    } else {
-      spaOff();
-    }
-  }
+  // function parsePump(data) {
 
   // function parseTemps(data){
   //   unit = data.units;
