@@ -16,27 +16,27 @@ $(function () {
   // Example of specific event handling based on your provided data
   mainSocket.on("pump", function (message) {
     console.log("Pump message: ", message);
-    parsePump(message);
+    parseMsg(message);
   });
 
   mainSocket.on("body", function (message) {
     console.log("Body message: ", message);
-    parseBody(message);
+    parseMsg(message);
   });
 
   mainSocket.on("temps", function (message) {
     console.log("Temps message: ", message);
-    parseTemps(message);
+    parseMsg(message);
   });
 
   mainSocket.on("heater", function (message) {
     console.log("Heater message: ", message);
-    parseHeater(message);
+    parseMsg(message);
   });
 
   mainSocket.on("controller", function (message) {
     console.log("Controller message: ", message);
-    parseController(message);
+    parseMsg(message);
   });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
@@ -78,32 +78,46 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function parseBody(data){
-    $.each(bods, function (i, field) {
-      bods = data.bodies;
+  function parseMsg(data){
+    $.each(data, function (i, field) {
+      aa = field.id;
+      bb = field.isOn;
+      cc = field.heatStatus;
+      dd = cc.desc;
       if (field.name == "Pool") {
-        aa = field.id;
-        bb = field.isOn;
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
         poolSetPt = field.setPoint;
         poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
-        statusUpdate(aa, bb);
+        if (dd == "Heating") {
+          poolWarm();
+        } else if (dd == "Cooling") {
+          poolCold();
+        } else {
+          poolOff();
+        }
+        // statusUpdate(aa, bb);
         // field.setPoint
       }
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
-        aa = field.id;
-        bb = field.isOn;
         spaCoolSetpt = field.coolSetpoint;
         spaSetPt = field.setPoint;
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
-        statusUpdate(aa, bb);
+        if (dd == "Heating") {
+          spaHot();
+        } else if (dd == "Cooling") {
+          spaCool();
+        } else {
+          spaOff();
+        }
+        // statusUpdate(aa, bb);
       }
+    statusUpdate(aa, bb);
     });
   }
 
@@ -119,34 +133,34 @@ $(function () {
 
   }
 
-  function parseTemps(data){
-    unit = data.units;
-    $.each(unit, function (i, field) {
-      if (field.name == "Pool") {
-        aa = field.id;
-        bb = field.isOn;
-        $("#poolCurrentTemps").text(field.temp);
-        poolCoolSetpt = field.coolSetpoint;
-        poolSetPt = field.setPoint;
-        poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
-        $("#poolSlider").roundSlider("setValue", poolVals);
-        $("#poolSetTemps").text(poolVals + "°F");
-        statusUpdate(aa, bb);
-        // field.setPoint
-      }
-      if (field.name == "Spa") {
-        $("#spaCurrentTemps").text(field.temp);
-        aa = field.id;
-        bb = field.isOn;
-        spaCoolSetpt = field.coolSetpoint;
-        spaSetPt = field.setPoint;
-        spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
-        $("#spaSlider").roundSlider("setValue", spaVals);
-        $("#spaSetTemps").text(spaVals + "°F");
-        statusUpdate(aa, bb);
-      }
-    });
-  }
+  // function parseTemps(data){
+  //   unit = data.units;
+  //   bod = data.bodies;
+  //   $.each(unit, function (i, field) {
+  //     if (field.name == "Pool") {
+  //       aa = field.id;
+  //       bb = field.isOn;
+  //       $("#poolCurrentTemps").text(field.temp);
+  //       poolCoolSetpt = field.coolSetpoint;
+  //       poolSetPt = field.setPoint;
+  //       poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
+  //       $("#poolSlider").roundSlider("setValue", poolVals);
+  //       $("#poolSetTemps").text(poolVals + "°F");
+  //       statusUpdate(aa, bb);
+  //     }
+  //     if (field.name == "Spa") {
+  //       $("#spaCurrentTemps").text(field.temp);
+  //       aa = field.id;
+  //       bb = field.isOn;
+  //       spaCoolSetpt = field.coolSetpoint;
+  //       spaSetPt = field.setPoint;
+  //       spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+  //       $("#spaSlider").roundSlider("setValue", spaVals);
+  //       $("#spaSetTemps").text(spaVals + "°F");
+  //       statusUpdate(aa, bb);
+  //     }
+  //   });
+  // }
 
 
   // function getStatus() {
