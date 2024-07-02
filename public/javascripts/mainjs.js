@@ -117,11 +117,11 @@ $(function () {
         var poolCoolSetpt;
         var poolChil;
         var spaChil;
-
+      
         var circ = json.circuits;
         var teps = json.temps;
         var heaters = json.heaters;
-        var field = connectLogWebSocket()
+        // var field = connectLogWebSocket()
         $.each(circ, function (i, field) {
           aa = field.id;
           bb = field.isOn;
