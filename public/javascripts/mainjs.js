@@ -16,14 +16,27 @@ $(function () {
   // Example of specific event handling based on your provided data
   mainSocket.on("pump", function (message) {
     console.log("Pump message: ", message);
+    parsePump(message);
   });
 
   mainSocket.on("body", function (message) {
     console.log("Body message: ", message);
+    parseBody(message);
   });
 
   mainSocket.on("temps", function (message) {
     console.log("Temps message: ", message);
+    parseTemps(message);
+  });
+
+  mainSocket.on("heater", function (message) {
+    console.log("Heater message: ", message);
+    parseHeater(message);
+  });
+
+  mainSocket.on("controller", function (message) {
+    console.log("Controller message: ", message);
+    parseController(message);
   });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
@@ -58,80 +71,110 @@ $(function () {
     max: "104",
   });
 
-  getStatus();
+  // getStatus();
 
   $(".closers").on("click", function (e) {
     e.preventDefault();
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function getStatus() {
-    // Listen for status updates from the WebSocket
-    mainSocket.on("message", function (message) {
-      try {
-        const json = JSON.parse(message);
-        console.log("message: ", message);
-        var aa;
-        var bb;
-        var cc;
-        var cnom;
-        var poolVals;
-        var spaVals;
-        var spaSetPt;
-        var spaCoolSetpt;
-        var poolSetPts;
-        var poolCoolSetpt;
-        var poolChil;
-        var spaChil;
+  function parseBody(data){
 
-        var circ = json.circuits;
-        var teps = json.temps;
-        var heaters = json.heaters;
-        $.each(circ, function (i, field) {
-          console.log("field: ", field);
-          aa = field.id;
-          bb = field.isOn;
-          $.each(teps.bodies, function (i, eid) {
-            console.log("eid: ", eid);
-            cc = eid.temp;
-            dd = eid.heatStatus;
-            ee = eid.heatMode;
-            cnom = eid.name;
-            if (cnom == "Spa") {
-              spaChil = cc;
-              spaSetPt = eid.setPoint;
-              spaCoolSetpt = eid.coolSetpoint;
-              spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
-              $("#spaSlider").roundSlider("setValue", spaVals);
-              $("#spaCurrentTemps").text(spaChil);
-            }
-            if (cnom == "Pool") {
-              poolChil = cc;
-              poolSetPts = eid.setPoint;
-              poolCoolSetpt = eid.coolSetpoint;
-              poolVals =
-                poolSetPts.toString() + ", " + poolCoolSetpt.toString();
-              $("#poolSlider").roundSlider("setValue", poolVals);
-              $("#poolCurrentTemps").text(poolChil);
-            }
-            statusUpdate(aa, bb);
-          });
-        });
-        $.each(heaters, function (i, hett) {
-          var bID = hett.bodyId;
-          var hID = hett.isOn;
-          var isCool = hett.isCooling;
-          makeChanges(bID, hID, isCool);
-        });
-        $("#poolCurrentTemps").text(poolChil);
-        $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
-        $("#spaCurrentTemps").text(spaChil);
-        $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
-      } catch (error) {
-        console.error("Error processing status update:", error);
+  }
+
+  function parseHeater(data){
+
+  }
+
+  function parseController(data){
+
+  }
+
+  function parsePump(data){
+
+  }
+
+  function parseTemps(data){
+    bods = data.bodies;
+    $.each(bods, function (i, field) {
+      if (field.name == "Pool") {
+        $("#poolCurrentTemps").text(field.temp);
+        field.setPoint
+      // }
+      if (field.name == "Spa") {
+        $("#spaCurrentTemps").text(field.temp);
       }
     });
   }
+
+
+  // function getStatus() {
+  //   // Listen for status updates from the WebSocket
+  //   mainSocket.on("message", function (message) {
+  //     try {
+  //       const json = JSON.parse(message);
+  //       console.log("message: ", message);
+  //       var aa;
+  //       var bb;
+  //       var cc;
+  //       var cnom;
+  //       var poolVals;
+  //       var spaVals;
+  //       var spaSetPt;
+  //       var spaCoolSetpt;
+  //       var poolSetPts;
+  //       var poolCoolSetpt;
+  //       var poolChil;
+  //       var spaChil;
+
+  //       var circ = json.circuits;
+  //       var teps = json.temps;
+  //       var heaters = json.heaters;
+  //       $.each(circ, function (i, field) {
+  //         console.log("field: ", field);
+  //         aa = field.id;
+  //         bb = field.isOn;
+  //         $.each(teps.bodies, function (i, eid) {
+  //           console.log("eid: ", eid);
+  //           cc = eid.temp;
+  //           dd = eid.heatStatus;
+  //           ee = eid.heatMode;
+  //           cnom = eid.name;
+  //           if (cnom == "Spa") {
+  //             spaChil = cc;
+  //             spaSetPt = eid.setPoint;
+  //             spaCoolSetpt = eid.coolSetpoint;
+  //             spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+  //             $("#spaSlider").roundSlider("setValue", spaVals);
+  //             $("#spaCurrentTemps").text(spaChil);
+  //           }
+  //           if (cnom == "Pool") {
+  //             poolChil = cc;
+  //             poolSetPts = eid.setPoint;
+  //             poolCoolSetpt = eid.coolSetpoint;
+  //             poolVals =
+  //               poolSetPts.toString() + ", " + poolCoolSetpt.toString();
+  //             $("#poolSlider").roundSlider("setValue", poolVals);
+  //             $("#poolCurrentTemps").text(poolChil);
+  //           }
+  //           statusUpdate(aa, bb);
+  //         });
+  //       });
+  //       $.each(heaters, function (i, hett) {
+  //         var bID = hett.bodyId;
+  //         var hID = hett.isOn;
+  //         var isCool = hett.isCooling;
+  //         makeChanges(bID, hID, isCool);
+  //       });
+  //       $("#poolCurrentTemps").text(poolChil);
+  //       $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
+  //       $("#spaCurrentTemps").text(spaChil);
+  //       $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
+  //     } catch (error) {
+  //       console.error("Error processing status update:", error);
+  //     }
+  //   });
+  // }
 
   $("#poolSlider").roundSlider({
     stop: function () {
