@@ -83,7 +83,7 @@ $(function () {
       aa = field.id;
       bb = field.isOn;
       if (field.name == "Pool") {
-        console.log("POOLTIME: ", field);
+        console.log("POOLTIME: ", data);
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
         poolSetPt = field.setPoint;
@@ -103,7 +103,7 @@ $(function () {
         }
       }
       if (field.name == "Spa") {
-        console.log("HOTTER THAN SPATIME: ", field);
+        console.log("HOTTER THAN SPATIME: ", data);
         $("#spaCurrentTemps").text(field.temp);
         spaCoolSetpt = field.coolSetpoint;
         spaSetPt = field.setPoint;
