@@ -79,6 +79,7 @@ $(function () {
   });
 
   function parseMsg(data) {
+    console.log("DATA: ", data);
     $.each(data, function (i, field) {
       aa = field.id;
       bb = field.isOn;
