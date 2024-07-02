@@ -79,21 +79,21 @@ $(function () {
   });
 
   function parsebodies(message) {
-    // const bodies = message.bodies;
+    const bodies = message.bodies;
     // console.log("bodies: ", bodies);
-    // $.each(bodies, function (i, message) {
-      const aa = message.id;
-      const bb = message.isOn;
-      console.log("POOLTIME: ", message.name);
-      if (message.name === "Pool") {
+    $.each(bodies, function (i, field) {
+      const aa = field.id;
+      const bb = field.isOn;
+      console.log("POOLTIME: ", field.name);
+      if (field.name === "Pool") {
         $("#poolCurrentTemps").text(message.temp);
-        const poolCoolSetpt = message.coolSetpoint;
-        const poolSetPt = message.setPoint;
+        const poolCoolSetpt = field.coolSetpoint;
+        const poolSetPt = field.setPoint;
         const poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
-        if ('heatStatus' in message) {
-          const cc = message.heatStatus;
+        if ('heatStatus' in field) {
+          const cc = field.heatStatus;
           const dd = cc.desc;
           if (dd === "Heating") {
             poolWarm();
@@ -104,15 +104,15 @@ $(function () {
           }
         }
       }
-      if (message.name === "Spa") {
-        $("#spaCurrentTemps").text(message.temp);
-        const spaCoolSetpt = message.coolSetpoint;
-        const spaSetPt = message.setPoint;
+      if (field.name === "Spa") {
+        $("#spaCurrentTemps").text(field.temp);
+        const spaCoolSetpt = field.coolSetpoint;
+        const spaSetPt = field.setPoint;
         const spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
-        if ('heatStatus' in message) {
-          const cc = message.heatStatus;
+        if ('heatStatus' in field) {
+          const cc = field.heatStatus;
           const dd = cc.desc;
           if (dd === "Heating") {
             spaHot();
@@ -124,7 +124,7 @@ $(function () {
         }
       }
       statusUpdate(aa, bb);
-    // });
+    });
   }
   
   function parseTemps(data) {
