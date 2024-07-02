@@ -80,12 +80,12 @@ $(function () {
 
   function parsebodies(message) {
     // const bodies = message.bodies;
-    console.log("bodies: ", bodies);
+    // console.log("bodies: ", bodies);
     // $.each(bodies, function (i, message) {
       const aa = message.id;
       const bb = message.isOn;
+      console.log("POOLTIME: ", message.name);
       if (message.name === "Pool") {
-        console.log("POOLTIME: ", bodies);
         $("#poolCurrentTemps").text(message.temp);
         const poolCoolSetpt = message.coolSetpoint;
         const poolSetPt = message.setPoint;
@@ -132,6 +132,7 @@ $(function () {
     // $.each(temps, function (i, data) {
       const aa = data.id;
       const bb = data.isOn;
+      console.log("POOLTIME: ", data.name);
       if (data.name === "Pool") {
         console.log("temps: ", temps);
         $("#poolCurrentTemps").text(data.temp);
