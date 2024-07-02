@@ -80,6 +80,7 @@ $(function () {
 
   function parsebodies(message) {
     const bodies = message.bodies;
+    console.log("bodies: ", bodies);
     $.each(bodies, function (i, field) {
       const aa = field.id;
       const bb = field.isOn;
