@@ -84,7 +84,7 @@ $(function () {
     $.each(message, function (i, field) {
       const aa = field.id;
       const bb = field.isOn;
-      console.log("POOLTIME: ", field.name);
+      console.log("Bodies: ", field.name);
       if (field.name === "Pool") {
         $("#poolCurrentTemps").text(message.temp);
         const poolCoolSetpt = field.coolSetpoint;
@@ -132,7 +132,7 @@ $(function () {
     $.each(message, function (i, data) {
       const aa = data.id;
       const bb = data.isOn;
-      console.log("POOLTIME: ", data.name);
+      console.log("Temps: ", data.name);
       if (data.name === "Pool") {
         console.log("temps: ", temps);
         $("#poolCurrentTemps").text(data.temp);
