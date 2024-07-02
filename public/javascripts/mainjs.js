@@ -103,6 +103,7 @@ $(function () {
         poolSetPt = field.setPoint;
         poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
+        $("#poolSetTemps").text(poolVals + "°F");
         // field.setPoint
       }
       if (field.name == "Spa") {
@@ -111,6 +112,7 @@ $(function () {
         spaSetPt = field.setPoint;
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
+        $("#spaSetTemps").text(spaVals + "°F");
       }
     });
   }
