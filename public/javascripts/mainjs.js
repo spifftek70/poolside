@@ -90,18 +90,8 @@ $(function () {
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
         if (field.heatStatus) {
-          cc = field.heatStatus;
-          dd = cc.desc;
-          if (dd == "Heating") {
-            poolWarm();
-          } else if (dd == "Cooling") {
-            poolCold();
-          } else {
-            poolOff();
-          }
+          updatePoolTemps(field);
         }
-        // statusUpdate(aa, bb);
-        // field.setPoint
       }
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
@@ -111,17 +101,8 @@ $(function () {
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
         if (field.heatStatus) {
-          cc = field.heatStatus;
-          dd = cc.desc;
-          if (dd == "Heating") {
-            spaHot();
-          } else if (dd == "Cooling") {
-            spaCool();
-          } else {
-            spaOff();
-          }
+          updateSpaTemps(field);
         }
-        // statusUpdate(aa, bb);
       }
       statusUpdate(aa, bb);
     });
@@ -132,6 +113,32 @@ $(function () {
   function parseController(data) {}
 
   function parsePump(data) {}
+
+  function updatePoolTemps(field) {}
+  {
+    cc = field.heatStatus;
+    dd = cc.desc;
+    if (dd == "Heating") {
+      poolWarm();
+    } else if (dd == "Cooling") {
+      poolCold();
+    } else {
+      poolOff();
+    }
+  }
+
+  function updateSpaTemps(field) {}
+  {
+    cc = field.heatStatus;
+    dd = cc.desc;
+    if (dd == "Heating") {
+      spaHot();
+    } else if (dd == "Cooling") {
+      spaCool();
+    } else {
+      spaOff();
+    }
+  }
 
   // function parseTemps(data){
   //   unit = data.units;
