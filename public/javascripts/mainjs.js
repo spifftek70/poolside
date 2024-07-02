@@ -10,16 +10,16 @@ $(function () {
   // });
 
   mainSocket.on("connect", function () {
-    console.log("Connected to WebSocket server");
+    // console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
   mainSocket.on("message", function (message) {
-    console.log("Received message:", message);
+    // console.log("Received message:", message);
   });
 
   mainSocket.on("disconnect", function () {
-    console.log("Disconnected from WebSocket server");
+    // console.log("Disconnected from WebSocket server");
   });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
