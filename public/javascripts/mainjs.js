@@ -79,7 +79,32 @@ $(function () {
   });
 
   function parseBody(data){
-
+    $.each(bods, function (i, field) {
+      bods = data.bodies;
+      if (field.name == "Pool") {
+        aa = field.id;
+        bb = field.isOn;
+        $("#poolCurrentTemps").text(field.temp);
+        poolCoolSetpt = field.coolSetpoint;
+        poolSetPt = field.setPoint;
+        poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
+        $("#poolSlider").roundSlider("setValue", poolVals);
+        $("#poolSetTemps").text(poolVals + "°F");
+        statusUpdate(aa, bb);
+        // field.setPoint
+      }
+      if (field.name == "Spa") {
+        $("#spaCurrentTemps").text(field.temp);
+        aa = field.id;
+        bb = field.isOn;
+        spaCoolSetpt = field.coolSetpoint;
+        spaSetPt = field.setPoint;
+        spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+        $("#spaSlider").roundSlider("setValue", spaVals);
+        $("#spaSetTemps").text(spaVals + "°F");
+        statusUpdate(aa, bb);
+      }
+    });
   }
 
   function parseHeater(data){
@@ -95,9 +120,9 @@ $(function () {
   }
 
   function parseTemps(data){
-    bods = data.bodies;
-    $.each(bods, function (i, field) {
-      if (field.name == "pool") {
+    unit = data.units;
+    $.each(unit, function (i, field) {
+      if (field.name == "Pool") {
         aa = field.id;
         bb = field.isOn;
         $("#poolCurrentTemps").text(field.temp);
@@ -109,7 +134,7 @@ $(function () {
         statusUpdate(aa, bb);
         // field.setPoint
       }
-      if (field.name == "spa") {
+      if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
         aa = field.id;
         bb = field.isOn;
