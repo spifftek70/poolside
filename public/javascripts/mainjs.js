@@ -78,12 +78,10 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function parseMsg(data){
+  function parseMsg(data) {
     $.each(data, function (i, field) {
       aa = field.id;
       bb = field.isOn;
-      cc = field.heatStatus;
-      dd = cc.desc;
       if (field.name == "Pool") {
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
@@ -91,12 +89,16 @@ $(function () {
         poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
-        if (dd == "Heating") {
-          poolWarm();
-        } else if (dd == "Cooling") {
-          poolCold();
-        } else {
-          poolOff();
+        if (field.heatStatus) {
+          cc = field.heatStatus;
+          dd = cc.desc;
+          if (dd == "Heating") {
+            poolWarm();
+          } else if (dd == "Cooling") {
+            poolCold();
+          } else {
+            poolOff();
+          }
         }
         // statusUpdate(aa, bb);
         // field.setPoint
@@ -108,30 +110,28 @@ $(function () {
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
-        if (dd == "Heating") {
-          spaHot();
-        } else if (dd == "Cooling") {
-          spaCool();
-        } else {
-          spaOff();
+        if (field.heatStatus) {
+          cc = field.heatStatus;
+          dd = cc.desc;
+          if (dd == "Heating") {
+            spaHot();
+          } else if (dd == "Cooling") {
+            spaCool();
+          } else {
+            spaOff();
+          }
         }
         // statusUpdate(aa, bb);
       }
-    statusUpdate(aa, bb);
+      statusUpdate(aa, bb);
     });
   }
 
-  function parseHeater(data){
+  function parseHeater(data) {}
 
-  }
+  function parseController(data) {}
 
-  function parseController(data){
-
-  }
-
-  function parsePump(data){
-
-  }
+  function parsePump(data) {}
 
   // function parseTemps(data){
   //   unit = data.units;
@@ -161,7 +161,6 @@ $(function () {
   //     }
   //   });
   // }
-
 
   // function getStatus() {
   //   // Listen for status updates from the WebSocket
