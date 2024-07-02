@@ -303,7 +303,7 @@ $(function () {
     }
     $.ajax({
       type: "PUT",
-      url: "https://autopool.local:4200/state/body/heatMode",
+      url: "http://autopool.local:4200/state/body/heatMode",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(tempData),
@@ -339,7 +339,7 @@ $(function () {
     }
     $.ajax({
       type: "PUT",
-      url: "https://autopool.local:4200/state/body/heatMode",
+      url: "http://autopool.local:4200/state/body/heatMode",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(tempData),
@@ -550,7 +550,7 @@ $(function () {
   function setPool(jdata) {
     $.ajax({
       type: "PUT",
-      url: "https://autopool.local:4200/state/circuit/setState",
+      url: "http://autopool.local:4200/state/circuit/setState",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(jdata),
@@ -664,7 +664,7 @@ $(function () {
   function setPoolCond(data) {
     $.ajax({
       type: "PUT",
-      url: "https://autopool.local:4200/state/body/setPoint",
+      url: "http://autopool.local:4200/state/body/setPoint",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(data),
