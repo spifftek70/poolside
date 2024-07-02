@@ -116,6 +116,10 @@ iframe{
   height: 100%;
 } */
 
+.fa {
+  color: #0066ff;
+}
+
 .col{
    background: none;
    text-align: center;
