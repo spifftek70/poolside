@@ -61,44 +61,44 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function connectLogWebSocket() {
-    const socket = io("https://autopool.local:4200", {
-      path: "/socket.io",
-      transports: ["websocket"],
-    });
+  // function connectLogWebSocket() {
+  //   const socket = io("https://autopool.local:4200", {
+  //     path: "/socket.io",
+  //     transports: ["websocket"],
+  //   });
 
-    socket.on("connect", function () {
-      console.log("WebSocket connection established.");
-    });
+  //   socket.on("connect", function () {
+  //     console.log("WebSocket connection established.");
+  //   });
 
-    socket.on("message", function (message) {
-      try {
-        const data = JSON.parse(message);
-        if (data.message) {
-          let messageContent = data.message;
-          if (messageContent.includes("progress update")) {
-            console.log("msg content: ", messageContent);
-          } else if (messageContent.includes("progress completion")) {
-            completeProgress();
-          } else {
-            updateLog(messageContent);
-          }
-        }
-      } catch (error) {
-        console.error("Error processing WebSocket message:", error);
-      }
-    });
+  //   socket.on("message", function (message) {
+  //     try {
+  //       const data = JSON.parse(message);
+  //       if (data.message) {
+  //         let messageContent = data.message;
+  //         if (messageContent.includes("progress update")) {
+  //           console.log("msg content: ", messageContent);
+  //         } else if (messageContent.includes("progress completion")) {
+  //           completeProgress();
+  //         } else {
+  //           updateLog(messageContent);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error processing WebSocket message:", error);
+  //     }
+  //   });
 
-    socket.on("disconnect", function (e) {
-      console.log("Disconnected from WebSocket server");
-    });
+  //   socket.on("disconnect", function (e) {
+  //     console.log("Disconnected from WebSocket server");
+  //   });
 
-    socket.on("error", function (err) {
-      console.error("WebSocket encountered error: ", err.message);
-    });
+  //   socket.on("error", function (err) {
+  //     console.error("WebSocket encountered error: ", err.message);
+  //   });
 
-    return socket;
-  }
+  //   return socket;
+  // }
 
   function getStatus() {
     // Listen for status updates from the WebSocket
@@ -121,11 +121,12 @@ $(function () {
         var circ = json.circuits;
         var teps = json.temps;
         var heaters = json.heaters;
-        // var field = connectLogWebSocket()
         $.each(circ, function (i, field) {
+          console.log("field: ", field);
           aa = field.id;
           bb = field.isOn;
           $.each(teps.bodies, function (i, eid) {
+            console.log("eid: ", eid);
             cc = eid.temp;
             dd = eid.heatStatus;
             ee = eid.heatMode;
