@@ -99,10 +99,18 @@ $(function () {
     $.each(bods, function (i, field) {
       if (field.name == "Pool") {
         $("#poolCurrentTemps").text(field.temp);
+        poolCoolSetpt = field.coolSetpoint;
+        poolSetPt = field.setPoint;
+        poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
+        $("#poolSlider").roundSlider("setValue", poolVals);
         // field.setPoint
       }
       if (field.name == "Spa") {
         $("#spaCurrentTemps").text(field.temp);
+        spaCoolSetpt = field.coolSetpoint;
+        spaSetPt = field.setCoolPoint;
+        spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+        $("#spaSlider").roundSlider("setValue", spaVals);
       }
     });
   }
