@@ -4,11 +4,6 @@ $(function () {
     transports: ["websocket"],
   });
   
-  // const logSocket = io("http://autopool.local:4200", {
-  //   path: "/socket.io",
-  //   transports: ["websocket"],
-  // });
-
   mainSocket.on("connect", function () {
     // console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
@@ -54,7 +49,7 @@ $(function () {
     max: "104",
   });
 
-  // getStatus();
+  getStatus();
 
   $(".closers").on("click", function (e) {
     e.preventDefault();
