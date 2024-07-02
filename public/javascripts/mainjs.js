@@ -97,7 +97,7 @@ $(function () {
   function parseTemps(data){
     bods = data.bodies;
     $.each(bods, function (i, field) {
-      if (field.name == "Pool") {
+      if (field.name == "pool") {
         aa = field.id;
         bb = field.isOn;
         $("#poolCurrentTemps").text(field.temp);
@@ -109,7 +109,7 @@ $(function () {
         statusUpdate(aa, bb);
         // field.setPoint
       }
-      if (field.name == "Spa") {
+      if (field.name == "spa") {
         $("#spaCurrentTemps").text(field.temp);
         aa = field.id;
         bb = field.isOn;
