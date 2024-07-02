@@ -112,7 +112,7 @@ $(function () {
         $("#spaSetTemps").text(spaVals + "°F");
         if ('heatStatus' in field) {
           cc = field.heatStatus;
-          dd = cc.desc;
+          dd = cc.desc;d
           if (dd == "Heating") {
             spaHot();
           } else if (dd == "Cooling") {
@@ -133,7 +133,7 @@ $(function () {
   // function parsePump(data) {
 
   function parseTemps(data){
-    temps = message.temps;
+    temps = data.temps;
     $.each(temps, function (i, field) {
       aa = field.id;
       bb = field.isOn;
