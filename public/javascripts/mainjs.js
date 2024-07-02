@@ -89,8 +89,16 @@ $(function () {
         poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
-        if (field.heatStatus) {
-          updatePoolTemps(field);
+        if ('heatStatus' in field) {
+          cc = field.heatStatus;
+          dd = cc.desc;
+          if (data == "Heating") {
+            poolWarm();
+          } else if (data == "Cooling") {
+            poolCold();
+          } else {
+            poolOff();
+          }
         }
       }
       if (field.name == "Spa") {
@@ -100,40 +108,44 @@ $(function () {
         spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
-        if (field.heatStatus) {
-          updateSpaTemps(field);
+        if ('heatStatus' in field) {
+          cc = field.heatStatus;
+          dd = cc.desc;
+          if (data == "Heating") {
+            spaHot();
+          } else if (data == "Cooling") {
+            spaCool();
+          } else {
+            spaOff();
         }
       }
       statusUpdate(aa, bb);
+    }
     });
   }
 
-  function parseHeater(data) {}
+  // function parseHeater(data) {}
 
-  function parseController(data) {}
+  // function parseController(data) {}
 
-  function parsePump(data) {}
+  // function parsePump(data) {}
 
-  function updatePoolTemps(field) {}
+  function updatePoolTemps(data) {}
   {
-    cc = field.heatStatus;
-    dd = cc.desc;
-    if (dd == "Heating") {
+    if (data == "Heating") {
       poolWarm();
-    } else if (dd == "Cooling") {
+    } else if (data == "Cooling") {
       poolCold();
     } else {
       poolOff();
     }
   }
 
-  function updateSpaTemps(field) {}
+  function updateSpaTemps(data) {}
   {
-    cc = field.heatStatus;
-    dd = cc.desc;
-    if (dd == "Heating") {
+    if (data == "Heating") {
       spaHot();
-    } else if (dd == "Cooling") {
+    } else if (data == "Cooling") {
       spaCool();
     } else {
       spaOff();
