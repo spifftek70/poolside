@@ -681,6 +681,7 @@ $(function () {
   var aC2;
 
   function statusUpdate(a, b) {
+    console.log("A and B: ", a, b);
     if (a === 6 && b === true) {
       ck1 = true;
       aC1 = true;
@@ -716,7 +717,7 @@ $(function () {
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
     }
-    if (a === 3 && b === true) {
+    if (a === 2 && b === true) {
       $("#spaJets").removeClass("btn-info");
       $("#spaJets").addClass("btn-circ");
     }
