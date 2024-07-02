@@ -92,9 +92,9 @@ $(function () {
         if ('heatStatus' in field) {
           cc = field.heatStatus;
           dd = cc.desc;
-          if (data == "Heating") {
+          if (dd == "Heating") {
             poolWarm();
-          } else if (data == "Cooling") {
+          } else if (dd == "Cooling") {
             poolCold();
           } else {
             poolOff();
@@ -111,9 +111,9 @@ $(function () {
         if ('heatStatus' in field) {
           cc = field.heatStatus;
           dd = cc.desc;
-          if (data == "Heating") {
+          if (dd == "Heating") {
             spaHot();
-          } else if (data == "Cooling") {
+          } else if (dd == "Cooling") {
             spaCool();
           } else {
             spaOff();
