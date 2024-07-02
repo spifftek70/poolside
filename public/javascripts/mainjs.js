@@ -128,20 +128,20 @@ $(function () {
   }
   
   function parseTemps(data) {
-    const temps = data.temps;
-    $.each(temps, function (i, field) {
-      const aa = field.id;
-      const bb = field.isOn;
-      if (field.name === "Pool") {
+    // const temps = data.temps;
+    // $.each(temps, function (i, data) {
+      const aa = data.id;
+      const bb = data.isOn;
+      if (data.name === "Pool") {
         console.log("temps: ", temps);
-        $("#poolCurrentTemps").text(field.temp);
-        const poolCoolSetpt = field.coolSetpoint;
-        const poolSetPt = field.setPoint;
+        $("#poolCurrentTemps").text(data.temp);
+        const poolCoolSetpt = data.coolSetpoint;
+        const poolSetPt = data.setPoint;
         const poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text(poolVals + "°F");
-        if ('heatStatus' in field) {
-          const cc = field.heatStatus;
+        if ('heatStatus' in data) {
+          const cc = data.heatStatus;
           const dd = cc.desc;
           if (dd === "Heating") {
             poolWarm();
@@ -152,15 +152,15 @@ $(function () {
           }
         }
       }
-      if (field.name === "Spa") {
-        $("#spaCurrentTemps").text(field.temp);
-        const spaCoolSetpt = field.coolSetpoint;
-        const spaSetPt = field.setPoint;
+      if (data.name === "Spa") {
+        $("#spaCurrentTemps").text(data.temp);
+        const spaCoolSetpt = data.coolSetpoint;
+        const spaSetPt = data.setPoint;
         const spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text(spaVals + "°F");
-        if ('heatStatus' in field) {
-          const cc = field.heatStatus;
+        if ('heatStatus' in data) {
+          const cc = data.heatStatus;
           const dd = cc.desc;
           if (dd === "Heating") {
             spaHot();
@@ -172,7 +172,7 @@ $(function () {
         }
       }
       statusUpdate(aa, bb);
-    });
+    // });
   }
 
   // function getStatus() {
@@ -197,10 +197,10 @@ $(function () {
   //       var circ = json.circuits;
   //       var teps = json.temps;
   //       var heaters = json.heaters;
-  //       $.each(circ, function (i, field) {
-  //         console.log("field: ", field);
-  //         aa = field.id;
-  //         bb = field.isOn;
+  //       $.each(circ, function (i, data) {
+  //         console.log("data: ", data);
+  //         aa = data.id;
+  //         bb = data.isOn;
   //         $.each(teps.bodies, function (i, eid) {
   //           console.log("eid: ", eid);
   //           cc = eid.temp;
