@@ -78,13 +78,13 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function parseMsg(data) {
+  function parseMsg(message) {
     // console.log("DATA: ", field);
-    $.each(data, function (i, field) {
+    $.each(message, function (i, field) {
       aa = field.id;
       bb = field.isOn;
       if (field.name == "Pool") {
-        console.log("POOLTIME: ", data);
+        console.log("POOLTIME: ", message);
         $("#poolCurrentTemps").text(field.temp);
         poolCoolSetpt = field.coolSetpoint;
         poolSetPt = field.setPoint;
