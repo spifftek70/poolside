@@ -129,7 +129,8 @@ $(function () {
   
   function parseTemps(message) {
     // const temps = data.temps;
-    $.each(message, function (i, data) {
+    var bodes = message.bodies;
+    $.each(bodes, function (i, data) {
       const aa = data.id;
       const bb = data.isOn;
       console.log("Temps: ", data.name);
