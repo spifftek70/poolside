@@ -3,18 +3,27 @@ $(function () {
     path: "/socket.io",
     transports: ["websocket"],
   });
-  
+
   mainSocket.on("connect", function () {
-    // console.log("Connected to WebSocket server");
+    console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
-  mainSocket.on("message", function (message) {
-    // console.log("Received message:", message);
+  mainSocket.on("disconnect", function () {
+    console.log("Disconnected from WebSocket server");
   });
 
-  mainSocket.on("disconnect", function () {
-    // console.log("Disconnected from WebSocket server");
+  // Example of specific event handling based on your provided data
+  mainSocket.on("pump", function (message) {
+    console.log("Pump message: ", message);
+  });
+
+  mainSocket.on("body", function (message) {
+    console.log("Body message: ", message);
+  });
+
+  mainSocket.on("temps", function (message) {
+    console.log("Temps message: ", message);
   });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
@@ -56,45 +65,6 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  // function connectLogWebSocket() {
-  //   const socket = io("https://autopool.local:4200", {
-  //     path: "/socket.io",
-  //     transports: ["websocket"],
-  //   });
-
-  //   socket.on("connect", function () {
-  //     console.log("WebSocket connection established.");
-  //   });
-
-  //   socket.on("message", function (message) {
-  //     try {
-  //       const data = JSON.parse(message);
-  //       if (data.message) {
-  //         let messageContent = data.message;
-  //         if (messageContent.includes("progress update")) {
-  //           console.log("msg content: ", messageContent);
-  //         } else if (messageContent.includes("progress completion")) {
-  //           completeProgress();
-  //         } else {
-  //           updateLog(messageContent);
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error processing WebSocket message:", error);
-  //     }
-  //   });
-
-  //   socket.on("disconnect", function (e) {
-  //     console.log("Disconnected from WebSocket server");
-  //   });
-
-  //   socket.on("error", function (err) {
-  //     console.error("WebSocket encountered error: ", err.message);
-  //   });
-
-  //   return socket;
-  // }
-
   function getStatus() {
     // Listen for status updates from the WebSocket
     mainSocket.on("message", function (message) {
@@ -113,7 +83,7 @@ $(function () {
         var poolCoolSetpt;
         var poolChil;
         var spaChil;
-      
+
         var circ = json.circuits;
         var teps = json.temps;
         var heaters = json.heaters;
@@ -511,10 +481,9 @@ $(function () {
     $("#poolTempLink").removeClass("btn-info");
     $("#poolTempLink").removeClass("btn-danger");
     $("#poolTempLink").addClass("btn-primary");
-    $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> off');
+    $("#poolTempOnOff").html(" off");
     $("#poolTempOnOff").addClass("btn-primary");
     $("#poolTempOnOff").removeClass("btn-secondary");
-
     $(".pFlake").show();
     $(".pFlame").hide();
   }
@@ -523,7 +492,7 @@ $(function () {
     $("#poolTempLink").removeClass("btn-info");
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").addClass("btn-danger");
-    $("#poolTempOnOff").html('<i class="fa-solid fa-power-off"></i> off');
+    $("#poolTempOnOff").html(" off");
     $("#poolTempOnOff").addClass("btn-primary");
     $("#poolTempOnOff").removeClass("btn-secondary");
     $(".pFlake").hide();
@@ -675,8 +644,4 @@ $(function () {
       $("#spaLight").addClass("btn-info");
     } else return;
   }
-
-  // setInterval(function (e) {
-  //   getStatus();
-  // }, 5000);
 });
