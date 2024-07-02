@@ -701,22 +701,22 @@ $(function () {
     if (a === 1 && b === true) {
       $("#poolCirculation").removeClass("btn-info");
       $("#poolCirculation").addClass("btn-circ");
-      $("#poOn").text(" Pool Off");
+      $("#poOn").text(" Pool On");
     }
     if (a === 1 && b === false) {
       $("#poolCirculation").removeClass("btn-circ");
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
     }
-    if (aC1 === true || aC2 === true) {
-      $("#poolCirculation").removeClass("btn-info");
-      $("#poolCirculation").addClass("btn-circ");
-      $("#poOn").text(" Pool Off");
-    } else {
-      $("#poolCirculation").removeClass("btn-circ");
-      $("#poolCirculation").addClass("btn-info");
-      $("#poOn").text(" Pool On");
-    }
+    // if (aC1 === true || aC2 === true) {
+    //   $("#poolCirculation").removeClass("btn-info");
+    //   $("#poolCirculation").addClass("btn-circ");
+    //   $("#poOn").text(" Pool Off");
+    // } else {
+    //   $("#poolCirculation").removeClass("btn-circ");
+    //   $("#poolCirculation").addClass("btn-info");
+    //   $("#poOn").text(" Pool On");
+    // }
     if (a === 2 && b === true) {
       $("#spaJets").removeClass("btn-info");
       $("#spaJets").addClass("btn-circ");
