@@ -79,9 +79,9 @@ $(function () {
   });
 
   function parsebodies(message) {
-    const bodies = message.body;
-    // console.log("bodies: ", bodies);
-    $.each(bodies, function (i, field) {
+    // const bodies = message.bodies;
+    // // console.log("bodies: ", bodies);
+    $.each(message, function (i, field) {
       const aa = field.id;
       const bb = field.isOn;
       console.log("POOLTIME: ", field.name);
@@ -127,9 +127,9 @@ $(function () {
     });
   }
   
-  function parseTemps(data) {
-    const temps = data.temps;
-    $.each(temps, function (i, data) {
+  function parseTemps(message) {
+    // const temps = data.temps;
+    $.each(message, function (i, data) {
       const aa = data.id;
       const bb = data.isOn;
       console.log("POOLTIME: ", data.name);
