@@ -708,20 +708,19 @@ $(function () {
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
     }
-    // if (aC1 === true || aC2 === true) {
-    //   $("#poolCirculation").removeClass("btn-info");
-    //   $("#poolCirculation").addClass("btn-circ");
-    //   $("#poOn").text(" Pool Off");
-    // } else {
-    //   $("#poolCirculation").removeClass("btn-circ");
-    //   $("#poolCirculation").addClass("btn-info");
-    //   $("#poOn").text(" Pool On");
-    // }
     if (a === 2 && b === true) {
+      $("#spaCirculation").removeClass("btn-info");
+      $("#spaCirculation").addClass("btn-circ");
+    }
+    if (a === 2 && b === false) {
+      $("#spaCirculation").removeClass("btn-circ");
+      $("#spaCirculation").addClass("btn-info");
+    }
+    if (a === 3 && b === true) {
       $("#spaJets").removeClass("btn-info");
       $("#spaJets").addClass("btn-circ");
     }
-    if (a === 2 && b === false) {
+    if (a === 3 && b === false) {
       $("#spaJets").removeClass("btn-circ");
       $("#spaJets").addClass("btn-info");
     }
