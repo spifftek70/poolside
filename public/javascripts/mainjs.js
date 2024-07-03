@@ -79,14 +79,16 @@ $(function () {
   });
 
   function parsebodies(message) {
+    var aa;
+    var bb;
     // const bodies = message.bodies;
     // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
       if (field.id === 1) {
-        const aa = field.id;
-        const bb = field.isOn;
         console.log("Bodies: ", field.name);
         if (field.name === "Pool") {
+          aa = field.id;
+          bb = field.isOn;
           $("#poolCurrentTemps").text(message.temp);
           const poolCoolSetpt = field.coolSetpoint;
           const poolSetPt = field.setPoint;
@@ -94,8 +96,8 @@ $(function () {
           $("#poolSlider").roundSlider("setValue", poolVals);
           $("#poolSetTemps").text(poolVals + "°F");
           if ('heatStatus' in field) {
-            const cc = field.heatStatus;
-            const dd = cc.desc;
+            var cc = field.heatStatus;
+            var dd = cc.desc;
             if (dd === "Heating") {
               poolWarm();
             } else if (dd === "Cooling") {
@@ -104,8 +106,11 @@ $(function () {
               poolOff();
             }
           }
+          statusUpdate(aa, bb);
         }
         if (field.name === "Spa") {
+          aa = field.id;
+          bb = field.isOn;
           $("#spaCurrentTemps").text(field.temp);
           const spaCoolSetpt = field.coolSetpoint;
           const spaSetPt = field.setPoint;
@@ -123,20 +128,27 @@ $(function () {
               spaOff();
             }
           }
+          statusUpdate(aa, bb);
         }
-        statusUpdate(aa, bb);
+        if (field.name === "Spa Jets") {
+          aa = field.id;
+          bb = field.isActive;
+          statusUpdate(aa, bb);
+        }
       }
     });
   }
   
   function parseTemps(message) {
+    var aa;
+    var bb;
     // const temps = data.temps;
     var bodes = message.bodies;
     $.each(bodes, function (i, data) {
-      const aa = data.id;
-      const bb = data.isOn;
       console.log("Temps: ", data.name);
       if (data.name === "Pool") {
+        aa = data.id;
+        bb = data.isOn;
         $("#poolCurrentTemps").text(data.temp);
         const poolCoolSetpt = data.coolSetpoint;
         const poolSetPt = data.setPoint;
@@ -154,8 +166,11 @@ $(function () {
             poolOff();
           }
         }
+        statusUpdate(aa, bb);
       }
       if (data.name === "Spa") {
+        aa = data.id;
+        bb = data.isOn;
         $("#spaCurrentTemps").text(data.temp);
         const spaCoolSetpt = data.coolSetpoint;
         const spaSetPt = data.setPoint;
@@ -173,8 +188,8 @@ $(function () {
             spaOff();
           }
         }
+        statusUpdate(aa, bb);
       }
-      statusUpdate(aa, bb);
     });
   }
 
