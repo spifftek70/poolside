@@ -492,7 +492,7 @@ $(function () {
         state: false,
       };
     }
-    $(this).toggleClass("btn-info btn-circ");
+  $(this).toggleClass("btn-info btn-circ");
     setPool(data);
   });
 
@@ -519,12 +519,12 @@ $(function () {
     var data;
     if ($(this).hasClass("btn-info")) {
       data = {
-        id: 3,
+        id: 2,
         state: true,
       };
     } else {
       data = {
-        id: 3,
+        id: 2,
         state: false,
       };
     }
