@@ -92,7 +92,7 @@ $(function () {
       var bb;
       var ee;
       var ff;
-      var gg;
+      var gg;console.log("Field: ", field.name);
       if (field.name === "Spa Jets" || field.name === "Blower") {
         aa = field.id;
         bb = field.isActive;
