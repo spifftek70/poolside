@@ -106,9 +106,14 @@ $(function () {
         ff = message.watts;
         gg = message.flow;
         statusUpdate(aa, bb);
-        $("#pumpRPM").text(ee + " RPM | ");
-        $("#pumpGPM").text(gg + " GPM | ");
-        $("#pumpWatt").text(ff + " Watt");
+        if (isActive === true){
+          $(".gauge").show();
+          $("#pumpRPM").text(ee + " RPM | ");
+          $("#pumpGPM").text(gg + " GPM | ");
+          $("#pumpWatt").text(ff + " Watt");
+        } else {
+          $(".gauge").hide();
+        }
       }
     // });
   }
