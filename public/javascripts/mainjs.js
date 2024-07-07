@@ -87,7 +87,6 @@ $(function () {
   });
 
   function parseMsgs(message){
-    console.log("FUCK YOU Message: ", message);
     // $.each(message, function (i, message) {
       var aa;
       var bb;
@@ -107,9 +106,9 @@ $(function () {
         ff = message.watts;
         gg = message.flow;
         statusUpdate(aa, bb);
-        $("#pumpRPM").text(ee);
-        $("#pumpGPM").text(gg);
-        $("#pumpWatt").text(ff);
+        $("#pumpRPM").text(ee + "RPM | ");
+        $("#pumpGPM").text(gg + "GPM | ");
+        $("#pumpWatt").text(ff + " Watt");
       }
     // });
   }
