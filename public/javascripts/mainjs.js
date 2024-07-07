@@ -87,6 +87,7 @@ $(function () {
   });
 
   function parseMsgs(message){
+    console.log("FUCK YOU Message: ", message);
     $.each(message, function (i, field) {
       var aa;
       var bb;
