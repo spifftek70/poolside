@@ -69,7 +69,7 @@ iframe{
 
 #poolGauges{
   position: relative;
-  bottom: -50px;
+  bottom: -45px;
 }
 
 #poolTempLink > p:nth-child(8){
