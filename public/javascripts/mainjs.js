@@ -14,7 +14,7 @@ $(function () {
   });
 
   // Example of specific event handling based on your provided data
-  mainSocket.on("pump", function (message) {
+  mainSocket.on("pump" || "pumpExt", function (message) {
     // console.log("Pump message: ", message);
     parsebodies(message);
   });
