@@ -97,7 +97,7 @@ $(function () {
     // const bodies = message.bodies;
     // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
-      if (field.id === 1) {
+      // if (field.id === 1) {
         console.log("Bodies: ", field.name);
         if (field.name === "Pool") {
           aa = field.id;
@@ -149,6 +149,7 @@ $(function () {
           statusUpdate(aa, bb);
         }
         if (field.name === "Pool Pump") {
+          console.log("FUCK YEAH, Pool Pump: ", field.id);
           aa = field.id;
           bb = field.isActive;
           ee = field.rpm;
@@ -159,7 +160,7 @@ $(function () {
           $("#pumpGPM").text(gg);
           $("#pumpWatt").text(ff);
         }
-      }
+      // }
     });
   }
   
