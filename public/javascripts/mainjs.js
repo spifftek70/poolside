@@ -24,7 +24,7 @@ $(function () {
 
   mainSocket.on("pump", function (message) {
     console.log("Pump message: ", message);
-    // parseMsg(message);
+    parseMsg(message);
   });
 
   mainSocket.on("body", function (message) {
