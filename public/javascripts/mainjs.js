@@ -2,45 +2,48 @@ $(function () {
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"], // Change transport method to polling
-    query: {
-      EIO: 4, // Engine.IO protocol version
-      t: "P2Ebc5G", // Custom query parameter `t`
-      sid: "dZA7q5x3x96k2i_IAAC0" // Custom query parameter `sid`
+    transportOptions: {
+      polling: {
+        extraHeaders: {
+          EIO: 4, // Engine.IO protocol version
+          t: "P2Ebc5G", // Custom query parameter `t`
+          sid: "dZA7q5x3x96k2i_IAAC0" // Custom query parameter `sid`
+        }
+      }
     }
   });
 
   mainSocket.on("connect", function () {
-    // console.log("Connected to WebSocket server");
+    console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
   mainSocket.on("disconnect", function () {
-    // console.log("Disconnected from WebSocket server");
+    console.log("Disconnected from WebSocket server");
   });
 
-  // Example of specific event handling based on your provided data
-  mainSocket.on("pump" || "pumpExt", function (message) {
-    // console.log("Pump message: ", message);
-    parsebodies(message);
+  mainSocket.on("pump", function (message) {
+    console.log("Pump message: ", message);
+    // parseMsg(message);
   });
 
   mainSocket.on("body", function (message) {
-    // console.log("Body message: ", message);
+    console.log("Body message: ", message);
     parsebodies(message);
   });
 
   mainSocket.on("temps", function (message) {
-    // console.log("Temps message: ", message);
+    console.log("Temps message: ", message);
     parseTemps(message);
   });
 
   mainSocket.on("heater", function (message) {
-    // console.log("Heater message: ", message);
+    console.log("Heater message: ", message);
     // parseMsg(message);
   });
 
   mainSocket.on("controller", function (message) {
-    // console.log("Controller message: ", message);
+    console.log("Controller message: ", message);
     // parseMsg(message);
   });
 
