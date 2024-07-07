@@ -1,7 +1,12 @@
 $(function () {
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
-    transports: ["websocket"],
+    transports: ["polling"], // Change transport method to polling
+    query: {
+      EIO: 4, // Engine.IO protocol version
+      t: "P2Ebc5G", // Custom query parameter `t`
+      sid: "dZA7q5x3x96k2i_IAAC0" // Custom query parameter `sid`
+    }
   });
 
   mainSocket.on("connect", function () {
