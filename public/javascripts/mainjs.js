@@ -88,6 +88,11 @@ $(function () {
 
   function parseMsgs(message){
     $.each(message, function (i, field) {
+      var aa;
+      var bb;
+      var ee;
+      var ff;
+      var gg;
       if (field.name === "Spa Jets" || field.name === "Blower") {
         aa = field.id;
         bb = field.isActive;
@@ -113,9 +118,6 @@ $(function () {
     var bb;
     var cc;
     var dd;
-    var ee;
-    var ff;
-    var gg;
     // const bodies = message.bodies;
     // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
