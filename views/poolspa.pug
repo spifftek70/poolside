@@ -56,29 +56,28 @@ append content
                 a.nav-link.mx-2(role='button' href='sms:15015157182') Contact Us 
 
     .container
-    h1.text-center.mt-3.mb-4.h-title #{title}
-    .row
-        .card.card-bigg.shadow.border.mb-4.py-3.px-3
-        .card-body.p-0
-            .card-title.py-2
-            h2.text-center.pb-0 Pool Controls
-            .container-fluid.poolSpecCont
-            .row.text-center.row-cols-1.row-cols-lg-4.row-cols-md-2.g-2
-                .col.px-2
-                .card.card-smm.text-decoration-none
-                    #poolCirculation.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
-                    p.card-text
-                        h3
-                        i.fa.fa-power-off(aria-hidden='true').fa-4
-                        span#poOn  Pool On
-                        br
-                        span#poolDelay
-                        a#pool-circulate.stretched-link(href='#' role='button' data-bs-toggle='button'  aria-pressed='true')
-                    .col-sm-12.w-100
-                        .gauge-container
-                        #pumpRPM.gauge Pump RPM
-                        #pumpWatt.gauge Pump Watt
-                        #pumpGPM.gauge Pump GPM
+        h1.text-center.mt-3.mb-4.h-title #{title}
+        .row
+            .card.card-bigg.shadow.border.mb-4.py-3.px-3
+                .card-body.p-0
+                    .card-title.py-2
+                        h2.text-center.pb-0 Pool Controls
+                    .container-fluid.poolSpecCont
+                        .row.text-center.row-cols-1.row-cols-lg-4.row-cols-md-2.g-2
+                            .col.px-2
+                                .card.card-smm.text-decoration-none
+                                    #poolCirculation.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
+                                        p.card-text
+                                            h3
+                                                i.fa.fa-power-off(aria-hidden='true').fa-4
+                                                span#poOn  Pool On
+                                                br
+                                                span#poolDelay
+                                            a#pool-circulate.stretched-link(href='#' role='button' data-bs-toggle='button'  aria-pressed='true')
+                                            .d-flex.flex-row
+                                                #pumpRPM.gauge
+                                                #pumpWatt.gauge
+                                                #pumpGPM.gauge
                             //- .col.px-2
                             //-     .card.card-smm.text-center.text-decoration-none
                             //-         #poolLight.card-body.shadow.border.btn.btn-lg.btn-info.mb-2
