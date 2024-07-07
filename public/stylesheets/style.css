@@ -89,6 +89,10 @@ iframe{
   font-size: 18px;
 }
 
+.gauge{
+  font-size: 12px;
+}
+
 .card-bigg{
   background-color: #98bebe;
   border-radius: 25px; 

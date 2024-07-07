@@ -106,8 +106,8 @@ $(function () {
         ff = message.watts;
         gg = message.flow;
         statusUpdate(aa, bb);
-        $("#pumpRPM").text(ee + "RPM | ");
-        $("#pumpGPM").text(gg + "GPM | ");
+        $("#pumpRPM").text(ee + " RPM | ");
+        $("#pumpGPM").text(gg + " GPM | ");
         $("#pumpWatt").text(ff + " Watt");
       }
     // });
