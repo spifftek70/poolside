@@ -67,6 +67,11 @@ iframe{
   color: white;
 }
 
+#poolGauges{
+  position: relative;
+  bottom: 0px;
+}
+
 #poolTempLink > p:nth-child(8){
   margin: 0px !important;
   margin-bottom: 0px;
