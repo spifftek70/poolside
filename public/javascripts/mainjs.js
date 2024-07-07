@@ -88,30 +88,30 @@ $(function () {
 
   function parseMsgs(message){
     console.log("FUCK YOU Message: ", message);
-    $.each(message, function (i, field) {
+    // $.each(message, function (i, message) {
       var aa;
       var bb;
       var ee;
       var ff;
-      var gg;console.log("Field: ", field.name);
-      if (field.name === "Spa Jets" || field.name === "Blower") {
-        aa = field.id;
-        bb = field.isActive;
+      var gg;console.log("message: ", message.name);
+      if (message.name === "Spa Jets" || message.name === "Blower") {
+        aa = message.id;
+        bb = message.isActive;
         statusUpdate(aa, bb);
       }
-      if (field.name === "Pool Pump") {
-        console.log("FUCK YEAH, Pool Pump: ", field.id);
-        aa = field.id;
-        bb = field.isActive;
-        ee = field.rpm;
-        ff = field.watts;
-        gg = field.flow;
+      if (message.name === "Pool Pump") {
+        console.log("FUCK YEAH, Pool Pump: ", message.id);
+        aa = message.id;
+        bb = message.isActive;
+        ee = message.rpm;
+        ff = message.watts;
+        gg = message.flow;
         statusUpdate(aa, bb);
         $("#pumpRPM").text(ee);
         $("#pumpGPM").text(gg);
         $("#pumpWatt").text(ff);
       }
-    });
+    // });
   }
 
   function parsebodies(message) {
