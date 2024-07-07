@@ -115,8 +115,8 @@ $(function () {
           $("#poolCirculation").addClass("btn-circ");
           $("#poOn").text(" Pool On");
           $(".gauge").show();
-          $("#pumpRPM").text(ee + " RPM | ");
-          $("#pumpGPM").text(gg + " GPM | ");
+          $("#pumpRPM").text(ee + " RPM | &nbsp;");
+          $("#pumpGPM").text(gg + " GPM | &nbsp;");
           $("#pumpWatt").text(ff + " Watt");
         } else {
           $("#poolCirculation").removeClass("btn-circ");
