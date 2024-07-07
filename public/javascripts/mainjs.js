@@ -16,7 +16,7 @@ $(function () {
   // Example of specific event handling based on your provided data
   mainSocket.on("pump", function (message) {
     // console.log("Pump message: ", message);
-    // parseMsg(message);
+    parsebodies(message);
   });
 
   mainSocket.on("body", function (message) {
@@ -81,6 +81,11 @@ $(function () {
   function parsebodies(message) {
     var aa;
     var bb;
+    var cc;
+    var dd;
+    var ee;
+    var ff;
+    var gg;
     // const bodies = message.bodies;
     // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
@@ -96,8 +101,8 @@ $(function () {
           $("#poolSlider").roundSlider("setValue", poolVals);
           $("#poolSetTemps").text(poolVals + "°F");
           if ('heatStatus' in field) {
-            var cc = field.heatStatus;
-            var dd = cc.desc;
+            cc = field.heatStatus;
+            dd = cc.desc;
             if (dd === "Heating") {
               poolWarm();
             } else if (dd === "Cooling") {
@@ -118,8 +123,8 @@ $(function () {
           $("#spaSlider").roundSlider("setValue", spaVals);
           $("#spaSetTemps").text(spaVals + "°F");
           if ('heatStatus' in field) {
-            const cc = field.heatStatus;
-            const dd = cc.desc;
+            cc = field.heatStatus;
+            dd = cc.desc;
             if (dd === "Heating") {
               spaHot();
             } else if (dd === "Cooling") {
@@ -130,10 +135,21 @@ $(function () {
           }
           statusUpdate(aa, bb);
         }
-        if (field.name === "Spa Jets") {
+        if (field.name === "Spa Jets" || field.name === "Blower") {
           aa = field.id;
           bb = field.isActive;
           statusUpdate(aa, bb);
+        }
+        if (field.name === "Pool Pump") {
+          aa = field.id;
+          bb = field.isActive;
+          ee = field.rpm;
+          ff = field.watts;
+          gg = field.gpm;
+          statusUpdate(aa, bb);
+          $("#poolRPM").text(ee);
+          $("#poolGPM").text(gg);
+          $("#poolWatt").text(ff);
         }
       }
     });
@@ -575,25 +591,6 @@ $(function () {
     });
   }
 
-  // function makeChanges(bb, hh, iSS) {
-  //   if (bb == 0) {
-  //     bothOff();
-  //     return true;
-  //   }
-  //   if (bb == 2 && hh == true && iSS == false) {
-  //     spaHot();
-  //   } else if (bb == 2 && hh == true && iSS == true) {
-  //     spaCool();
-  //   } else if (bb == 1 && hh == true && iSS == false) {
-  //     poolWarm();
-  //   } else if (bb == 1 && hh == true && iSS == true) {
-  //     poolCold();
-  //   } else {
-  //     return true;
-  //   }
-  //   return true;
-  // }
-
   function poolOff() {
     $("#poolTempLink").removeClass("btn-primary");
     $("#poolTempLink").removeClass("btn-danger");
@@ -604,6 +601,11 @@ $(function () {
     $(".pFlake").hide();
     $(".pFlame").hide();
   }
+
+  // function poolOn(){
+  //   $("#poolCirculation").removeClass("btn-info");
+  //   $("#poolCirculation").addClass("btn-circ");
+  // }
 
   function poolCold() {
     $("#poolTempLink").removeClass("btn-info");
@@ -637,6 +639,11 @@ $(function () {
     $(".pFlake").hide();
     $(".pFlame").hide();
   }
+
+  // function spaOn(){
+  //   $("#spaCirculation").removeClass("btn-info");
+  //   $("#spaCirculation").addClass("btn-circ");
+  // }
 
   function spaCool() {
     $("#spaTempLink").removeClass("btn-info");
@@ -719,6 +726,17 @@ $(function () {
       $("#poOn").text(" Pool On");
     }
     if (a === 1 && b === false) {
+      $("#poolCirculation").removeClass("btn-circ");
+      $("#poolCirculation").addClass("btn-info");
+      $("#poOn").text(" Pool On");
+    }
+
+    if (a === 50 && b === true) {
+      $("#poolCirculation").removeClass("btn-info");
+      $("#poolCirculation").addClass("btn-circ");
+      $("#poOn").text(" Pool On");
+    }
+    if (a === 50 && b === false) {
       $("#poolCirculation").removeClass("btn-circ");
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
