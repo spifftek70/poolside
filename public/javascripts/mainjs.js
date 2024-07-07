@@ -153,11 +153,11 @@ $(function () {
           bb = field.isActive;
           ee = field.rpm;
           ff = field.watts;
-          gg = field.gpm;
+          gg = field.flow;
           statusUpdate(aa, bb);
-          $("#poolRPM").text(ee);
-          $("#poolGPM").text(gg);
-          $("#poolWatt").text(ff);
+          $("#pumpRPM").text(ee);
+          $("#pumpGPM").text(gg);
+          $("#pumpWatt").text(ff);
         }
       }
     });
