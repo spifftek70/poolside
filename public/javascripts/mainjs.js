@@ -106,7 +106,7 @@ $(function () {
         ff = message.watts;
         gg = message.flow;
         statusUpdate(aa, bb);
-        if (isActive === true){
+        if (bb === true){
           $(".gauge").show();
           $("#pumpRPM").text(ee + " RPM | ");
           $("#pumpGPM").text(gg + " GPM | ");
