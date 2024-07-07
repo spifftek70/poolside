@@ -42,7 +42,6 @@ body {
 
 #poolTempLink{
     padding-bottom: 0px !important;
-    color: white;
 }
 
 .txtUs{
@@ -70,7 +69,7 @@ iframe{
 
 #poolGauges{
   position: relative;
-  bottom: -45px;
+  bottom: -px;
 }
 
 #poolTempLink > p:nth-child(8){
