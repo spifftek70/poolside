@@ -24,7 +24,7 @@ $(function () {
 
   mainSocket.on("pump", function (message) {
     console.log("Pump message: ", message);
-    parsebodies(message);
+    parseMsgs(message);
   });
 
   mainSocket.on("body", function (message) {
@@ -39,7 +39,7 @@ $(function () {
 
   mainSocket.on("heater", function (message) {
     console.log("Heater message: ", message);
-    parsebodies(message);
+    parseMsgs(message);
   });
 
   mainSocket.on("controller", function (message) {
@@ -86,6 +86,28 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
+  function parseMsgs(message){
+    $.each(message, function (i, field) {
+      if (field.name === "Spa Jets" || field.name === "Blower") {
+        aa = field.id;
+        bb = field.isActive;
+        statusUpdate(aa, bb);
+      }
+      if (field.name === "Pool Pump") {
+        console.log("FUCK YEAH, Pool Pump: ", field.id);
+        aa = field.id;
+        bb = field.isActive;
+        ee = field.rpm;
+        ff = field.watts;
+        gg = field.flow;
+        statusUpdate(aa, bb);
+        $("#pumpRPM").text(ee);
+        $("#pumpGPM").text(gg);
+        $("#pumpWatt").text(ff);
+      }
+    });
+  }
+
   function parsebodies(message) {
     var aa;
     var bb;
@@ -97,7 +119,7 @@ $(function () {
     // const bodies = message.bodies;
     // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
-      // if (field.id === 1) {
+      if (field.id === 1) {
         console.log("Bodies: ", field.name);
         if (field.name === "Pool") {
           aa = field.id;
@@ -143,24 +165,7 @@ $(function () {
           }
           statusUpdate(aa, bb);
         }
-        if (field.name === "Spa Jets" || field.name === "Blower") {
-          aa = field.id;
-          bb = field.isActive;
-          statusUpdate(aa, bb);
-        }
-        if (field.name === "Pool Pump") {
-          console.log("FUCK YEAH, Pool Pump: ", field.id);
-          aa = field.id;
-          bb = field.isActive;
-          ee = field.rpm;
-          ff = field.watts;
-          gg = field.flow;
-          statusUpdate(aa, bb);
-          $("#pumpRPM").text(ee);
-          $("#pumpGPM").text(gg);
-          $("#pumpWatt").text(ff);
-        }
-      // }
+      }
     });
   }
   
