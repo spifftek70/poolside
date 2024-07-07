@@ -92,30 +92,39 @@ $(function () {
       var bb;
       var ee;
       var ff;
-      var gg;console.log("message: ", message.name);
+      var gg;
       if (message.name === "Spa Jets" || message.name === "Blower") {
         aa = message.id;
         bb = message.isActive;
-        statusUpdate(aa, bb);
+        if (bb === true){
+          $("#spaCirculation").removeClass("btn-info");
+          $("#spaCirculation").addClass("btn-circ");
+        } else {
+          $("#spaCirculation").removeClass("btn-circ");
+          $("#spaCirculation").addClass("btn-info");
+        }
       }
       if (message.name === "Pool Pump") {
-        console.log("FUCK YEAH, Pool Pump: ", message.id);
         aa = message.id;
         bb = message.isActive;
         ee = message.rpm;
         ff = message.watts;
         gg = message.flow;
-        statusUpdate(aa, bb);
         if (bb === true){
+          $("#poolCirculation").removeClass("btn-info");
+          $("#poolCirculation").addClass("btn-circ");
+          $("#poOn").text(" Pool On");
           $(".gauge").show();
           $("#pumpRPM").text(ee + " RPM | ");
           $("#pumpGPM").text(gg + " GPM | ");
           $("#pumpWatt").text(ff + " Watt");
         } else {
+          $("#poolCirculation").removeClass("btn-circ");
+          $("#poolCirculation").addClass("btn-info");
+          $("#poOn").text(" Pool On");
           $(".gauge").hide();
         }
       }
-    // });
   }
 
   function parsebodies(message) {
@@ -123,11 +132,8 @@ $(function () {
     var bb;
     var cc;
     var dd;
-    // const bodies = message.bodies;
-    // // console.log("bodies: ", bodies);
     $.each(message, function (i, field) {
       if (field.id === 1) {
-        console.log("Bodies: ", field.name);
         if (field.name === "Pool") {
           aa = field.id;
           bb = field.isOn;
@@ -179,7 +185,6 @@ $(function () {
   function parseTemps(message) {
     var aa;
     var bb;
-    // const temps = data.temps;
     var bodes = message.bodies;
     $.each(bodes, function (i, data) {
       console.log("Temps: ", data.name);
@@ -741,12 +746,12 @@ $(function () {
       ck2 = false;
       aC2 = false;
     }
-    if ((a === 1 || a === 50) && b === true) {
+    if (a === 1 && b === true) {
       $("#poolCirculation").removeClass("btn-info");
       $("#poolCirculation").addClass("btn-circ");
       $("#poOn").text(" Pool On");
     }
-    if ((a === 1 || a === 50) && b === false) {
+    if (a === 1 && b === false) {
       $("#poolCirculation").removeClass("btn-circ");
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
