@@ -24,7 +24,7 @@ $(function () {
 
   mainSocket.on("pump", function (message) {
     console.log("Pump message: ", message);
-    parseMsg(message);
+    parsebodies(message);
   });
 
   mainSocket.on("body", function (message) {
@@ -39,7 +39,7 @@ $(function () {
 
   mainSocket.on("heater", function (message) {
     console.log("Heater message: ", message);
-    // parseMsg(message);
+    parsebodies(message);
   });
 
   mainSocket.on("controller", function (message) {
