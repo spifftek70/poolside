@@ -741,23 +741,12 @@ $(function () {
       ck2 = false;
       aC2 = false;
     }
-    if (a === 1 && b === true) {
+    if ((a === 1 || a === 50) && b === true) {
       $("#poolCirculation").removeClass("btn-info");
       $("#poolCirculation").addClass("btn-circ");
       $("#poOn").text(" Pool On");
     }
-    if (a === 1 && b === false) {
-      $("#poolCirculation").removeClass("btn-circ");
-      $("#poolCirculation").addClass("btn-info");
-      $("#poOn").text(" Pool On");
-    }
-
-    if (a === 50 && b === true) {
-      $("#poolCirculation").removeClass("btn-info");
-      $("#poolCirculation").addClass("btn-circ");
-      $("#poOn").text(" Pool On");
-    }
-    if (a === 50 && b === false) {
+    if ((a === 1 || a === 50) && b === false) {
       $("#poolCirculation").removeClass("btn-circ");
       $("#poolCirculation").addClass("btn-info");
       $("#poOn").text(" Pool On");
