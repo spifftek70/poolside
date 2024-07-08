@@ -732,6 +732,7 @@ $(function () {
         break;
   
       case "Spa Light":
+      case "Spa Lights":  // Handling plural
         toggleClass("#spaLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
         break;
   
