@@ -715,7 +715,7 @@ $(function () {
       } else {
         $("#fount").removeClass("btn-circ");
         $("#fount").addClass("btn-info");
-      }
+      } 
     }
     if (data === "Spa Jets") {
       if (status === true) {
