@@ -689,7 +689,7 @@ $(function () {
     // Looping through each circuit and logging relevant information
     circuits.forEach(circuit => {
       var cName = circuit.name;
-      var cState = circuit.isActive;
+      var cState = circuit.isOn;
       changeStuff(cName, cState);
     });
   }
