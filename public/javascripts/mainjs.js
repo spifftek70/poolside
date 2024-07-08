@@ -719,18 +719,22 @@ $(function () {
     }
     if (data === "Spa Jets") {
       if (status === true) {
+        $("#spaOn").text(" Spa Off");
         $("#spaJets").removeClass("btn-info");
         $("#spaJets").addClass("btn-circ");
       } else {
+        $("#spaOn").text(" Spa On");
         $("#spaJets").removeClass("btn-circ");
         $("#spaJets").addClass("btn-info");
       }
     }
     if (data === "Pool Clean" || data === "Pool Cond") {
       if (status === true) {
+        $("#poOn").text(" Pool Off");
         $("#poolCirculation").removeClass("btn-info");
         $("#poolCirculation").addClass("btn-light");
       } else {
+        $("#poOn").text(" Pool On");
         $("#poolCirculation").removeClass("btn-light");
         $("#poolCirculation").addClass("btn-info");
       }
