@@ -735,11 +735,11 @@ $(function () {
         $("#poOn").text(" Pool Off");
         $("#spaOn").text(" Spa On");
         $("#poolCirculation").removeClass("btn-info");
-        $("#poolCirculation").addClass("btn-light");
+        $("#poolCirculation").addClass("btn-circ");
       } else {
         $("#poOn").text(" Pool On");
         $("#spaOn").text(" Spa Off");
-        $("#poolCirculation").removeClass("btn-light");
+        $("#poolCirculation").removeClass("btn-circ");
         $("#poolCirculation").addClass("btn-info");
       }
     }
