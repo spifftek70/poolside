@@ -618,11 +618,15 @@ $(function () {
     e.preventDefault();
     var data;
     if ($(this).hasClass("btn-info")) {
+      $("#blowsHard").removeClass("btn-info")
+      $("#blowsHard").addClass("btn-circ");
       data = {
         id: 4,
         state: true,
       };
     } else {
+      $("#blowsHard").removeClass("btn-circ")
+      $("#blowsHard").addClass("btn-info");
       data = {
         id: 4,
         state: false,
