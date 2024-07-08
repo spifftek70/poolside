@@ -513,17 +513,17 @@ $(function () {
     var $this = $(this);
     var data;
     if ($this.hasClass("btn-info")) {
+      $("#spOn").text(" Spa Off");
       data = {
         id: 1,
         state: true,
       };
-      $("#spOn").text(" Spa Off");
     } else {
+      $("#spOn").text(" Spa On");
       data = {
         id: 1,
         state: false,
       };
-      $("#spOn").text(" Spa On");
     }
     setPool(data);
     var elem = $("#spaDelay");
