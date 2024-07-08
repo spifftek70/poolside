@@ -209,12 +209,12 @@ $(function () {
         if (field.name === "Spa") {
           aa = field.id;
           bb = field.isOn;
-          $("#spaCurrentTemps").text("Is now: ", field.temp, "° F");
+          $("#spaCurrentTemps").text("Is now: " + field.temp + "° F");
           const spaCoolSetpt = field.coolSetpoint;
           const spaSetPt = field.setPoint;
           const spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
           $("#spaSlider").roundSlider("setValue", spaVals);
-          $("#spaSetTemps").text("Set for: ", spaVals, "° F");
+          $("#spaSetTemps").text("Set for: " + spaVals + "° F");
           if ('heatStatus' in field) {
             cc = field.heatStatus;
             dd = cc.desc;
