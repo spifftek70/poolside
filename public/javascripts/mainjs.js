@@ -108,12 +108,12 @@ $(function () {
         if (bb === true){
           $("#spaCirculation").removeClass("btn-info");
           $("#spaCirculation").addClass("btn-circ");
-          $("#spaOn").text(" Spa Off");
+          $("#spOn").text(" Spa Off");
           spaPumpMaster = true;
         } else {
           $("#spaCirculation").removeClass("btn-circ");
           $("#spaCirculation").addClass("btn-info");
-          $("#spaOn").text(" Spa On");
+          $("#spOn").text(" Spa On");
           spaPumpMaster = false;
         }
       }
@@ -517,13 +517,13 @@ $(function () {
         id: 1,
         state: true,
       };
-      $("#spaOn").text(" Spa Off");
+      $("#spOn").text(" Spa Off");
     } else {
       data = {
         id: 1,
         state: false,
       };
-      // $("#spaOn").text(" Spa On");
+      // $("#spOn").text(" Spa On");
     }
     setPool(data);
     var elem = $("#spaDelay");
