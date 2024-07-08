@@ -200,7 +200,7 @@ $(function () {
               heaterMaster = "Off";
             }
           }
-          statusUpdate(aa, bb);
+          // statusUpdate(aa, bb);
         }
         if (field.name === "Spa") {
           aa = field.id;
@@ -225,7 +225,7 @@ $(function () {
               heaterMaster = "Off";
             }
           }
-          statusUpdate(aa, bb);
+          // statusUpdate(aa, bb);
         }
       }
     });
