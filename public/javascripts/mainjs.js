@@ -810,7 +810,7 @@ $(function () {
     if (a === 1 && b === true) {
       $("#poolCirculation").removeClass("btn-info");
       $("#poolCirculation").addClass("btn-circ");
-      $("#poOn").text(" Pool On");
+      $("#poOn").text(" Pool Off");
     }
     if (a === 1 && b === false) {
       $("#poolCirculation").removeClass("btn-circ");
@@ -820,10 +820,12 @@ $(function () {
     if (a === 2 && b === true) {
       $("#spaCirculation").removeClass("btn-info");
       $("#spaCirculation").addClass("btn-circ");
+      $("#spaOn").text(" Spa Off");
     }
     if (a === 2 && b === false) {
       $("#spaCirculation").removeClass("btn-circ");
       $("#spaCirculation").addClass("btn-info");
+      $("#spaOn").text(" Spa On");
     }
     if (a === 3 && b === true) {
       $("#spaJets").removeClass("btn-info");
