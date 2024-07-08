@@ -603,11 +603,13 @@ $(function () {
         id: 5,
         state: true,
       };
+      changeStuff("Aerator", true);
     } else {
       data = {
         id: 5,
         state: false,
       };
+      changeStuff("Aerator", false);
     }
   // $(this).toggleClass("btn-info btn-circ");
     setPool(data);
@@ -617,15 +619,15 @@ $(function () {
     e.preventDefault();
     var data;
     if ($(this).hasClass("btn-info")) {
-      $("#blowsHard").removeClass("btn-info")
-      $("#blowsHard").addClass("btn-circ");
+      // $("#blowsHard").removeClass("btn-info")
+      // $("#blowsHard").addClass("btn-circ");
+      changeStuff("Blower", true);
       data = {
         id: 4,
         state: true,
       };
     } else {
-      $("#blowsHard").removeClass("btn-circ")
-      $("#blowsHard").addClass("btn-info");
+      changeStuff("Blower", false);
       data = {
         id: 4,
         state: false,
@@ -643,11 +645,13 @@ $(function () {
         id: 2,
         state: true,
       };
+      changeStuff("Spa Jets", true);
     } else {
       data = {
         id: 2,
         state: false,
       };
+      changeStuff("Spa Jets", false);
     }
     // $("#spaJets").toggleClass("btn-info btn-circ");
     setPool(data);
@@ -667,6 +671,62 @@ $(function () {
     e.preventDefault();
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
+
+  function allState() {
+    $.ajax({
+      type: "PUT",
+      url: "http://autopool.local:4200/state/all",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(jdata),
+      success: function (data) {
+        parseAll(data);
+        return data;
+      },
+    });
+  }
+  
+  function parseAll(data) {
+    // Parsing the circuits array from the JSON response
+    const circuits = data.circuits;
+  
+    // Looping through each circuit and logging relevant information
+    circuits.forEach(circuit => {
+      var cName = circuit.name;
+      var cState = circuit.isActive;
+      changeStuff(cName, cState);
+    });
+  }
+
+  function changeStuff(data, status) {
+    if (data === "Blower") {
+      if (status === true) {
+        $("#blowsHard").removeClass("btn-info");
+        $("#blowsHard").addClass("btn-circ");
+      } else {
+        $("#blowsHard").removeClass("btn-circ");
+        $("#blowsHard").addClass("btn-info");
+      }
+    }
+    if (data === "Aerator") {
+      if (status === true) {
+        $("#fount").removeClass("btn-info");
+        $("#fount").addClass("btn-circ");
+      } else {
+        $("#fount").removeClass("btn-circ");
+        $("#fount").addClass("btn-info");
+      }
+    }
+    if (data === "Spa Jets") {
+      if (status === true) {
+        $("#spaJets").removeClass("btn-info");
+        $("#spaJets").addClass("btn-circ");
+      } else {
+        $("#spaJets").removeClass("btn-circ");
+        $("#spaJets").addClass("btn-info");
+      }
+    }
+  }
 
   function setPool(jdata) {
     $.ajax({
