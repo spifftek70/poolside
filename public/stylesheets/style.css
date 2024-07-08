@@ -167,6 +167,24 @@ iframe{
   --bs-btn-disabled-border-color: aquamarine;
 }
 
+
+.btn-light{
+  --bs-btn-color: #000;
+  --bs-btn-bg: rgb(254, 254, 105);
+  --bs-btn-border-color: white;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: rgb(233, 246, 53);
+  --bs-btn-hover-border-color: rgb(224, 224, 4);
+  --bs-btn-focus-shadow-rgb: 11, 172, 204;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #a9ab2e;
+  --bs-btn-active-border-color: rgb(235, 246, 22);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: rgb(199, 205, 136);
+  --bs-btn-disabled-border-color: rgb(191, 204, 110);
+}
+
 /* .card-text{
   padding-top: 35px;
 } */
