@@ -108,12 +108,12 @@ $(function () {
         if (bb === true){
           $("#spaCirculation").removeClass("btn-info");
           $("#spaCirculation").addClass("btn-circ");
-          $("#spOn").text(" Spa Off");
+          $("#spaOn").text(" Spa Off");
           spaPumpMaster = true;
         } else {
           $("#spaCirculation").removeClass("btn-circ");
           $("#spaCirculation").addClass("btn-info");
-          $("#spOn").text(" Spa On");
+          $("#spaOn").text(" Spa On");
           spaPumpMaster = false;
         }
       }
@@ -513,13 +513,13 @@ $(function () {
     var $this = $(this);
     var data;
     if ($this.hasClass("btn-info")) {
-      $("#spOn").text(" Spa Off");
+      $("#spaOn").text(" Spa Off");
       data = {
         id: 1,
         state: true,
       };
     } else {
-      $("#spOn").text(" Spa On");
+      $("#spaOn").text(" Spa On");
       data = {
         id: 1,
         state: false,
