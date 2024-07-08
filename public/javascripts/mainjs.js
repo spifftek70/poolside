@@ -268,12 +268,12 @@ $(function () {
       if (data.name === "Spa") {
         aa = data.id;
         bb = data.isOn;
-        $("#spaCurrentTemps").text(data.temp);
+        $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
         const spaCoolSetpt = data.coolSetpoint;
         const spaSetPt = data.setPoint;
         const spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
-        $("#spaSetTemps").text(spaVals + "°F");
+        $("#spaSetTemps").text("Set for: " + spaVals + "° F");
         if ('heatStatus' in data) {
           const cc = data.heatStatus;
           const dd = cc.desc;
