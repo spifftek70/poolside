@@ -682,7 +682,7 @@ $(function () {
       url: "http://autopool.local:4200/state/all",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
-      data: JSON.stringify(data),
+      data: JSON.stringify(jdata),
       success: function (data) {
         parseAll(data);
         return data;
