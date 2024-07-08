@@ -1,4 +1,13 @@
 $(function () {
+  var spaJetsMaster;
+  var spaPumpMaster;
+  var poolPumpMaster;
+  var poolLightMaster;
+  var spaLightMaster;
+  var blowerMaster;
+  var fountainMaster;
+  var heaterMaster;
+
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"], // Change transport method to polling
@@ -100,10 +109,12 @@ $(function () {
           $("#spaCirculation").removeClass("btn-info");
           $("#spaCirculation").addClass("btn-circ");
           $("#spaOn").text(" Spa Off");
+          spaPumpMaster = true;
         } else {
           $("#spaCirculation").removeClass("btn-circ");
           $("#spaCirculation").addClass("btn-info");
           $("#spaOn").text(" Spa On");
+          spaPumpMaster = false;
         }
       }
       if (message.name === "Spa Jets") {
@@ -112,9 +123,11 @@ $(function () {
         if (bb === true){
           $("#spaJets").removeClass("btn-info")
           $("#spaJets").addClass("btn-circ");
+          spaJetsMaster = true;
         } else {
           $("#spaJets").removeClass("btn-circ");
           $("#spaJets").addClass("btn-info");
+          spaJetsMaster = false;
         }
       }
       if (message.name === "Blower") {
@@ -123,9 +136,11 @@ $(function () {
         if (bb === true){
           $("#blowsHard").removeClass("btn-info")
           $("#blowsHard").addClass("btn-circ");
+          blowerMaster = true;
         } else {
           $("#blowsHard").removeClass("btn-circ");
           $("#blowsHard").addClass("btn-info");
+          blowerMaster = false;
         }
       }
       if (message.name === "Pool Pump") {
@@ -144,11 +159,13 @@ $(function () {
           $("#pumpGPM").text(gg + " GPM | ");
           $("#pumpGPM").append("&nbsp;");
           $("#pumpWatt").text(ff + " Watt");
+          poolPumpMaster = true;
         } else {
           $("#poolCirculation").removeClass("btn-circ");
           $("#poolCirculation").addClass("btn-info");
           $("#poOn").text(" Pool On");
           $(".gauge").hide();
+          poolPumpMaster = false;
         }
       }
   }
@@ -174,10 +191,13 @@ $(function () {
             dd = cc.desc;
             if (dd === "Heating") {
               poolWarm();
+              heaterMaster = "Heating";
             } else if (dd === "Cooling") {
+              heaterMaster = "Cooling";
               poolCold();
             } else {
               poolOff();
+              heaterMaster = "Off";
             }
           }
           statusUpdate(aa, bb);
@@ -195,11 +215,14 @@ $(function () {
             cc = field.heatStatus;
             dd = cc.desc;
             if (dd === "Heating") {
+              heaterMaster = "Heating";
               spaHot();
             } else if (dd === "Cooling") {
+              heaterMaster = "Cooling";
               spaCool();
             } else {
               spaOff();
+              heaterMaster = "Off";
             }
           }
           statusUpdate(aa, bb);
@@ -228,10 +251,13 @@ $(function () {
           const dd = cc.desc;
           if (dd === "Heating") {
             poolWarm();
+            heaterMaster = "Heating";
           } else if (dd === "Cooling") {
             poolCold();
+            heaterMaster = "Cooling
           } else {
             poolOff();
+            heaterMaster = "Off";
           }
         }
         statusUpdate(aa, bb);
@@ -250,10 +276,13 @@ $(function () {
           const dd = cc.desc;
           if (dd === "Heating") {
             spaHot();
+            heaterMaster = "Heating";
           } else if (dd === "Cooling") {
             spaCool();
+            heaterMaster = "Cooling";
           } else {
             spaOff();
+            heaterMaster = "Off";
           }
         }
         statusUpdate(aa, bb);
