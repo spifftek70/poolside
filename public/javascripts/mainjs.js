@@ -517,13 +517,13 @@ $(function () {
         id: 1,
         state: true,
       };
-      $("#spOn").text("Spa Off");
+      $("#spOn").text(" Spa Off");
     } else {
       data = {
         id: 1,
         state: false,
       };
-      // $("#spOn").text(" Spa On");
+      $("#spOn").text(" Spa On");
     }
     setPool(data);
     var elem = $("#spaDelay");
