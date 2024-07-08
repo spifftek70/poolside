@@ -246,7 +246,7 @@ $(function () {
         $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");  
         const poolCoolSetpt = data.coolSetpoint;
         const poolSetPt = data.setPoint;
-        const poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
+        const poolVals = poolSetPt.toString() + " - " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         if ('heatStatus' in data) {
@@ -271,7 +271,7 @@ $(function () {
         $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
         const spaCoolSetpt = data.coolSetpoint;
         const spaSetPt = data.setPoint;
-        const spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
+        const spaVals = spaSetPt.toString() + " - " + spaCoolSetpt.toString();
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
         if ('heatStatus' in data) {
