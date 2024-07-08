@@ -726,6 +726,33 @@ $(function () {
         $("#spaJets").addClass("btn-info");
       }
     }
+    if (data === "Pool Clean" || data === "Pool Cond") {
+      if (status === true) {
+        $("#poolCirculation").removeClass("btn-info");
+        $("#poolCirculation").addClass("btn-light");
+      } else {
+        $("#poolCirculation").removeClass("btn-light");
+        $("#poolCirculation").addClass("btn-info");
+      }
+    }
+    if (data === "Spa Light") {
+      if (status === true) {
+        $("#spaLight").removeClass("btn-info");
+        $("#spaLight").addClass("btn-light");
+      } else {
+        $("#spaLight").removeClass("btn-light");
+        $("#spaLight").addClass("btn-info");
+      }
+    }
+    if (data === "Pool Light") {
+      if (status === true) {
+        $("#poolLight").removeClass("btn-info");
+        $("#poolLight").addClass("btn-light");
+      } else {
+        $("#poolLight").removeClass("btn-light");
+        $("#poolLight").addClass("btn-info");
+      }
+    }
   }
 
   function setPool(jdata) {
