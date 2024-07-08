@@ -699,6 +699,7 @@ $(function () {
   }
 
   function changeStuff(data, status) {
+    console.log("Data: ", data, "Status: ", status);
     // Helper function to toggle classes
     function toggleClass(element, removeClass, addClass) {
       $(element).removeClass(removeClass).addClass(addClass);
