@@ -430,11 +430,15 @@ $(function () {
         id: 2,
         state: true,
       };
+      $("#poOn").text(" Pool Off");
+      $("#poolGauges").show();
     } else {
       data1 = {
         id: 6,
         state: false,
       };
+      $("#poOn").text(" Pool On");
+      $("#poolGauges").hide();
       data2 = {
         id: 2,
         state: false,
@@ -446,9 +450,9 @@ $(function () {
     }, 500);
     var elem = $("#poolDelay");
     cntdown(elem, $this);
-    setTimeout(function () {
-      $this.toggleClass("btn-info btn-circ");
-    }, 25000);
+    // setTimeout(function () {
+    //   $this.toggleClass("btn-info btn-circ");
+    // }, 25000);
   });
 
   $("#spaCirculation").on("click", function (e) {
@@ -460,18 +464,20 @@ $(function () {
         id: 1,
         state: true,
       };
+      $("#spaOn").text(" Spa Off");
     } else {
       data = {
         id: 1,
         state: false,
       };
+      $("#spaOn").text(" Spa On");
     }
     setPool(data);
     var elem = $("#spaDelay");
     cntdown(elem, $this);
-    setTimeout(function () {
-      $this.toggleClass("btn-info btn-circ");
-    }, 25000);
+    // setTimeout(function () {
+    //   $this.toggleClass("btn-info btn-circ");
+    // }, 25000);
   });
 
   function cntdown(a, b) {
