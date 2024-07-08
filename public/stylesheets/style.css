@@ -143,6 +143,13 @@ iframe{
    min-height: 98%;
 }
 
+.card-mmm{
+  background: none;
+  text-align: center;
+  border: none;
+  min-height: 49%;
+}
+
 .btn-circ{
   --bs-btn-color: #000;
   --bs-btn-bg: aquamarine;
