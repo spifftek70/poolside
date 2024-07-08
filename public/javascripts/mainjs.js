@@ -93,15 +93,39 @@ $(function () {
       var ee;
       var ff;
       var gg;
-      if (message.name === "Spa Jets" || message.name === "Blower") {
+      if (message.name === "Spa Pump") {
         aa = message.id;
         bb = message.isActive;
         if (bb === true){
           $("#spaCirculation").removeClass("btn-info");
           $("#spaCirculation").addClass("btn-circ");
+          $("#spaOn").text(" Spa Off");
         } else {
           $("#spaCirculation").removeClass("btn-circ");
           $("#spaCirculation").addClass("btn-info");
+          $("#spaOn").text(" Spa On");
+        }
+      }
+      if (message.name === "Spa Jets") {
+        aa = message.id;
+        bb = message.isActive;
+        if (bb === true){
+          $("#spaJets").removeClass("btn-info")
+          $("#spaJets").addClass("btn-circ");
+        } else {
+          $("#spaJets").removeClass("btn-circ");
+          $("#spaJets").addClass("btn-info");
+        }
+      }
+      if (message.name === "Blower") {
+        aa = message.id;
+        bb = message.isActive;
+        if (bb === true){
+          $("#blowsHard").removeClass("btn-info")
+          $("#blowsHard").addClass("btn-circ");
+        } else {
+          $("#blowsHard").removeClass("btn-circ");
+          $("#blowsHard").addClass("btn-info");
         }
       }
       if (message.name === "Pool Pump") {
@@ -113,7 +137,7 @@ $(function () {
         if (bb === true){
           $("#poolCirculation").removeClass("btn-info");
           $("#poolCirculation").addClass("btn-circ");
-          $("#poOn").text(" Pool On");
+          $("#poOn").text(" Pool Off");
           $(".gauge").show();
           $("#pumpRPM").text(ee + " RPM | ");
           $("#pumpRPM").append("&nbsp;");
@@ -470,7 +494,7 @@ $(function () {
         id: 1,
         state: false,
       };
-      $("#spaOn").text(" Spa On");
+      // $("#spaOn").text(" Spa On");
     }
     setPool(data);
     var elem = $("#spaDelay");
@@ -521,7 +545,7 @@ $(function () {
         state: false,
       };
     }
-    $("#poolLight").toggleClass("btn-info btn-warning");
+    // $("#poolLight").toggleClass("btn-info btn-warning");
     setPool(data);
   });
 
@@ -539,7 +563,7 @@ $(function () {
         state: false,
       };
     }
-    $(this).toggleClass("btn-info btn-warning");
+    // $(this).toggleClass("btn-info btn-warning");
     setPool(data);
   });
 
@@ -557,7 +581,7 @@ $(function () {
         state: false,
       };
     }
-  $(this).toggleClass("btn-info btn-circ");
+  // $(this).toggleClass("btn-info btn-circ");
     setPool(data);
   });
 
@@ -575,7 +599,7 @@ $(function () {
         state: false,
       };
     }
-    $("#blowsHard").toggleClass("btn-info btn-light");
+    // $("#blowsHard").toggleClass("btn-info btn-light");
     setPool(data);
   });
 
@@ -593,7 +617,7 @@ $(function () {
         state: false,
       };
     }
-    $("#spaJets").toggleClass("btn-info btn-circ");
+    // $("#spaJets").toggleClass("btn-info btn-circ");
     setPool(data);
   });
 
