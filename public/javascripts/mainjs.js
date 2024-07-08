@@ -517,7 +517,7 @@ $(function () {
         id: 1,
         state: true,
       };
-      $("#spOn").text(" Spa Off");
+      $("#spOn").text("Spa Off");
     } else {
       data = {
         id: 1,
