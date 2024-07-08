@@ -7,7 +7,7 @@ $(function () {
   var blowerMaster;
   var fountainMaster;
   var heaterMaster;
-
+  allState();
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"], // Change transport method to polling
