@@ -699,64 +699,46 @@ $(function () {
   }
 
   function changeStuff(data, status) {
-    if (data === "Blower" && status === true) {
-      $("#blowsHard").removeClass("btn-info");
-      $("#blowsHard").addClass("btn-circ");
-    } 
-    if (data === "Blower" && status === false) {
-      $("#blowsHard").removeClass("btn-circ");
-      $("#blowsHard").addClass("btn-info");
+    // Helper function to toggle classes
+    function toggleClass(element, removeClass, addClass) {
+      $(element).removeClass(removeClass).addClass(addClass);
     }
-    if (data === "Aerator" && status === true) {
-      $("#fount").removeClass("btn-info");
-      $("#fount").addClass("btn-circ");
-    }
-    if (data === "Aerator" && status === false) {
-      $("#fount").removeClass("btn-circ");
-      $("#fount").addClass("btn-info");
-    }
-    if (data === "Spa Jets" && status === true) {
-      $("#spaOn").text(" Spa Off");
-      $("#poOn").text(" Pool On");
-      $("#spaJets").removeClass("btn-info");
-      $("#spaJets").addClass("btn-circ");
-    }
-    if (data === "Spa Jets" && status === false) {
-      $("#spaOn").text(" Spa On");
-      $("#poOn").text(" Pool Off");
-      $("#spaJets").removeClass("btn-circ");
-      $("#spaJets").addClass("btn-info");
-    }
-    if ((data === "Pool Clean" || data === "Pool Cond") && status === true) {
-      $("#poOn").text(" Pool Off");
-      $("#spaOn").text(" Spa On");
-      $("#poolCirculation").removeClass("btn-info");
-      $("#poolCirculation").addClass("btn-circ");
-    } 
-    if ((data === "Pool Clean" || data === "Pool Cond") && status === false) { {
-      $("#poOn").text(" Pool On");
-      $("#spaOn").text(" Spa Off");
-      $("#poolCirculation").removeClass("btn-circ");
-      $("#poolCirculation").addClass("btn-info");
-    }
-    if (data === "Spa Light" && status === true) {
-        $("#spaLight").removeClass("btn-info");
-        $("#spaLight").addClass("btn-light");
-      } 
-    if (data === "Spa Light" && status === false){
-        $("#spaLight").removeClass("btn-light");
-        $("#spaLight").addClass("btn-info");
-      }
-    if (data === "Pool Light" && status === true) {
-      $("#poolLight").removeClass("btn-info");
-      $("#poolLight").addClass("btn-light");
-    }
-    if (data === "Pool Light" && status === false) {
-      $("#poolLight").removeClass("btn-light");
-      $("#poolLight").addClass("btn-info");
+  
+    switch (data) {
+      case "Blower":
+        toggleClass("#blowsHard", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        break;
+  
+      case "Aerator":
+        toggleClass("#fount", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        break;
+  
+      case "Spa Jets":
+        $("#spaOn").text(status ? " Spa Off" : " Spa On");
+        $("#poOn").text(status ? " Pool On" : " Pool Off");
+        toggleClass("#spaJets", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        break;
+  
+      case "Pool Clean":
+      case "Pool Cond":
+        $("#poOn").text(status ? " Pool Off" : " Pool On");
+        $("#spaOn").text(status ? " Spa On" : " Spa Off");
+        toggleClass("#poolCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        break;
+  
+      case "Spa Light":
+        toggleClass("#spaLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
+        break;
+  
+      case "Pool Light":
+        toggleClass("#poolLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
+        break;
+  
+      default:
+        console.warn(`Unhandled data type: ${data}`);
+        break;
     }
   }
-
   function setPool(jdata) {
     $.ajax({
       type: "PUT",
