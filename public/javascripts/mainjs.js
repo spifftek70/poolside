@@ -571,11 +571,13 @@ $(function () {
         id: 7,
         state: true,
       };
+      changeStuff("Pool Lights", true) 
     } else {
       data = {
         id: 7,
         state: false,
       };
+      changeStuff("Pool Lights", false) 
     }
     // $("#poolLight").toggleClass("btn-info btn-warning");
     setPool(data);
@@ -589,11 +591,13 @@ $(function () {
         id: 8,
         state: true,
       };
+      changeStuff("Spa Lights", true) 
     } else {
       data = {
         id: 8,
         state: false,
       };
+      changeStuff("Spa Lights", false) 
     }
     // $(this).toggleClass("btn-info btn-warning");
     setPool(data);
