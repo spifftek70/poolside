@@ -147,7 +147,7 @@ iframe{
   background: none;
   text-align: center;
   border: none;
-  min-height: 49%;
+  max-height: 49%;
 }
 
 .btn-circ{
