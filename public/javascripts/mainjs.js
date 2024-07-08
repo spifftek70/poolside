@@ -243,12 +243,12 @@ $(function () {
       if (data.name === "Pool") {
         aa = data.id;
         bb = data.isOn;
-        $("#poolCurrentTemps").text(data.temp);
+        $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");  
         const poolCoolSetpt = data.coolSetpoint;
         const poolSetPt = data.setPoint;
         const poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
         $("#poolSlider").roundSlider("setValue", poolVals);
-        $("#poolSetTemps").text(poolVals + "°F");
+        $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         if ('heatStatus' in data) {
           const cc = data.heatStatus;
           const dd = cc.desc;
