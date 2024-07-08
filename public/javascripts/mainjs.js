@@ -23,36 +23,36 @@ $(function () {
   });
 
   mainSocket.on("connect", function () {
-    console.log("Connected to WebSocket server");
+    // console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
   mainSocket.on("disconnect", function () {
-    console.log("Disconnected from WebSocket server");
+    // console.log("Disconnected from WebSocket server");
   });
 
   mainSocket.on("pump", function (message) {
-    console.log("Pump message: ", message);
+    // console.log("Pump message: ", message);
     parseMsgs(message);
   });
 
   mainSocket.on("body", function (message) {
-    console.log("Body message: ", message);
+    // console.log("Body message: ", message);
     parsebodies(message);
   });
 
   mainSocket.on("temps", function (message) {
-    console.log("Temps message: ", message);
+    // console.log("Temps message: ", message);
     parseTemps(message);
   });
 
   mainSocket.on("heater", function (message) {
-    console.log("Heater message: ", message);
+    // console.log("Heater message: ", message);
     parseMsgs(message);
   });
 
   mainSocket.on("controller", function (message) {
-    console.log("Controller message: ", message);
+    // console.log("Controller message: ", message);
     // parseMsg(message);
   });
 
@@ -236,7 +236,6 @@ $(function () {
     var bb;
     var bodes = message.bodies;
     $.each(bodes, function (i, data) {
-      console.log("Temps: ", data.name);
       if (data.name === "Pool") {
         aa = data.id;
         bb = data.isOn;
@@ -794,7 +793,7 @@ $(function () {
   var aC2;
 
   function statusUpdate(a, b) {
-    console.log("A and B: ", a, b);
+    // console.log("A and B: ", a, b);
     if (a === 6 && b === true) {
       ck1 = true;
       aC1 = true;
