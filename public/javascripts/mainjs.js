@@ -699,67 +699,30 @@ $(function () {
   }
 
   function changeStuff(data, status) {
-    if (data === "Blower") {
-      if (status === true) {
-        $("#blowsHard").removeClass("btn-info");
-        $("#blowsHard").addClass("btn-circ");
-      } else {
-        $("#blowsHard").removeClass("btn-circ");
-        $("#blowsHard").addClass("btn-info");
-      }
+    const elements = {
+      "Blower": "#blowsHard",
+      "Aerator": "#fount",
+      "Spa Jets": "#spaJets",
+      "Spa Light": "#spaLight",
+      "Pool Light": "#poolLight",
+      "Pool Clean": "#poolCirculation",
+      "Pool Cond": "#poolCirculation"
+    };
+  
+    const classAction = status ? ['btn-info', 'btn-circ'] : ['btn-circ', 'btn-info'];
+  
+    if (elements[data]) {
+      $(elements[data]).removeClass(classAction[0]).addClass(classAction[1]);
     }
-    if (data === "Aerator") {
-      if (status === true) {
-        $("#fount").removeClass("btn-info");
-        $("#fount").addClass("btn-circ");
-      } else {
-        $("#fount").removeClass("btn-circ");
-        $("#fount").addClass("btn-info");
-      } 
-    }
+  
     if (data === "Spa Jets") {
-      if (status === true) {
-        $("#spaOn").text(" Spa Off");
-        $("#poOn").text(" Pool On");
-        $("#spaJets").removeClass("btn-info");
-        $("#spaJets").addClass("btn-circ");
-      } else {
-        $("#spaOn").text(" Spa On");
-        $("#poOn").text(" Pool Off");
-        $("#spaJets").removeClass("btn-circ");
-        $("#spaJets").addClass("btn-info");
-      }
+      $("#spaOn").text(status ? " Spa Off" : " Spa On");
+      $("#poOn").text(status ? " Pool On" : " Pool Off");
     }
+  
     if (data === "Pool Clean" || data === "Pool Cond") {
-      if (status === true) {
-        $("#poOn").text(" Pool Off");
-        $("#spaOn").text(" Spa On");
-        $("#poolCirculation").removeClass("btn-info");
-        $("#poolCirculation").addClass("btn-circ");
-      } else {
-        $("#poOn").text(" Pool On");
-        $("#spaOn").text(" Spa Off");
-        $("#poolCirculation").removeClass("btn-circ");
-        $("#poolCirculation").addClass("btn-info");
-      }
-    }
-    if (data === "Spa Light") {
-      if (status === true) {
-        $("#spaLight").removeClass("btn-info");
-        $("#spaLight").addClass("btn-light");
-      } else {
-        $("#spaLight").removeClass("btn-light");
-        $("#spaLight").addClass("btn-info");
-      }
-    }
-    if (data === "Pool Light") {
-      if (status === true) {
-        $("#poolLight").removeClass("btn-info");
-        $("#poolLight").addClass("btn-light");
-      } else {
-        $("#poolLight").removeClass("btn-light");
-        $("#poolLight").addClass("btn-info");
-      }
+      $("#poOn").text(status ? " Pool Off" : " Pool On");
+      $("#spaOn").text(status ? " Spa On" : " Spa Off");
     }
   }
 
