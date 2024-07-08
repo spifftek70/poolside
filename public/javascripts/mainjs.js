@@ -109,11 +109,13 @@ $(function () {
           $("#spaCirculation").removeClass("btn-info");
           $("#spaCirculation").addClass("btn-circ");
           $("#spaOn").text(" Spa Off");
+          $("#poOn").text(" Pool On");
           spaPumpMaster = true;
         } else {
           $("#spaCirculation").removeClass("btn-circ");
           $("#spaCirculation").addClass("btn-info");
           $("#spaOn").text(" Spa On");
+          $("#poOn").text(" Pool Off");
           spaPumpMaster = false;
         }
       }
@@ -153,6 +155,7 @@ $(function () {
           $("#poolCirculation").removeClass("btn-info");
           $("#poolCirculation").addClass("btn-circ");
           $("#poOn").text(" Pool Off");
+          $("#spaOn").text(" Spa On");
           $(".gauge").show();
           $("#pumpRPM").text(ee + " RPM | ");
           $("#pumpRPM").append("&nbsp;");
@@ -164,6 +167,7 @@ $(function () {
           $("#poolCirculation").removeClass("btn-circ");
           $("#poolCirculation").addClass("btn-info");
           $("#poOn").text(" Pool On");
+          $("#spaOn").text(" Spa Off");
           $(".gauge").hide();
           poolPumpMaster = false;
         }
