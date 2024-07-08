@@ -254,7 +254,7 @@ $(function () {
             heaterMaster = "Heating";
           } else if (dd === "Cooling") {
             poolCold();
-            heaterMaster = "Cooling
+            heaterMaster = "Cooling"
           } else {
             poolOff();
             heaterMaster = "Off";
