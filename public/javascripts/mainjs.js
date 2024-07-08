@@ -714,6 +714,7 @@ $(function () {
         break;
   
       case "Spa Jets":
+      case "Spa jets":  // Handling case sensitivity
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
         $("#poOn").text(status ? " Pool On" : " Pool Off");
         toggleClass("#spaJets", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
@@ -726,11 +727,16 @@ $(function () {
         toggleClass("#poolCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
         break;
   
+      case "Spa Clean":
+        toggleClass("#spaClean", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        break;
+  
       case "Spa Light":
         toggleClass("#spaLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
         break;
   
       case "Pool Light":
+      case "Pool Lights":  // Handling plural
         toggleClass("#poolLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
         break;
   
