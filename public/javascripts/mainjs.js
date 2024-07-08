@@ -720,10 +720,12 @@ $(function () {
     if (data === "Spa Jets") {
       if (status === true) {
         $("#spaOn").text(" Spa Off");
+        $("#poOn").text(" Pool On");
         $("#spaJets").removeClass("btn-info");
         $("#spaJets").addClass("btn-circ");
       } else {
         $("#spaOn").text(" Spa On");
+        $("#poOn").text(" Pool Off");
         $("#spaJets").removeClass("btn-circ");
         $("#spaJets").addClass("btn-info");
       }
@@ -731,10 +733,12 @@ $(function () {
     if (data === "Pool Clean" || data === "Pool Cond") {
       if (status === true) {
         $("#poOn").text(" Pool Off");
+        $("#spaOn").text(" Spa On");
         $("#poolCirculation").removeClass("btn-info");
         $("#poolCirculation").addClass("btn-light");
       } else {
         $("#poOn").text(" Pool On");
+        $("#spaOn").text(" Spa Off");
         $("#poolCirculation").removeClass("btn-light");
         $("#poolCirculation").addClass("btn-info");
       }
