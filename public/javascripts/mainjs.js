@@ -184,12 +184,12 @@ $(function () {
         if (field.name === "Pool") {
           aa = field.id;
           bb = field.isOn;
-          $("#poolCurrentTemps").text(message.temp);
+          $("#poolCurrentTemps").text("Is now: " + message.temp + "° F");
           const poolCoolSetpt = field.coolSetpoint;
           const poolSetPt = field.setPoint;
           const poolVals = poolSetPt.toString() + ", " + poolCoolSetpt.toString();
           $("#poolSlider").roundSlider("setValue", poolVals);
-          $("#poolSetTemps").text(poolVals + "°F");
+          $("#poolSetTemps").text("Set for: " + poolVals + "° F");
           if ('heatStatus' in field) {
             cc = field.heatStatus;
             dd = cc.desc;
@@ -377,7 +377,7 @@ $(function () {
       setTimeout(function () {
         setPoolCond(tmpdataHi);
       }, 500);
-      $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
+      $("#poolSetTemps").text(poolHeatTo + " - " + poolCoolTo + "° F");
     },
   });
 
@@ -397,7 +397,7 @@ $(function () {
       setTimeout(function () {
         setPoolCond(tmpdataHi);
       }, 500);
-      $("#spaSetTemps").text(spaHeatTo + "° - " + spaCoolTo + "°F");
+      $("#spaSetTemps").text(spaHeatTo + " - " + spaCoolTo + "° F");
     },
   });
 
