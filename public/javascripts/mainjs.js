@@ -294,6 +294,46 @@ $(function () {
     }
   }
 
+  $("#poolSlider").roundSlider({
+    stop: function () {
+      var poolHeatTo = $("#poolSlider").roundSlider("getValue", 1);
+      var poolCoolTo = $("#poolSlider").roundSlider("getValue", 2);
+      var tmpdataLow = {
+        id: 1,
+        heatSetpoint: poolHeatTo,
+      };
+      var tmpdataHi = {
+        id: 1,
+        coolSetpoint: poolCoolTo,
+      };
+      setPoolCond(tmpdataLow);
+      setTimeout(function () {
+        setPoolCond(tmpdataHi);
+      }, 500);
+      $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
+    },
+  });
+
+  $("#spaSlider").roundSlider({
+    stop: function () {
+      var spaHeatTo = $("#spaSlider").roundSlider("getValue", 1);
+      var spaCoolTo = $("#spaSlider").roundSlider("getValue", 2);
+      var tmpdataLow = {
+        id: 2,
+        coolSetpoint: spaHeatTo,
+      };
+      var tmpdataHi = {
+        id: 2,
+        heatSetpoint: spaCoolTo,
+      };
+      setPoolCond(tmpdataLow);
+      setTimeout(function () {
+        setPoolCond(tmpdataHi);
+      }, 500);
+      $("#spaSetTemps").text(spaHeatTo + "° - " + spaCoolTo + "°F");
+    },
+  });
+
     $("#poolTempOnOff").on("click", function (e) {
       e.preventDefault();
       var $this = $(this);
