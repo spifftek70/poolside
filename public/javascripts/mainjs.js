@@ -24,28 +24,27 @@ $(function () {
       handleMessage(message);
     }
   }
-
   function handleMessage(message) {
     if (!isPaused) {
       // Process the message
-      switch (message.type) {
+      switch (message.evt) { // Ensure you're using the correct property for the message type
         case "pump":
-          parseMsgs(message);
+          parseMsgs(message.data); // Ensure you're passing the correct data to the function
           break;
         case "body":
-          parsebodies(message);
+          parsebodies(message.data);
           break;
         case "temps":
-          parseTemps(message);
+          parseTemps(message.data);
           break;
         case "circuit":
-          parseOne(message);
+          parseOne(message.data);
           break;
         case "heater":
-          parseMsgs(message);
+          parseMsgs(message.data);
           break;
         default:
-          console.warn(`Unhandled message type: ${message.type}`);
+          console.warn(`Unhandled message type: ${message.evt}`);
       }
     } else {
       messageQueue.push(message);
@@ -76,25 +75,25 @@ $(function () {
     handleMessage(message);
   });
 
-  // mainSocket.on("pump", function (message) {
-  //   parseMsgs(message);
-  // });
+  mainSocket.on("pump", function (message) {
+    parseMsgs(message);
+  });
 
-  // mainSocket.on("body", function (message) {
-  //   parsebodies(message);
-  // });
+  mainSocket.on("body", function (message) {
+    parsebodies(message);
+  });
 
-  // mainSocket.on("temps", function (message) {
-  //   parseTemps(message);
-  // });
+  mainSocket.on("temps", function (message) {
+    parseTemps(message);
+  });
 
-  // mainSocket.on("circuit", function (message) {
-  //   parseOne(message);
-  // });
+  mainSocket.on("circuit", function (message) {
+    parseOne(message);
+  });
 
-  // mainSocket.on("heater", function (message) {
-  //   parseMsgs(message);
-  // });
+  mainSocket.on("heater", function (message) {
+    parseMsgs(message);
+  });
 
   mainSocket.on("controller", function (message) {});
 
