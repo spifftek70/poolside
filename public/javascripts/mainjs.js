@@ -5,8 +5,7 @@ function toggleClass(element, removeClass, addClass) {
 $(function () {
 
   allState();
-
-    const mainSocket = io("http://autopool.local:4200", {
+  const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"],
     transportOptions: {
@@ -27,28 +26,26 @@ $(function () {
   mainSocket.on("disconnect", function () {});
 
   mainSocket.on("pump", function (message) {
-    handleMessage({ evt: 'pump', data: message });
+    parseMsgs(message);
   });
 
   mainSocket.on("body", function (message) {
-    handleMessage({ evt: 'body', data: message });
+    parsebodies(message);
   });
 
   mainSocket.on("temps", function (message) {
-    handleMessage({ evt: 'temps', data: message });
+    parseTemps(message);
   });
 
   mainSocket.on("circuit", function (message) {
-    handleMessage({ evt: 'circuit', data: message });
+    parseOne(message);
   });
 
   mainSocket.on("heater", function (message) {
-    handleMessage({ evt: 'heater', data: message });
+    parseMsgs(message);
   });
 
-  mainSocket.on("controller", function (message) {
-    handleMessage({ evt: 'controller', data: message });
-  });
+  mainSocket.on("controller", function (message) {});
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
 
