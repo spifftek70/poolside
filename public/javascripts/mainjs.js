@@ -207,7 +207,7 @@ $(function () {
       var pumps = data.pumps;
       parseTemps(temps);
       pumps.forEach((pump) => {
-        setNumbers (message)
+        setNumbers (pump)
         console.log("pump: ", pump);
       });
     });
