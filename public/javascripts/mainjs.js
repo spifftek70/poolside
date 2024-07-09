@@ -199,8 +199,10 @@ $(function () {
   function allState() {
     $.getJSON("http://autopool.local:4200/state/all", function (data) {
       parseAll(data);
-      const temps = data.temps;
+      var temps = data.temps;
+      var pumps = data.pumps;
       parseTemps(temps);
+      parseMsgs(pumps);
     });
   }
 
