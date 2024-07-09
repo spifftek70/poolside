@@ -42,9 +42,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Start the HTTP server on port 3000
-httpServer.listen(3000, () => {
-  console.log('Express server listening on port 3000');
+// Start the HTTP server on port from environment variable or default to 3000
+const port = process.env.PORT || 3000;
+httpServer.listen(port, () => {
+  console.log(`Express server listening on port ${port}`);
 });
 
 // WebSocket handling
