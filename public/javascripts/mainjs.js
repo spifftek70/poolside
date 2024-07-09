@@ -210,14 +210,14 @@ $(function () {
     $.each(bodes, function (i, data) {
       if (data.name === "Pool") {
         $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");
-        const poolVals = data.setPoint + " - " + data.coolSetpoint;
+        const poolVals = data.setPoint + ", " + data.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(data.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (data.name === "Spa") {
         $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
-        const spaVals = data.setPoint + " - " + data.coolSetpoint;
+        const spaVals = data.setPoint + ", " + data.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
         handleHeatStatus(data.heatStatus, spaHot, spaCool, spaOff);
