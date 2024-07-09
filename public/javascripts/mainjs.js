@@ -351,7 +351,7 @@ $(function () {
 
   $("#poolSlider").roundSlider({
     stop: function () {
-      pauseWebSockets();
+      // pauseWebSockets();
       var poolHeatTo = $("#poolSlider").roundSlider("getValue", 1);
       var poolCoolTo = $("#poolSlider").roundSlider("getValue", 2);
       var tmpdataLow = {
@@ -365,7 +365,7 @@ $(function () {
       setPoolCond(tmpdataLow);
       setTimeout(function () {
         setPoolCond(tmpdataHi);
-        unpauseWebSockets();
+        // unpauseWebSockets();
       }, 500);
       $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
     },
@@ -373,7 +373,7 @@ $(function () {
 
   $("#spaSlider").roundSlider({
     stop: function () {
-      pauseWebSockets();
+      // pauseWebSockets();
       var spaHeatTo = $("#spaSlider").roundSlider("getValue", 1);
       var spaCoolTo = $("#spaSlider").roundSlider("getValue", 2);
       var tmpdataLow = {
@@ -389,7 +389,7 @@ $(function () {
         setPoolCond(tmpdataHi);
       }, 500);
       $("#spaSetTemps").text(spaHeatTo + "° - " + spaCoolTo + "°F");
-      unpauseWebSockets();
+      // unpauseWebSockets();
     },
   });
 
