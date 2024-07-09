@@ -731,7 +731,7 @@ $(function () {
         console.log(data, status);
       // case "Spa clean": // Handling case sensitivity
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
-        toggleClass("#spaClean", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
+        toggleClass("#spaCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
         break;
   
       case "Spa Light":
