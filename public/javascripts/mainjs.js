@@ -125,7 +125,7 @@ $(function () {
   }
 
   function setNumbers (message) {
-    console.log("rpm: ", rpm, "flow: ", flow, "watts: ", watts);
+    console.log("rpm: ", message.rpm, "flow: ", message.flow, "watts: ", message.watts);
     $("#pumpRPM")
       .text(message.rpm + " RPM | ")
       .append("&nbsp;");
