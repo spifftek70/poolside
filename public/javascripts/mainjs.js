@@ -3,8 +3,6 @@ function toggleClass(element, removeClass, addClass) {
 }
 
 $(function () {
-
-  allState();
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"],
@@ -84,7 +82,7 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  
+  allState();
   function parseMsgs(message) {
     if (message.name === "Spa Pump") {
       toggleClass(
