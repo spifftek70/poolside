@@ -82,7 +82,7 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  allState();
+  // allState();
   function parseMsgs(message) {
     if (message.name === "Spa Pump") {
       toggleClass(
