@@ -1,0 +1,21 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - echo "No build step required"
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "No frontend build required"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
