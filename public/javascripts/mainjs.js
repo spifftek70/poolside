@@ -84,6 +84,7 @@ $(function () {
 
   allState();
   function parseMsgs(message) {
+    console.log("parseMsgs", message);
     if (message.name === "Spa Pump") {
       toggleClass(
         "#spaCirculation",
@@ -203,6 +204,7 @@ $(function () {
       var pumps = data.pumps;
       parseTemps(temps);
       parseMsgs(pumps);
+      console.log("pumps: ", pumps);
     });
   }
 
