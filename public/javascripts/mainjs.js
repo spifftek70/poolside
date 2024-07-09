@@ -199,6 +199,8 @@ $(function () {
   function allState() {
     $.getJSON("http://autopool.local:4200/state/all", function (data) {
       parseAll(data);
+      const temps = data.temps;
+      parseTemps(temps);
     });
   }
 
@@ -220,8 +222,6 @@ $(function () {
     });
   }
 
-  const temps = data.temps;
-  parseTemps(temps);
 
   function parseOne(msg) {
     if (msg && msg.name && msg.isOn !== undefined) {
