@@ -190,14 +190,14 @@ $(function () {
     $.each(message, function (i, field) {
       if (field.name === "Pool") {
         $("#poolCurrentTemps").text("Is now: " + field.temp + "° F");
-        const poolVals = field.setPoint + " - " + field.coolSetpoint;
+        const poolVals = field.setPoint + ", " + field.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(field.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (field.name === "Spa") {
         $("#spaCurrentTemps").text("Is now: " + field.temp + "° F");
-        const spaVals = field.setPoint + " - " + field.coolSetpoint;
+        const spaVals = field.setPoint + ", " + field.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
         handleHeatStatus(field.heatStatus, spaHot, spaCool, spaOff);
