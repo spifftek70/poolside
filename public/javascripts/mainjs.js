@@ -650,13 +650,13 @@ $(function () {
     var data;
     if ($(this).hasClass("btn-info")) {
       data = {
-        id: 2,
+        id: 3,
         state: true,
       };
       changeStuff("Spa Jets", true);
     } else {
       data = {
-        id: 2,
+        id: 3,
         state: false,
       };
       changeStuff("Spa Jets", false);
