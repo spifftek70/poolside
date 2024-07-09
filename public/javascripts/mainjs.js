@@ -708,7 +708,7 @@ $(function () {
         console.error("Invalid message format", msg);
       }
     }
-    
+
   function changeStuff(data, status) {
     // Helper function to toggle classes
     function toggleClass(element, removeClass, addClass) {
@@ -731,8 +731,8 @@ $(function () {
         toggleClass("#spaJets", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
         break;
   
-      case "Pool Clean":
-      case "Pool Cond":
+      case "Pool Clean" || "Pool Cond":
+      case "Pool cond" || "Pool clean":  // Handling case sensitivity
         $("#poOn").text(status ? " Pool Off" : " Pool On");
         $("#spaOn").text(status ? " Spa On" : " Spa Off");
         toggleClass("#poolCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
