@@ -378,6 +378,7 @@ $(function () {
         setPoolCond(tmpdataHi);
       }, 500);
       $("#poolSetTemps").text(poolHeatTo + " - " + poolCoolTo + "° F");
+      allState();
     },
   });
 
@@ -398,6 +399,7 @@ $(function () {
         setPoolCond(tmpdataHi);
       }, 500);
       $("#spaSetTemps").text(spaHeatTo + " - " + spaCoolTo + "° F");
+      allState();
     },
   });
 
@@ -415,6 +417,7 @@ $(function () {
         id: 1,
         mode: 1,
       };
+      allState();
     }
     $.ajax({
       type: "PUT",
@@ -434,6 +437,7 @@ $(function () {
         }
       },
     });
+    allState();
     return true;
   });
 
@@ -470,6 +474,7 @@ $(function () {
         }
       },
     });
+    allState();
     return true;
   });
 
@@ -506,6 +511,7 @@ $(function () {
     }, 500);
     var elem = $("#poolDelay");
     cntdown(elem, $this);
+    allState();
     // setTimeout(function () {
     //   $this.toggleClass("btn-info btn-circ");
     // }, 25000);
@@ -531,6 +537,7 @@ $(function () {
     setPool(data);
     var elem = $("#spaDelay");
     cntdown(elem, $this);
+    allState();
     // setTimeout(function () {
     //   $this.toggleClass("btn-info btn-circ");
     // }, 25000);
@@ -581,6 +588,7 @@ $(function () {
     }
     // $("#poolLight").toggleClass("btn-info btn-warning");
     setPool(data);
+    allState();
   });
 
   $("#spaLight").on("click", function (e) {
@@ -601,6 +609,7 @@ $(function () {
     }
     // $(this).toggleClass("btn-info btn-warning");
     setPool(data);
+    allState();
   });
 
   $("#fount").on("click", function (e) {
@@ -621,6 +630,7 @@ $(function () {
     }
   // $(this).toggleClass("btn-info btn-circ");
     setPool(data);
+    allState();
   });
 
   $("#blowsHard").on("click", function (e) {
@@ -643,6 +653,7 @@ $(function () {
     }
     // $("#blowsHard").toggleClass("btn-info btn-light");
     setPool(data);
+    allState();
   });
 
   $("#spaJets").on("click", function (e) {
@@ -663,16 +674,19 @@ $(function () {
     }
     // $("#spaJets").toggleClass("btn-info btn-circ");
     setPool(data);
+    allState();
   });
 
   $("#poolTempLink").on("click", function (e) {
     e.preventDefault();
     $("#poolTempModal").modal("show");
+    allState();
   });
 
   $("#spaTempLink").on("click", function (e) {
     e.preventDefault();
     $("#spaTempModal").modal("show");
+    allState();
   });
 
   $(".btn-close").on("click", function (e) {
