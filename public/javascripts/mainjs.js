@@ -221,6 +221,7 @@ $(function () {
     function toggleClass(element, removeClass, addClass) {
       $(element).removeClass(removeClass).addClass(addClass);
     }
+  }
 
     switch (data) {
       case "Blower":
@@ -551,118 +552,118 @@ $(function () {
     $(".sFlame").show();
   }
 
-  function bothOff() {
-    $("#spaTempLink").removeClass("btn-danger");
-    $("#spaTempLink").removeClass("btn-primary");
-    $("#spaTempLink").addClass("btn-info");
-    $("#poolTempLink").removeClass("btn-danger");
-    $("#poolTempLink").removeClass("btn-primary");
-    $("#poolTempLink").addClass("btn-info");
-    $("#poolTempOnOff").html(" On");
-    $("#poolTempOnOff").removeClass("btn-primary");
-    $("#poolTempOnOff").addClass("btn-secondary");
-    $("#spaTempOnOff").html(" On");
-    $("#spaTempOnOff").removeClass("btn-primary");
-    $("#spaTempOnOff").addClass("btn-secondary");
-    $(".pFlake, .pFlame, .sFlake, .sFlame").hide();
-  }
+  // function bothOff() {
+  //   $("#spaTempLink").removeClass("btn-danger");
+  //   $("#spaTempLink").removeClass("btn-primary");
+  //   $("#spaTempLink").addClass("btn-info");
+  //   $("#poolTempLink").removeClass("btn-danger");
+  //   $("#poolTempLink").removeClass("btn-primary");
+  //   $("#poolTempLink").addClass("btn-info");
+  //   $("#poolTempOnOff").html(" On");
+  //   $("#poolTempOnOff").removeClass("btn-primary");
+  //   $("#poolTempOnOff").addClass("btn-secondary");
+  //   $("#spaTempOnOff").html(" On");
+  //   $("#spaTempOnOff").removeClass("btn-primary");
+  //   $("#spaTempOnOff").addClass("btn-secondary");
+  //   $(".pFlake, .pFlame, .sFlake, .sFlame").hide();
+  // }
 
-  function setPoolCond(data) {
-    $.ajax({
-      type: "PUT",
-      url: "http://autopool.local:4200/state/body/setPoint",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      data: JSON.stringify(data),
-      success: function (dataz) {
-        return true;
-      },
-    });
-    return true;
-  }
+  // function setPoolCond(data) {
+  //   $.ajax({
+  //     type: "PUT",
+  //     url: "http://autopool.local:4200/state/body/setPoint",
+  //     contentType: "application/json; charset=utf-8",
+  //     dataType: "json",
+  //     data: JSON.stringify(data),
+  //     success: function (dataz) {
+  //       return true;
+  //     },
+  //   });
+  //   return true;
+  // }
 
-  var ck1;
-  var aC1;
-  var ck2;
-  var aC2;
+  // var ck1;
+  // var aC1;
+  // var ck2;
+  // var aC2;
 
-  function statusUpdate(a, b) {
-    // console.log("A and B: ", a, b);
-    if (a === 6 && b === true) {
-      ck1 = true;
-      aC1 = true;
-    }
-    if (a === 6 && b === false) {
-      ck1 = true;
-      aC1 = false;
-    }
-    if (a === 2 && b === true) {
-      ck2 = true;
-      aC2 = true;
-    }
-    if (a === 2 && b === false) {
-      ck2 = false;
-      aC2 = false;
-    }
-    if (a === 1 && b === true) {
-      $("#poolCirculation").removeClass("btn-info");
-      $("#poolCirculation").addClass("btn-circ");
-      $("#poOn").text(" Pool Off");
-    }
-    if (a === 1 && b === false) {
-      $("#poolCirculation").removeClass("btn-circ");
-      $("#poolCirculation").addClass("btn-info");
-      $("#poOn").text(" Pool On");
-    }
-    if (a === 2 && b === true) {
-      $("#spaCirculation").removeClass("btn-info");
-      $("#spaCirculation").addClass("btn-circ");
-      $("#spaOn").text(" Spa Off");
-    }
-    if (a === 2 && b === false) {
-      $("#spaCirculation").removeClass("btn-circ");
-      $("#spaCirculation").addClass("btn-info");
-      $("#spaOn").text(" Spa On");
-    }
-    if (a === 3 && b === true) {
-      $("#spaJets").removeClass("btn-info");
-      $("#spaJets").addClass("btn-circ");
-    }
-    if (a === 3 && b === false) {
-      $("#spaJets").removeClass("btn-circ");
-      $("#spaJets").addClass("btn-info");
-    }
-    if (a === 4 && b === true) {
-      $("#blowsHard").removeClass("btn-info");
-      $("#blowsHard").addClass("btn-light");
-    }
-    if (a === 4 && b === false) {
-      $("#blowsHard").removeClass("btn-light");
-      $("#blowsHard").addClass("btn-info");
-    }
-    if (a === 5 && b === true) {
-      $("#fount").removeClass("btn-info");
-      $("#fount").addClass("btn-circ");
-    }
-    if (a === 5 && b === false) {
-      $("#fount").removeClass("btn-circ");
-      $("#fount").addClass("btn-info");
-    }
-    if (a === 7 && b === true) {
-      $("#poolLight").removeClass("btn-info");
-      $("#poolLight").addClass("btn-warning");
-    }
-    if (a === 7 && b === false) {
-      $("#poolLight").removeClass("btn-warning");
-      $("#poolLight").addClass("btn-info");
-    }
-    if (a === 8 && b === true) {
-      $("#spaLight").removeClass("btn-info");
-      $("#spaLight").addClass("btn-warning");
-    }
-    if (a === 8 && b === false) {
-      $("#spaLight").removeClass("btn-warning");
-      $("#spaLight").addClass("btn-info");
-    } else return;
-  }
+  // function statusUpdate(a, b) {
+  //   // console.log("A and B: ", a, b);
+  //   if (a === 6 && b === true) {
+  //     ck1 = true;
+  //     aC1 = true;
+  //   }
+  //   if (a === 6 && b === false) {
+  //     ck1 = true;
+  //     aC1 = false;
+  //   }
+  //   if (a === 2 && b === true) {
+  //     ck2 = true;
+  //     aC2 = true;
+  //   }
+  //   if (a === 2 && b === false) {
+  //     ck2 = false;
+  //     aC2 = false;
+  //   }
+  //   if (a === 1 && b === true) {
+  //     $("#poolCirculation").removeClass("btn-info");
+  //     $("#poolCirculation").addClass("btn-circ");
+  //     $("#poOn").text(" Pool Off");
+  //   }
+  //   if (a === 1 && b === false) {
+  //     $("#poolCirculation").removeClass("btn-circ");
+  //     $("#poolCirculation").addClass("btn-info");
+  //     $("#poOn").text(" Pool On");
+  //   }
+  //   if (a === 2 && b === true) {
+  //     $("#spaCirculation").removeClass("btn-info");
+  //     $("#spaCirculation").addClass("btn-circ");
+  //     $("#spaOn").text(" Spa Off");
+  //   }
+  //   if (a === 2 && b === false) {
+  //     $("#spaCirculation").removeClass("btn-circ");
+  //     $("#spaCirculation").addClass("btn-info");
+  //     $("#spaOn").text(" Spa On");
+  //   }
+  //   if (a === 3 && b === true) {
+  //     $("#spaJets").removeClass("btn-info");
+  //     $("#spaJets").addClass("btn-circ");
+  //   }
+  //   if (a === 3 && b === false) {
+  //     $("#spaJets").removeClass("btn-circ");
+  //     $("#spaJets").addClass("btn-info");
+  //   }
+  //   if (a === 4 && b === true) {
+  //     $("#blowsHard").removeClass("btn-info");
+  //     $("#blowsHard").addClass("btn-light");
+  //   }
+  //   if (a === 4 && b === false) {
+  //     $("#blowsHard").removeClass("btn-light");
+  //     $("#blowsHard").addClass("btn-info");
+  //   }
+  //   if (a === 5 && b === true) {
+  //     $("#fount").removeClass("btn-info");
+  //     $("#fount").addClass("btn-circ");
+  //   }
+  //   if (a === 5 && b === false) {
+  //     $("#fount").removeClass("btn-circ");
+  //     $("#fount").addClass("btn-info");
+  //   }
+  //   if (a === 7 && b === true) {
+  //     $("#poolLight").removeClass("btn-info");
+  //     $("#poolLight").addClass("btn-warning");
+  //   }
+  //   if (a === 7 && b === false) {
+  //     $("#poolLight").removeClass("btn-warning");
+  //     $("#poolLight").addClass("btn-info");
+  //   }
+  //   if (a === 8 && b === true) {
+  //     $("#spaLight").removeClass("btn-info");
+  //     $("#spaLight").addClass("btn-warning");
+  //   }
+  //   if (a === 8 && b === false) {
+  //     $("#spaLight").removeClass("btn-warning");
+  //     $("#spaLight").addClass("btn-info");
+  //   } else return;
+  // }
 });
