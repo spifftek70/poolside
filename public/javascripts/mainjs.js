@@ -696,12 +696,12 @@ $(function () {
     });
   }
 
-  function parseOne(data) {
+  function parseOne(msg) {
     // Parsing the circuits array from the JSON response
-    const circuits = data.circuits;
+    const meat = msg.data;
     // Looping through each circuit and logging relevant information
-    var cName = circuit.name;
-    var cState = circuit.isOn;
+    var cName = meat.name;
+    var cState = meat.isOn;
     changeStuff(cName, cState);
   }
 
