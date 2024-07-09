@@ -533,7 +533,7 @@ $(function () {
       },
     });
   }
-
+  allState();
   // function setPool(jdata) {
   //   $.ajax({
   //     type: "PUT",
