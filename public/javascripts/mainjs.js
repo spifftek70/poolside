@@ -306,8 +306,8 @@ $(function () {
 
   function changeTemps(data, status, cooling) {
     switch (data) {
-      case "heaters":
-      case "Heaters":
+      case "UltraTemp":
+      // case "Heaters":
         if (cooling === true) {
           toggleClass(
             "#poolTempLink",
