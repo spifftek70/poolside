@@ -24,6 +24,7 @@ $(function () {
       handleMessage(message);
     }
   }
+
   function handleMessage(message) {
     if (!isPaused) {
       // Process the message
@@ -76,26 +77,28 @@ $(function () {
   });
 
   mainSocket.on("pump", function (message) {
-    parseMsgs(message);
+    handleMessage({ evt: 'pump', data: message });
   });
 
   mainSocket.on("body", function (message) {
-    parsebodies(message);
+    handleMessage({ evt: 'body', data: message });
   });
 
   mainSocket.on("temps", function (message) {
-    parseTemps(message);
+    handleMessage({ evt: 'temps', data: message });
   });
 
   mainSocket.on("circuit", function (message) {
-    parseOne(message);
+    handleMessage({ evt: 'circuit', data: message });
   });
 
   mainSocket.on("heater", function (message) {
-    parseMsgs(message);
+    handleMessage({ evt: 'heater', data: message });
   });
 
-  mainSocket.on("controller", function (message) {});
+  mainSocket.on("controller", function (message) {
+    handleMessage({ evt: 'controller', data: message });
+  });
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
 
