@@ -215,6 +215,7 @@ $(function () {
       var heaterName = heater.name;
       var heaterState = heater.isOn;
       var isCooling = heater.isCooling;
+      console.log(heaterName, heaterState, isCooling);
       changeTemps(heaterName, heaterState, isCooling);
     });
   }
