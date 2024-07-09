@@ -496,17 +496,31 @@ $(function () {
     });
   }
 
-  function setPool(jdata) {
+  // function setPool(jdata) {
+  //   $.ajax({
+  //     type: "PUT",
+  //     url: "http://autopool.local:4200/state/circuit/setState",
+  //     contentType: "application/json; charset=utf-8",
+  //     dataType: "json",
+  //     data: JSON.stringify(jdata),
+  //     success: function (data) {
+  //       return data;
+  //     },
+  //   });
+  // }
+
+  function setPoolCond(data) {
     $.ajax({
       type: "PUT",
-      url: "http://autopool.local:4200/state/circuit/setState",
+      url: "http://autopool.local:4200/state/body/setPoint",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
-      data: JSON.stringify(jdata),
-      success: function (data) {
-        return data;
+      data: JSON.stringify(data),
+      success: function (dataz) {
+        return true;
       },
     });
+    return true;
   }
 
   function poolOff() {
