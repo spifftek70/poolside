@@ -696,21 +696,19 @@ $(function () {
     });
   }
 
-  function parseOne(msg) {
-    // Ensure the message is an object and has the correct structure
-    if (msg && msg.evt === "circuit" && msg.data) {
-      const circuitData = msg.data;
-  
-      // Extract the circuit name and state
-      const circuitName = circuitData.name;
-      const circuitState = circuitData.isOn;
-  
-      // Call changeStuff with the extracted values
-      changeStuff(circuitName, circuitState);
-    } else {
-      console.error("Invalid message format", msg);
+    function parseOne(msg) {
+      // Ensure the message has the correct structure
+      if (msg && msg.name && msg.isOn !== undefined) {
+        const circuitName = msg.name;
+        const circuitState = msg.isOn;
+    
+        // Call changeStuff with the extracted values
+        changeStuff(circuitName, circuitState);
+      } else {
+        console.error("Invalid message format", msg);
+      }
     }
-  }
+    
   function changeStuff(data, status) {
     // Helper function to toggle classes
     function toggleClass(element, removeClass, addClass) {
