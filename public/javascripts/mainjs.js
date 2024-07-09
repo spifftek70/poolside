@@ -1,4 +1,7 @@
 $(function () {
+  function toggleClass(element, removeClass, addClass) {
+    $(element).removeClass(removeClass).addClass(addClass);
+  }
   allState();
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
@@ -219,9 +222,6 @@ $(function () {
   }
 
   function changeStuff(data, status) {
-    function toggleClass(element, removeClass, addClass) {
-      $(element).removeClass(removeClass).addClass(addClass);
-    }
     switch (data) {
       case "Blower":
         toggleClass(
