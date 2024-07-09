@@ -210,22 +210,21 @@ $(function () {
       var cName = circuit.name;
       var cState = circuit.isOn;
       changeStuff(cName, cState);
-      
-      // Check if heaters exist and then process them
-      if (circuit.heaters) {
-        circuit.heaters.forEach((heater) => {
-          var isCool = heater.cooling;
-          changeTemps(cName, cState, isCool);
-        });
-      }
     });
   
-    const bodies = data.bodies;
+    const bodies = data.temps.bodies;
     bodies.forEach((body) => {
-      var bName = body.name;
-      var bState = body.isOn;
-      var isCool = body.heatStatus && body.heatStatus.desc === "Cooling";
-      changeTemps(bName, bState, isCool);
+      const heaters = body.heaterOptions;
+      const isCool = body.heatStatus.desc === "Cooling";
+      changeTemps(body.name, body.isOn, isCool);
+    });
+  
+    const heaters = data.heaters;
+    heaters.forEach((heater) => {
+      var heaterName = heater.name;
+      var heaterState = heater.isOn;
+      var isCooling = heater.isCooling;
+      changeHeaterState(heaterName, heaterState, isCooling);
     });
   }
 
