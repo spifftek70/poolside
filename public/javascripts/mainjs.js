@@ -307,24 +307,24 @@ $(function () {
   function changeTemps(data, status, cooling) {
     switch (data) {
       case "heaters":
-        case "Heaters":
-          if (cooling === true) {
-            toggleClass(
-              "#poolTempLink",
-              status ? "btn-info" : "btn-light",
-              status ? "btn-light" : "btn-primary"
-            )
-          } else {
-            toggleClass(
-              "#poolTempLink",
-              status ? "btn-info" : "btn-light",
-              status ? "btn-light" : "btn-danger"
-            )
-          }
-            break;
-        default:
-          console.warn(`Unhandled data type: ${data}`);
+      case "Heaters":
+        if (cooling === true) {
+          toggleClass(
+            "#poolTempLink",
+            status ? "btn-info" : "btn-primary",
+            status ? "btn-primary" : "btn-info"
+          )
+        } else {
+          toggleClass(
+            "#poolTempLink",
+            status ? "btn-info" : "btn-danger",
+            status ? "btn-danger" : "btn-info"
+          )
+        }
           break;
+      default:
+        console.warn(`Unhandled data type: ${data}`);
+        break;
       }
     }
 
