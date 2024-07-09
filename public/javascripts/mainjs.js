@@ -697,14 +697,20 @@ $(function () {
   }
 
   function parseOne(msg) {
-    // Parsing the circuits array from the JSON response
-    const meat = msg.data;
-    // Looping through each circuit and logging relevant information
-    var cName = meat.name;
-    var cState = meat.isOn;
-    changeStuff(cName, cState);
+    // Ensure the message is an object and has the correct structure
+    if (msg && msg.evt === "circuit" && msg.data) {
+      const circuitData = msg.data;
+  
+      // Extract the circuit name and state
+      const circuitName = circuitData.name;
+      const circuitState = circuitData.isOn;
+  
+      // Call changeStuff with the extracted values
+      changeStuff(circuitName, circuitState);
+    } else {
+      console.error("Invalid message format", msg);
+    }
   }
-
   function changeStuff(data, status) {
     // Helper function to toggle classes
     function toggleClass(element, removeClass, addClass) {
