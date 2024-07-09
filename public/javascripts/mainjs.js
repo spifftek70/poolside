@@ -220,6 +220,9 @@ $(function () {
     });
   }
 
+  const temps = data.temps;
+  parseTemps(temps);
+
   function parseOne(msg) {
     if (msg && msg.name && msg.isOn !== undefined) {
       const circuitName = msg.name;
