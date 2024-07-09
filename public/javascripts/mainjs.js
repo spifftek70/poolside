@@ -1,58 +1,46 @@
 $(function () {
-
   allState();
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
-    transports: ["polling"], // Change transport method to polling
+    transports: ["polling"],
     transportOptions: {
       polling: {
         extraHeaders: {
-          EIO: 4, // Engine.IO protocol version
-          t: "P2Ebc5G", // Custom query parameter `t`
-          sid: "dZA7q5x3x96k2i_IAAC0" // Custom query parameter `sid`
-        }
-      }
-    }
+          EIO: 4,
+          t: "P2Ebc5G",
+          sid: "dZA7q5x3x96k2i_IAAC0",
+        },
+      },
+    },
   });
 
   mainSocket.on("connect", function () {
-    // console.log("Connected to WebSocket server");
     mainSocket.send("Hello from client");
   });
 
-  mainSocket.on("disconnect", function () {
-    // console.log("Disconnected from WebSocket server");
-  });
+  mainSocket.on("disconnect", function () {});
 
   mainSocket.on("pump", function (message) {
-    // console.log("Pump message: ", message);
     parseMsgs(message);
   });
 
   mainSocket.on("body", function (message) {
-    // console.log("Body message: ", message);
     parsebodies(message);
   });
 
   mainSocket.on("temps", function (message) {
-    // console.log("Temps message: ", message);
     parseTemps(message);
   });
 
   mainSocket.on("circuit", function (message) {
-    // console.log("Temps message: ", message);
     parseOne(message);
   });
 
   mainSocket.on("heater", function (message) {
-    // console.log("Heater message: ", message);
     parseMsgs(message);
   });
 
-  mainSocket.on("controller", function (message) {
-    // console.log("Controller message: ", message);
-    // parseMsg(message);
-  });
+  mainSocket.on("controller", function (message) {});
 
   $(".pFlame, .pFlake, .sFlame, .sFlake, #poolDelay, #spaDelay").hide();
 
@@ -86,472 +74,318 @@ $(function () {
     max: "104",
   });
 
-  // getStatus();
-
   $(".closers").on("click", function (e) {
     e.preventDefault();
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function parseMsgs(message){
-    // $.each(message, function (i, message) {
-      var aa;
-      var bb;
-      var ee;
-      var ff;
-      var gg;
-      if (message.name === "Spa Pump") {
-        aa = message.id;
-        bb = message.isActive;
-        if (bb === true){
-          $("#spaCirculation").removeClass("btn-info");
-          $("#spaCirculation").addClass("btn-circ");
-          $("#spaOn").text(" Spa Off");
-          $("#poOn").text(" Pool On");
-          spaPumpMaster = true;
-        } else {
-          $("#spaCirculation").removeClass("btn-circ");
-          $("#spaCirculation").addClass("btn-info");
-          $("#spaOn").text(" Spa On");
-          $("#poOn").text(" Pool Off");
-          spaPumpMaster = false;
-        }
-      }
-      if (message.name === "Spa Jets") {
-        aa = message.id;
-        bb = message.isActive;
-        if (bb === true){
-          $("#spaJets").removeClass("btn-info")
-          $("#spaJets").addClass("btn-circ");
-          spaJetsMaster = true;
-        } else {
-          $("#spaJets").removeClass("btn-circ");
-          $("#spaJets").addClass("btn-info");
-          spaJetsMaster = false;
-        }
-      }
-      if (message.name === "Blower") {
-        aa = message.id;
-        bb = message.isActive;
-        if (bb === true){
-          $("#blowsHard").removeClass("btn-info")
-          $("#blowsHard").addClass("btn-circ");
-          blowerMaster = true;
-        } else {
-          $("#blowsHard").removeClass("btn-circ");
-          $("#blowsHard").addClass("btn-info");
-          blowerMaster = false;
-        }
-      }
-      if (message.name === "Pool Pump") {
-        aa = message.id;
-        bb = message.isActive;
-        ee = message.rpm;
-        ff = message.watts;
-        gg = message.flow;
-        if (bb === true){
-          $("#poolCirculation").removeClass("btn-info");
-          $("#poolCirculation").addClass("btn-circ");
-          $("#poOn").text(" Pool Off");
-          $("#spaOn").text(" Spa On");
-          $(".gauge").show();
-          $("#pumpRPM").text(ee + " RPM | ");
-          $("#pumpRPM").append("&nbsp;");
-          $("#pumpGPM").text(gg + " GPM | ");
-          $("#pumpGPM").append("&nbsp;");
-          $("#pumpWatt").text(ff + " Watt");
-          poolPumpMaster = true;
-        } else {
-          $("#poolCirculation").removeClass("btn-circ");
-          $("#poolCirculation").addClass("btn-info");
-          $("#poOn").text(" Pool On");
-          $("#spaOn").text(" Spa Off");
-          $(".gauge").hide();
-          poolPumpMaster = false;
-        }
-      }
+  function parseMsgs(message) {
+    if (message.name === "Spa Pump") {
+      toggleClass(
+        "#spaCirculation",
+        message.isActive ? "btn-info" : "btn-circ",
+        message.isActive ? "btn-circ" : "btn-info"
+      );
+      $("#spaOn").text(message.isActive ? " Spa Off" : " Spa On");
+      $("#poOn").text(message.isActive ? " Pool On" : " Pool Off");
+      spaPumpMaster = message.isActive;
+    }
+    if (message.name === "Spa Jets") {
+      toggleClass(
+        "#spaJets",
+        message.isActive ? "btn-info" : "btn-circ",
+        message.isActive ? "btn-circ" : "btn-info"
+      );
+      spaJetsMaster = message.isActive;
+    }
+    if (message.name === "Blower") {
+      toggleClass(
+        "#blowsHard",
+        message.isActive ? "btn-info" : "btn-circ",
+        message.isActive ? "btn-circ" : "btn-info"
+      );
+      blowerMaster = message.isActive;
+    }
+    if (message.name === "Pool Pump") {
+      toggleClass(
+        "#poolCirculation",
+        message.isActive ? "btn-info" : "btn-circ",
+        message.isActive ? "btn-circ" : "btn-info"
+      );
+      $("#poOn").text(message.isActive ? " Pool Off" : " Pool On");
+      $("#spaOn").text(message.isActive ? " Spa On" : " Spa Off");
+      $(".gauge").toggle(message.isActive);
+      $("#pumpRPM")
+        .text(message.rpm + " RPM | ")
+        .append("&nbsp;");
+      $("#pumpGPM")
+        .text(message.flow + " GPM | ")
+        .append("&nbsp;");
+      $("#pumpWatt").text(message.watts + " Watt");
+      poolPumpMaster = message.isActive;
+    }
   }
 
   function parsebodies(message) {
-    var aa;
-    var bb;
-    var cc;
-    var dd;
     $.each(message, function (i, field) {
-      if (field.id === 1) {
-        if (field.name === "Pool") {
-          aa = field.id;
-          bb = field.isOn;
-          $("#poolCurrentTemps").text("Is now: " + message.temp + "° F");
-          const poolCoolSetpt = field.coolSetpoint;
-          const poolSetPt = field.setPoint;
-          const poolVals = poolSetPt.toString() + " - " + poolCoolSetpt.toString();
-          $("#poolSlider").roundSlider("setValue", poolVals);
-          $("#poolSetTemps").text("Set for: " + poolVals + "° F");
-          if ('heatStatus' in field) {
-            cc = field.heatStatus;
-            dd = cc.desc;
-            if (dd === "Heating") {
-              poolWarm();
-              heaterMaster = "Heating";
-            } else if (dd === "Cooling") {
-              heaterMaster = "Cooling";
-              poolCold();
-            } else {
-              poolOff();
-              heaterMaster = "Off";
-            }
-          }
-          // statusUpdate(aa, bb);
-        }
-        if (field.name === "Spa") {
-          aa = field.id;
-          bb = field.isOn;
-          $("#spaCurrentTemps").text("Is now: " + field.temp + "° F");
-          const spaCoolSetpt = field.coolSetpoint;
-          const spaSetPt = field.setPoint;
-          const spaVals = spaSetPt.toString() + " - " + spaCoolSetpt.toString();
-          $("#spaSlider").roundSlider("setValue", spaVals);
-          $("#spaSetTemps").text("Set for: " + spaVals + "° F");
-          if ('heatStatus' in field) {
-            cc = field.heatStatus;
-            dd = cc.desc;
-            if (dd === "Heating") {
-              heaterMaster = "Heating";
-              spaHot();
-            } else if (dd === "Cooling") {
-              heaterMaster = "Cooling";
-              spaCool();
-            } else {
-              spaOff();
-              heaterMaster = "Off";
-            }
-          }
-          // statusUpdate(aa, bb);
-        }
-      }
-    });
-  }
-  
-  function parseTemps(message) {
-    var aa;
-    var bb;
-    var bodes = message.bodies;
-    $.each(bodes, function (i, data) {
-      if (data.name === "Pool") {
-        aa = data.id;
-        bb = data.isOn;
-        $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");  
-        const poolCoolSetpt = data.coolSetpoint;
-        const poolSetPt = data.setPoint;
-        const poolVals = poolSetPt.toString() + " - " + poolCoolSetpt.toString();
+      if (field.name === "Pool") {
+        $("#poolCurrentTemps").text("Is now: " + field.temp + "° F");
+        const poolVals = field.setPoint + " - " + field.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
-        if ('heatStatus' in data) {
-          const cc = data.heatStatus;
-          const dd = cc.desc;
-          if (dd === "Heating") {
-            poolWarm();
-            heaterMaster = "Heating";
-          } else if (dd === "Cooling") {
-            poolCold();
-            heaterMaster = "Cooling"
-          } else {
-            poolOff();
-            heaterMaster = "Off";
-          }
-        }
-        // statusUpdate(aa, bb);
+        handleHeatStatus(field.heatStatus, poolWarm, poolCold, poolOff);
       }
-      if (data.name === "Spa") {
-        aa = data.id;
-        bb = data.isOn;
-        $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
-        const spaCoolSetpt = data.coolSetpoint;
-        const spaSetPt = data.setPoint;
-        const spaVals = spaSetPt.toString() + " - " + spaCoolSetpt.toString();
+      if (field.name === "Spa") {
+        $("#spaCurrentTemps").text("Is now: " + field.temp + "° F");
+        const spaVals = field.setPoint + " - " + field.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
-        if ('heatStatus' in data) {
-          const cc = data.heatStatus;
-          const dd = cc.desc;
-          if (dd === "Heating") {
-            spaHot();
-            heaterMaster = "Heating";
-          } else if (dd === "Cooling") {
-            spaCool();
-            heaterMaster = "Cooling";
-          } else {
-            spaOff();
-            heaterMaster = "Off";
-          }
-        }
-        // statusUpdate(aa, bb);
+        handleHeatStatus(field.heatStatus, spaHot, spaCool, spaOff);
       }
     });
   }
 
-  // function getStatus() {
-  //   // Listen for status updates from the WebSocket
-  //   mainSocket.on("message", function (message) {
-  //     try {
-  //       const json = JSON.parse(message);
-  //       console.log("message: ", message);
-  //       var aa;
-  //       var bb;
-  //       var cc;
-  //       var cnom;
-  //       var poolVals;
-  //       var spaVals;
-  //       var spaSetPt;
-  //       var spaCoolSetpt;
-  //       var poolSetPts;
-  //       var poolCoolSetpt;
-  //       var poolChil;
-  //       var spaChil;
-
-  //       var circ = json.circuits;
-  //       var teps = json.temps;
-  //       var heaters = json.heaters;
-  //       $.each(circ, function (i, data) {
-  //         console.log("data: ", data);
-  //         aa = data.id;
-  //         bb = data.isOn;
-  //         $.each(teps.bodies, function (i, eid) {
-  //           console.log("eid: ", eid);
-  //           cc = eid.temp;
-  //           dd = eid.heatStatus;
-  //           ee = eid.heatMode;
-  //           cnom = eid.name;
-  //           if (cnom == "Spa") {
-  //             spaChil = cc;
-  //             spaSetPt = eid.setPoint;
-  //             spaCoolSetpt = eid.coolSetpoint;
-  //             spaVals = spaSetPt.toString() + ", " + spaCoolSetpt.toString();
-  //             $("#spaSlider").roundSlider("setValue", spaVals);
-  //             $("#spaCurrentTemps").text(spaChil);
-  //           }
-  //           if (cnom == "Pool") {
-  //             poolChil = cc;
-  //             poolSetPts = eid.setPoint;
-  //             poolCoolSetpt = eid.coolSetpoint;
-  //             poolVals =
-  //               poolSetPts.toString() + ", " + poolCoolSetpt.toString();
-  //             $("#poolSlider").roundSlider("setValue", poolVals);
-  //             $("#poolCurrentTemps").text(poolChil);
-  //           }
-  //           statusUpdate(aa, bb);
-  //         });
-  //       });
-  //       $.each(heaters, function (i, hett) {
-  //         var bID = hett.bodyId;
-  //         var hID = hett.isOn;
-  //         var isCool = hett.isCooling;
-  //         makeChanges(bID, hID, isCool);
-  //       });
-  //       $("#poolCurrentTemps").text(poolChil);
-  //       $("#poolSetTemps").text(poolSetPts + "° - " + poolCoolSetpt + "°F");
-  //       $("#spaCurrentTemps").text(spaChil);
-  //       $("#spaSetTemps").text(spaSetPt + "° - " + spaCoolSetpt + "°F");
-  //     } catch (error) {
-  //       console.error("Error processing status update:", error);
-  //     }
-  //   });
-  // }
-
-  $("#poolSlider").roundSlider({
-    stop: function () {
-      var poolHeatTo = $("#poolSlider").roundSlider("getValue", 1);
-      var poolCoolTo = $("#poolSlider").roundSlider("getValue", 2);
-      var tmpdataLow = {
-        id: 1,
-        heatSetpoint: poolHeatTo,
-      };
-      var tmpdataHi = {
-        id: 1,
-        coolSetpoint: poolCoolTo,
-      };
-      setPoolCond(tmpdataLow);
-      setTimeout(function () {
-        setPoolCond(tmpdataHi);
-      }, 500);
-      $("#poolSetTemps").text(poolHeatTo + " - " + poolCoolTo + "° F");
-    },
-  });
-
-  $("#spaSlider").roundSlider({
-    stop: function () {
-      var spaHeatTo = $("#spaSlider").roundSlider("getValue", 1);
-      var spaCoolTo = $("#spaSlider").roundSlider("getValue", 2);
-      var tmpdataLow = {
-        id: 2,
-        coolSetpoint: spaHeatTo,
-      };
-      var tmpdataHi = {
-        id: 2,
-        heatSetpoint: spaCoolTo,
-      };
-      setPoolCond(tmpdataLow);
-      setTimeout(function () {
-        setPoolCond(tmpdataHi);
-      }, 500);
-      $("#spaSetTemps").text(spaHeatTo + " - " + spaCoolTo + "° F");
-    },
-  });
-
-  $("#poolTempOnOff").on("click", function (e) {
-    e.preventDefault();
-    var $this = $(this);
-    var tempData;
-    if ($this.hasClass("btn-secondary")) {
-      tempData = {
-        id: 1,
-        mode: 5,
-      };
-    } else {
-      tempData = {
-        id: 1,
-        mode: 1,
-      };
-    }
-    $.ajax({
-      type: "PUT",
-      url: "http://autopool.local:4200/state/body/heatMode",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      data: JSON.stringify(tempData),
-      success: function (datartn) {
-        var heatM = datartn.heatStatus;
-        var descc = heatM.desc;
-        if (descc == "Heating") {
-          poolWarm();
-        } else if (descc == "Cooling") {
-          poolCold();
-        } else {
-          poolOff();
-        }
-      },
+  function parseTemps(message) {
+    const bodes = message.bodies;
+    $.each(bodes, function (i, data) {
+      if (data.name === "Pool") {
+        $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");
+        const poolVals = data.setPoint + " - " + data.coolSetpoint;
+        $("#poolSlider").roundSlider("setValue", poolVals);
+        $("#poolSetTemps").text("Set for: " + poolVals + "° F");
+        handleHeatStatus(data.heatStatus, poolWarm, poolCold, poolOff);
+      }
+      if (data.name === "Spa") {
+        $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
+        const spaVals = data.setPoint + " - " + data.coolSetpoint;
+        $("#spaSlider").roundSlider("setValue", spaVals);
+        $("#spaSetTemps").text("Set for: " + spaVals + "° F");
+        handleHeatStatus(data.heatStatus, spaHot, spaCool, spaOff);
+      }
     });
-    return true;
-  });
+  }
 
-  $("#spaTempOnOff").on("click", function (e) {
-    e.preventDefault();
-    var $this = $(this);
-    var tempData;
-    if ($this.hasClass("btn-secondary")) {
-      tempData = {
-        id: 2,
-        mode: 5,
-      };
+  function handleHeatStatus(
+    heatStatus,
+    heatingCallback,
+    coolingCallback,
+    offCallback
+  ) {
+    if (heatStatus) {
+      switch (heatStatus.desc) {
+        case "Heating":
+          heatingCallback();
+          heaterMaster = "Heating";
+          break;
+        case "Cooling":
+          coolingCallback();
+          heaterMaster = "Cooling";
+          break;
+        default:
+          offCallback();
+          heaterMaster = "Off";
+      }
     } else {
-      tempData = {
-        id: 2,
-        mode: 1,
-      };
+      offCallback();
+      heaterMaster = "Off";
     }
-    $.ajax({
-      type: "PUT",
-      url: "http://autopool.local:4200/state/body/heatMode",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      data: JSON.stringify(tempData),
-      success: function (datartn) {
-        var heatM = datartn.heatStatus;
-        var descc = heatM.desc;
-        if (descc == "Heating") {
-          spaHot();
-        } else if (descc == "Cooling") {
-          spaCool();
-        } else {
-          spaOff();
-        }
-      },
+  }
+
+  function allState() {
+    $.getJSON("http://autopool.local:4200/state/all", function (data) {
+      parseAll(data);
     });
-    return true;
-  });
+  }
 
-  $("#poolCirculation").on("click", function (e) {
-    e.preventDefault();
-    var $this = $(this);
-    var data1, data2;
-    if ($this.hasClass("btn-info")) {
-      data1 = {
-        id: 6,
-        state: true,
-      };
-      data2 = {
-        id: 2,
-        state: true,
-      };
-      $("#poOn").text(" Pool Off");
-      $("#poolGauges").show();
-    } else {
-      data1 = {
-        id: 6,
-        state: false,
-      };
-      $("#poOn").text(" Pool On");
-      $("#poolGauges").hide();
-      data2 = {
-        id: 2,
-        state: false,
-      };
-    }
-    setPool(data1);
-    setTimeout(function () {
-      setPool(data2);
-    }, 500);
-    var elem = $("#poolDelay");
-    cntdown(elem, $this);
-    // setTimeout(function () {
-    //   $this.toggleClass("btn-info btn-circ");
-    // }, 25000);
-  });
+  function parseAll(data) {
+    const circuits = data.circuits;
+    circuits.forEach((circuit) => {
+      var cName = circuit.name;
+      var cState = circuit.isOn;
+      changeStuff(cName, cState);
+    });
+  }
 
-  $("#spaCirculation").on("click", function (e) {
-    e.preventDefault();
-    var $this = $(this);
-    var data;
-    if ($this.hasClass("btn-info")) {
-      $("#spaOn").text(" Spa Off");
-      data = {
-        id: 1,
-        state: true,
-      };
+  function parseOne(msg) {
+    if (msg && msg.name && msg.isOn !== undefined) {
+      const circuitName = msg.name;
+      const circuitState = msg.isOn;
+      changeStuff(circuitName, circuitState);
     } else {
-      $("#spaOn").text(" Spa On");
-      data = {
-        id: 1,
-        state: false,
-      };
+      console.error("Invalid message format", msg);
     }
-    setPool(data);
-    var elem = $("#spaDelay");
-    cntdown(elem, $this);
-    // setTimeout(function () {
-    //   $this.toggleClass("btn-info btn-circ");
-    // }, 25000);
-  });
+  }
 
-  function cntdown(a, b) {
-    b.addClass("disabled");
-    a.empty();
-    if (!timerId) {
-      var timeLeft = 25;
-      var timerId = setInterval(countdown, 1000);
-    } else {
-      clearInterval(timerId);
-      timerId = null;
+  function changeStuff(data, status) {
+    function toggleClass(element, removeClass, addClass) {
+      $(element).removeClass(removeClass).addClass(addClass);
     }
-    function countdown() {
-      if (timeLeft <= 0) {
-        clearInterval(timerId);
-        doSomething();
+
+    switch (data) {
+      case "Blower":
+        toggleClass(
+          "#blowsHard",
+          status ? "btn-info" : "btn-circ",
+          status ? "btn-circ" : "btn-info"
+        );
+        break;
+
+      case "Aerator":
+        toggleClass(
+          "#fount",
+          status ? "btn-info" : "btn-circ",
+          status ? "btn-circ" : "btn-info"
+        );
+        break;
+
+      case "Spa Jets":
+      case "Spa jets":
+        $("#spaOn").text(status ? " Spa Off" : " Spa On");
+        $("#poOn").text(status ? " Pool On" : " Pool Off");
+        toggleClass(
+          "#spaJets",
+          status ? "btn-info" : "btn-circ",
+          status ? "btn-circ" : "btn-info"
+        );
+        break;
+
+      case "Pool Clean":
+      case "Pool Cond":
+        $("#poOn").text(status ? " Pool Off" : " Pool On");
+        $("#spaOn").text(status ? " Spa On" : " Spa Off");
+        toggleClass(
+          "#poolCirculation",
+          status ? "btn-info" : "btn-circ",
+          status ? "btn-circ" : "btn-info"
+        );
+        break;
+
+      case "Spa Clean":
+        $("#spaOn").text(status ? " Spa Off" : " Spa On");
+        toggleClass(
+          "#spaCirculation",
+          status ? "btn-info" : "btn-circ",
+          status ? "btn-circ" : "btn-info"
+        );
+        break;
+
+      case "Spa Light":
+      case "Spa Lights":
+        toggleClass(
+          "#spaLight",
+          status ? "btn-info" : "btn-light",
+          status ? "btn-light" : "btn-info"
+        );
+        break;
+
+      case "Pool Light":
+      case "Pool Lights":
+        toggleClass(
+          "#poolLight",
+          status ? "btn-info" : "btn-light",
+          status ? "btn-light" : "btn-info"
+        );
+        break;
+
+      default:
+        console.warn(`Unhandled data type: ${data}`);
+        break;
+    }
+
+    $("#poolTempOnOff").on("click", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      var tempData = { id: 1, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
+      $.ajax({
+        type: "PUT",
+        url: "http://autopool.local:4200/state/body/heatMode",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(tempData),
+        success: function (datartn) {
+          var heatM = datartn.heatStatus;
+          var descc = heatM.desc;
+          if (descc === "Heating") poolWarm();
+          else if (descc === "Cooling") poolCold();
+          else poolOff();
+        },
+      });
+    });
+
+    $("#spaTempOnOff").on("click", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      var tempData = { id: 2, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
+      $.ajax({
+        type: "PUT",
+        url: "http://autopool.local:4200/state/body/heatMode",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(tempData),
+        success: function (datartn) {
+          var heatM = datartn.heatStatus;
+          var descc = heatM.desc;
+          if (descc === "Heating") spaHot();
+          else if (descc === "Cooling") spaCool();
+          else spaOff();
+        },
+      });
+    });
+
+    $("#poolCirculation").on("click", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      var data1, data2;
+      if ($this.hasClass("btn-info")) {
+        data1 = { id: 6, state: true };
+        data2 = { id: 2, state: true };
+        $("#poOn").text(" Pool Off");
+        $("#poolGauges").show();
       } else {
-        a.show();
-        a.html(timeLeft + " sec delay");
-        timeLeft--;
+        data1 = { id: 6, state: false };
+        data2 = { id: 2, state: false };
+        $("#poOn").text(" Pool On");
+        $("#poolGauges").hide();
+      }
+      setPool(data1);
+      setTimeout(function () {
+        setPool(data2);
+      }, 500);
+      var elem = $("#poolDelay");
+      cntdown(elem, $this);
+    });
+
+    $("#spaCirculation").on("click", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      var data = { id: 1, state: $this.hasClass("btn-info") };
+      $("#spaOn").text($this.hasClass("btn-info") ? " Spa Off" : " Spa On");
+      setPool(data);
+      var elem = $("#spaDelay");
+      cntdown(elem, $this);
+    });
+
+    function cntdown(a, b) {
+      b.addClass("disabled");
+      a.empty();
+
+      let timeLeft = 25;
+      let timerId = setInterval(countdown, 1000);
+
+      function countdown() {
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          doSomething();
+        } else {
+          a.show();
+          a.html(timeLeft + " sec delay");
+          timeLeft--;
+        }
+      }
+
+      function doSomething() {
+        a.hide();
+        b.removeClass("disabled");
       }
     }
 
@@ -563,103 +397,41 @@ $(function () {
 
   $("#poolLight").on("click", function (e) {
     e.preventDefault();
-    var data;
-    if ($("#poolLight").hasClass("btn-info")) {
-      data = {
-        id: 7,
-        state: true,
-      };
-      changeStuff("Pool Lights", true) 
-    } else {
-      data = {
-        id: 7,
-        state: false,
-      };
-      changeStuff("Pool Lights", false) 
-    }
-    // $("#poolLight").toggleClass("btn-info btn-warning");
+    var $this = $(this);
+    var data = { id: 7, state: $this.hasClass("btn-info") };
+    changeStuff("Pool Lights", $this.hasClass("btn-info"));
     setPool(data);
   });
 
   $("#spaLight").on("click", function (e) {
     e.preventDefault();
-    var data;
-    if ($("#spaLight").hasClass("btn-info")) {
-      data = {
-        id: 8,
-        state: true,
-      };
-      changeStuff("Spa Lights", true) 
-    } else {
-      data = {
-        id: 8,
-        state: false,
-      };
-      changeStuff("Spa Lights", false) 
-    }
-    // $(this).toggleClass("btn-info btn-warning");
+    var $this = $(this);
+    var data = { id: 8, state: $this.hasClass("btn-info") };
+    changeStuff("Spa Lights", $this.hasClass("btn-info"));
     setPool(data);
   });
 
   $("#fount").on("click", function (e) {
     e.preventDefault();
-    var data;
-    if ($(this).hasClass("btn-info")) {
-      data = {
-        id: 5,
-        state: true,
-      };
-      changeStuff("Aerator", true);
-    } else {
-      data = {
-        id: 5,
-        state: false,
-      };
-      changeStuff("Aerator", false);
-    }
-  // $(this).toggleClass("btn-info btn-circ");
+    var $this = $(this);
+    var data = { id: 5, state: $this.hasClass("btn-info") };
+    changeStuff("Aerator", $this.hasClass("btn-info"));
     setPool(data);
   });
 
   $("#blowsHard").on("click", function (e) {
     e.preventDefault();
-    var data;
-    if ($(this).hasClass("btn-info")) {
-      // $("#blowsHard").removeClass("btn-info")
-      // $("#blowsHard").addClass("btn-circ");
-      changeStuff("Blower", true);
-      data = {
-        id: 4,
-        state: true,
-      };
-    } else {
-      changeStuff("Blower", false);
-      data = {
-        id: 4,
-        state: false,
-      };
-    }
-    // $("#blowsHard").toggleClass("btn-info btn-light");
+    var $this = $(this);
+    var data = { id: 4, state: $this.hasClass("btn-info") };
+    changeStuff("Blower", $this.hasClass("btn-info"));
     setPool(data);
   });
 
   $("#spaJets").on("click", function (e) {
     e.preventDefault();
-    var data;
-    if ($(this).hasClass("btn-info")) {
-      data = {
-        id: 3,
-        state: true,
-      };
-      changeStuff("Spa Jets", true);
-    } else {
-      data = {
-        id: 3,
-        state: false,
-      };
-      changeStuff("Spa Jets", false);
-    }
-    // $("#spaJets").toggleClass("btn-info btn-circ");
+    var $this = $(this);
+    var data = { id: 3, state: $this.hasClass("btn-info") };
+    changeStuff("Spa Jets", $this.hasClass("btn-info"));
     setPool(data);
   });
 
@@ -678,88 +450,20 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
-  function allState() {
-    $.getJSON("http://autopool.local:4200/state/all", function (data) {
-      parseAll(data);
+  function setPool(data) {
+    $.ajax({
+      type: "PUT",
+      url: "http://autopool.local:4200/state/circuit/setState",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(data),
+      success: function (data) {
+        return data;
+      },
     });
   }
-  
-  function parseAll(data) {
-    // Parsing the circuits array from the JSON response
-    const circuits = data.circuits;
-  
-    // Looping through each circuit and logging relevant information
-    circuits.forEach(circuit => {
-      var cName = circuit.name;
-      var cState = circuit.isOn;
-      changeStuff(cName, cState);
-    });
-  }
+  // });
 
-    function parseOne(msg) {
-      // Ensure the message has the correct structure
-      if (msg && msg.name && msg.isOn !== undefined) {
-        const circuitName = msg.name;
-        const circuitState = msg.isOn;
-    
-        // Call changeStuff with the extracted values
-        changeStuff(circuitName, circuitState);
-      } else {
-        console.error("Invalid message format", msg);
-      }
-    }
-
-  function changeStuff(data, status) {
-    // Helper function to toggle classes
-    function toggleClass(element, removeClass, addClass) {
-      $(element).removeClass(removeClass).addClass(addClass);
-    }
-  
-    switch (data) {
-      case "Blower":
-        toggleClass("#blowsHard", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
-        break;
-  
-      case "Aerator":
-        toggleClass("#fount", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
-        break;
-  
-      case "Spa Jets":
-      case "Spa jets":  // Handling case sensitivity
-        $("#spaOn").text(status ? " Spa Off" : " Spa On");
-        $("#poOn").text(status ? " Pool On" : " Pool Off");
-        toggleClass("#spaJets", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
-        break;
-  
-      case "Pool Clean" || "Pool Cond":
-      case "Pool cond" || "Pool clean":  // Handling case sensitivity
-        $("#poOn").text(status ? " Pool Off" : " Pool On");
-        $("#spaOn").text(status ? " Spa On" : " Spa Off");
-        toggleClass("#poolCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
-        break;
-  
-      case "Spa Clean":
-        console.log(data, status);
-      // case "Spa clean": // Handling case sensitivity
-        $("#spaOn").text(status ? " Spa Off" : " Spa On");
-        toggleClass("#spaCirculation", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
-        break;
-  
-      case "Spa Light":
-      case "Spa Lights":  // Handling plural
-        toggleClass("#spaLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
-        break;
-  
-      case "Pool Light":
-      case "Pool Lights":  // Handling plural
-        toggleClass("#poolLight", status ? "btn-info" : "btn-light", status ? "btn-light" : "btn-info");
-        break;
-  
-      default:
-        console.warn(`Unhandled data type: ${data}`);
-        break;
-    }
-  }
   function setPool(jdata) {
     $.ajax({
       type: "PUT",
