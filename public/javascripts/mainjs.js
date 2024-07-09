@@ -126,6 +126,7 @@ $(function () {
 
   function setNumbers (message) {
     console.log("rpm: ", message.rpm, "flow: ", message.flow, "watts: ", message.watts);
+    if (message.rpm !== undefined && message.flow !== undefined && message.watts !== undefined){
     $("#pumpRPM")
       .text(message.rpm + " RPM | ")
       .append("&nbsp;");
@@ -133,6 +134,7 @@ $(function () {
       .text(message.flow + " GPM | ")
       .append("&nbsp;");
     $("#pumpWatt").text(message.watts + " Watt");
+    }
   } 
 
   function parsebodies(message) {
