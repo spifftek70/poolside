@@ -209,9 +209,12 @@ $(function () {
     circuits.forEach((circuit) => {
       var cName = circuit.name;
       var cState = circuit.isOn;
-      var cooling = circuit.isCooling;
       changeStuff(cName, cState);
-      changeTemps(cName, cState, cooling);
+      const heaters = circuit.heaters;
+      heaters.forEach((heater) => {
+        var isCool = heater.cooling;
+      changeTemps(cName, cState, isCool);
+      });
     });
   }
 
