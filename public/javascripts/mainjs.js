@@ -3,7 +3,7 @@ function toggleClass(element, removeClass, addClass) {
 }
 
 $(function () {
-  const mainSocket = io("http://0.0.0.0:4200", {
+  const mainSocket = io("http://autopool.tplinkdns.com:4200", {
     path: "/socket.io",
     transports: ["polling"],
     transportOptions: {
@@ -203,7 +203,7 @@ $(function () {
   }
 
   function allState() {
-    $.getJSON("http://0.0.0.0:4200/state/all", function (data) {
+    $.getJSON("http://autopool.tplinkdns.com:4200/state/all", function (data) {
       parseAll(data);
       var temps = data.temps;
       var pumps = data.pumps;
@@ -392,7 +392,7 @@ $(function () {
     var tempData = { id: 1, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
     $.ajax({
       type: "PUT",
-      url: "http://0.0.0.0:4200/state/body/heatMode",
+      url: "http://autopool.tplinkdns.com:4200/state/body/heatMode",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(tempData),
@@ -412,7 +412,7 @@ $(function () {
     var tempData = { id: 2, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
     $.ajax({
       type: "PUT",
-      url: "http://0.0.0.0:4200/state/body/heatMode",
+      url: "http://autopool.tplinkdns.com:4200/state/body/heatMode",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(tempData),
@@ -538,7 +538,7 @@ $(function () {
   function setPool(data) {
     $.ajax({
       type: "PUT",
-      url: "http://0.0.0.0:4200/state/circuit/setState",
+      url: "http://autopool.tplinkdns.com:4200/state/circuit/setState",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(data),
@@ -551,7 +551,7 @@ $(function () {
   // function setPool(jdata) {
   //   $.ajax({
   //     type: "PUT",
-  //     url: "http://0.0.0.0:4200/state/circuit/setState",
+  //     url: "http://autopool.tplinkdns.com:4200/state/circuit/setState",
   //     contentType: "application/json; charset=utf-8",
   //     dataType: "json",
   //     data: JSON.stringify(jdata),
@@ -564,7 +564,7 @@ $(function () {
   function setPoolCond(data) {
     $.ajax({
       type: "PUT",
-      url: "http://0.0.0.0:4200/state/body/setPoint",
+      url: "http://autopool.tplinkdns.com:4200/state/body/setPoint",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify(data),
