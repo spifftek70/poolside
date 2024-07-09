@@ -120,17 +120,20 @@ $(function () {
       $("#poOn").text(message.isActive ? " Pool Off" : " Pool On");
       $("#spaOn").text(message.isActive ? " Spa On" : " Spa Off");
       $(".gauge").toggle(message.isActive);
-      $("#pumpRPM")
-        .text(message.rpm + " RPM | ")
-        .append("&nbsp;");
-      $("#pumpGPM")
-        .text(message.flow + " GPM | ")
-        .append("&nbsp;");
-      $("#pumpWatt").text(message.watts + " Watt");
+      setNumbers (message)
       poolPumpMaster = message.isActive;
     }
   }
- 
+
+  function setNumbers (message) {
+    $("#pumpRPM")
+      .text(message.rpm + " RPM | ")
+      .append("&nbsp;");
+    $("#pumpGPM")
+      .text(message.flow + " GPM | ")
+      .append("&nbsp;");
+    $("#pumpWatt").text(message.watts + " Watt");
+  } 
 
   function parsebodies(message) {
     $.each(message, function (i, field) {
@@ -204,7 +207,7 @@ $(function () {
       var pumps = data.pumps;
       parseTemps(temps);
       pumps.forEach((pump) => {
-        parseMsgs(pump);
+        setNumbers (message)
         console.log("pump: ", pump);
       });
     });
