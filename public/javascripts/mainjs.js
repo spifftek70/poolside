@@ -126,6 +126,7 @@ $(function () {
       poolPumpMaster = message.isActive;
     }
   }
+ 
 
   function parsebodies(message) {
     $.each(message, function (i, field) {
@@ -229,7 +230,7 @@ $(function () {
           status ? "btn-circ" : "btn-info"
         );
         break;
-
+  
       case "Aerator":
         toggleClass(
           "#fount",
@@ -237,7 +238,7 @@ $(function () {
           status ? "btn-circ" : "btn-info"
         );
         break;
-
+  
       case "Spa Jets":
       case "Spa jets":
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
@@ -248,7 +249,7 @@ $(function () {
           status ? "btn-circ" : "btn-info"
         );
         break;
-
+  
       case "Pool Clean":
       case "Pool Cond":
         $("#poOn").text(status ? " Pool Off" : " Pool On");
@@ -259,7 +260,7 @@ $(function () {
           status ? "btn-circ" : "btn-info"
         );
         break;
-
+  
       case "Spa Clean":
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
         toggleClass(
@@ -268,7 +269,7 @@ $(function () {
           status ? "btn-circ" : "btn-info"
         );
         break;
-
+  
       case "Spa Light":
       case "Spa Lights":
         toggleClass(
@@ -277,7 +278,7 @@ $(function () {
           status ? "btn-light" : "btn-info"
         );
         break;
-
+  
       case "Pool Light":
       case "Pool Lights":
         toggleClass(
@@ -286,7 +287,7 @@ $(function () {
           status ? "btn-light" : "btn-info"
         );
         break;
-
+  
       default:
         console.warn(`Unhandled data type: ${data}`);
         break;
@@ -369,23 +370,17 @@ $(function () {
     function cntdown(a, b) {
       b.addClass("disabled");
       a.empty();
-      let timerId;
-      if (!timerId) {
-        let timeLeft = 25;
-        timerId = setInterval(function countdown() {
-          if (timeLeft <= 0) {
-            clearInterval(timerId);
-            doSomething();
-          } else {
-            a.show();
-            a.html(timeLeft + " sec delay");
-            timeLeft--;
-          }
-        }, 1000);
-      } else {
-        clearInterval(timerId);
-        timerId = null;
-      }
+      let timerId = setInterval(function countdown() {
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          doSomething();
+        } else {
+          a.show();
+          a.html(timeLeft + " sec delay");
+          timeLeft--;
+        }
+      }, 1000);
+      let timeLeft = 25;
     
       function doSomething() {
         a.hide();
@@ -460,7 +455,6 @@ $(function () {
       },
     });
   }
-  // });
 
   function setPool(jdata) {
     $.ajax({
@@ -485,11 +479,6 @@ $(function () {
     $(".pFlake").hide();
     $(".pFlame").hide();
   }
-
-  // function poolOn(){
-  //   $("#poolCirculation").removeClass("btn-info");
-  //   $("#poolCirculation").addClass("btn-circ");
-  // }
 
   function poolCold() {
     $("#poolTempLink").removeClass("btn-info");
@@ -524,11 +513,6 @@ $(function () {
     $(".pFlame").hide();
   }
 
-  // function spaOn(){
-  //   $("#spaCirculation").removeClass("btn-info");
-  //   $("#spaCirculation").addClass("btn-circ");
-  // }
-
   function spaCool() {
     $("#spaTempLink").removeClass("btn-info");
     $("#spaTempLink").removeClass("btn-danger");
@@ -550,119 +534,4 @@ $(function () {
     $(".sFlake").hide();
     $(".sFlame").show();
   }
-
-  // function bothOff() {
-  //   $("#spaTempLink").removeClass("btn-danger");
-  //   $("#spaTempLink").removeClass("btn-primary");
-  //   $("#spaTempLink").addClass("btn-info");
-  //   $("#poolTempLink").removeClass("btn-danger");
-  //   $("#poolTempLink").removeClass("btn-primary");
-  //   $("#poolTempLink").addClass("btn-info");
-  //   $("#poolTempOnOff").html(" On");
-  //   $("#poolTempOnOff").removeClass("btn-primary");
-  //   $("#poolTempOnOff").addClass("btn-secondary");
-  //   $("#spaTempOnOff").html(" On");
-  //   $("#spaTempOnOff").removeClass("btn-primary");
-  //   $("#spaTempOnOff").addClass("btn-secondary");
-  //   $(".pFlake, .pFlame, .sFlake, .sFlame").hide();
-  // }
-
-  // function setPoolCond(data) {
-  //   $.ajax({
-  //     type: "PUT",
-  //     url: "http://autopool.local:4200/state/body/setPoint",
-  //     contentType: "application/json; charset=utf-8",
-  //     dataType: "json",
-  //     data: JSON.stringify(data),
-  //     success: function (dataz) {
-  //       return true;
-  //     },
-  //   });
-  //   return true;
-  // }
-
-  // var ck1;
-  // var aC1;
-  // var ck2;
-  // var aC2;
-
-  // function statusUpdate(a, b) {
-  //   // console.log("A and B: ", a, b);
-  //   if (a === 6 && b === true) {
-  //     ck1 = true;
-  //     aC1 = true;
-  //   }
-  //   if (a === 6 && b === false) {
-  //     ck1 = true;
-  //     aC1 = false;
-  //   }
-  //   if (a === 2 && b === true) {
-  //     ck2 = true;
-  //     aC2 = true;
-  //   }
-  //   if (a === 2 && b === false) {
-  //     ck2 = false;
-  //     aC2 = false;
-  //   }
-  //   if (a === 1 && b === true) {
-  //     $("#poolCirculation").removeClass("btn-info");
-  //     $("#poolCirculation").addClass("btn-circ");
-  //     $("#poOn").text(" Pool Off");
-  //   }
-  //   if (a === 1 && b === false) {
-  //     $("#poolCirculation").removeClass("btn-circ");
-  //     $("#poolCirculation").addClass("btn-info");
-  //     $("#poOn").text(" Pool On");
-  //   }
-  //   if (a === 2 && b === true) {
-  //     $("#spaCirculation").removeClass("btn-info");
-  //     $("#spaCirculation").addClass("btn-circ");
-  //     $("#spaOn").text(" Spa Off");
-  //   }
-  //   if (a === 2 && b === false) {
-  //     $("#spaCirculation").removeClass("btn-circ");
-  //     $("#spaCirculation").addClass("btn-info");
-  //     $("#spaOn").text(" Spa On");
-  //   }
-  //   if (a === 3 && b === true) {
-  //     $("#spaJets").removeClass("btn-info");
-  //     $("#spaJets").addClass("btn-circ");
-  //   }
-  //   if (a === 3 && b === false) {
-  //     $("#spaJets").removeClass("btn-circ");
-  //     $("#spaJets").addClass("btn-info");
-  //   }
-  //   if (a === 4 && b === true) {
-  //     $("#blowsHard").removeClass("btn-info");
-  //     $("#blowsHard").addClass("btn-light");
-  //   }
-  //   if (a === 4 && b === false) {
-  //     $("#blowsHard").removeClass("btn-light");
-  //     $("#blowsHard").addClass("btn-info");
-  //   }
-  //   if (a === 5 && b === true) {
-  //     $("#fount").removeClass("btn-info");
-  //     $("#fount").addClass("btn-circ");
-  //   }
-  //   if (a === 5 && b === false) {
-  //     $("#fount").removeClass("btn-circ");
-  //     $("#fount").addClass("btn-info");
-  //   }
-  //   if (a === 7 && b === true) {
-  //     $("#poolLight").removeClass("btn-info");
-  //     $("#poolLight").addClass("btn-warning");
-  //   }
-  //   if (a === 7 && b === false) {
-  //     $("#poolLight").removeClass("btn-warning");
-  //     $("#poolLight").addClass("btn-info");
-  //   }
-  //   if (a === 8 && b === true) {
-  //     $("#spaLight").removeClass("btn-info");
-  //     $("#spaLight").addClass("btn-warning");
-  //   }
-  //   if (a === 8 && b === false) {
-  //     $("#spaLight").removeClass("btn-warning");
-  //     $("#spaLight").addClass("btn-info");
-  //   } else return;
-  // }
 });
