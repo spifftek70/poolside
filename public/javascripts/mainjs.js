@@ -6,53 +6,7 @@ $(function () {
 
   allState();
 
-  let isPaused = false;
-  let messageQueue = [];
-
-  function pauseWebSockets() {
-    isPaused = true;
-  }
-
-  function unpauseWebSockets() {
-    isPaused = false;
-    processMessageQueue();
-  }
-
-  function processMessageQueue() {
-    while (messageQueue.length > 0) {
-      const message = messageQueue.shift();
-      handleMessage(message);
-    }
-  }
-
-  function handleMessage(message) {
-    if (!isPaused) {
-      // Process the message
-      switch (message.evt) { // Ensure you're using the correct property for the message type
-        case "pump":
-          parseMsgs(message.data); // Ensure you're passing the correct data to the function
-          break;
-        case "body":
-          parsebodies(message.data);
-          break;
-        case "temps":
-          parseTemps(message.data);
-          break;
-        case "circuit":
-          parseOne(message.data);
-          break;
-        case "heater":
-          parseMsgs(message.data);
-          break;
-        default:
-          console.warn(`Unhandled message type: ${message.evt}`);
-      }
-    } else {
-      messageQueue.push(message);
-    }
-  }
-
-  const mainSocket = io("http://autopool.local:4200", {
+    const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"],
     transportOptions: {
@@ -71,10 +25,6 @@ $(function () {
   });
 
   mainSocket.on("disconnect", function () {});
-
-  mainSocket.on("message", function (message) {
-    handleMessage(message);
-  });
 
   mainSocket.on("pump", function (message) {
     handleMessage({ evt: 'pump', data: message });
