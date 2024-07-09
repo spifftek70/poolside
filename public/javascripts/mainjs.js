@@ -211,20 +211,13 @@ $(function () {
       var cState = circuit.isOn;
       changeStuff(cName, cState);
     });
-  
-    const bodies = data.temps.bodies;
-    bodies.forEach((body) => {
-      const heaters = body.heaterOptions;
-      const isCool = body.heatStatus.desc === "Cooling";
-      changeTemps(body.name, body.isOn, isCool);
-    });
-  
+ 
     const heaters = data.heaters;
     heaters.forEach((heater) => {
       var heaterName = heater.name;
       var heaterState = heater.isOn;
       var isCooling = heater.isCooling;
-      changeHeaterState(heaterName, heaterState, isCooling);
+      changeTemps(heaterName, heaterState, isCooling);
     });
   }
 
