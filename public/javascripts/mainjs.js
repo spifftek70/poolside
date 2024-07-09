@@ -79,6 +79,7 @@ $(function () {
     $("#poolTempModal, #spaTempModal").modal("hide");
   });
 
+  
   function parseMsgs(message) {
     if (message.name === "Spa Pump") {
       toggleClass(
@@ -368,32 +369,29 @@ $(function () {
     function cntdown(a, b) {
       b.addClass("disabled");
       a.empty();
-
-      let timeLeft = 25;
-      let timerId = setInterval(countdown, 1000);
-
-      function countdown() {
-        if (timeLeft <= 0) {
-          clearInterval(timerId);
-          doSomething();
-        } else {
-          a.show();
-          a.html(timeLeft + " sec delay");
-          timeLeft--;
-        }
+      let timerId;
+      if (!timerId) {
+        let timeLeft = 25;
+        timerId = setInterval(function countdown() {
+          if (timeLeft <= 0) {
+            clearInterval(timerId);
+            doSomething();
+          } else {
+            a.show();
+            a.html(timeLeft + " sec delay");
+            timeLeft--;
+          }
+        }, 1000);
+      } else {
+        clearInterval(timerId);
+        timerId = null;
       }
-
+    
       function doSomething() {
         a.hide();
         b.removeClass("disabled");
       }
     }
-
-    function doSomething() {
-      a.hide();
-      b.removeClass("disabled");
-    }
-  }
 
   $("#poolLight").on("click", function (e) {
     e.preventDefault();
