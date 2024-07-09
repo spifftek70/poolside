@@ -209,7 +209,9 @@ $(function () {
     circuits.forEach((circuit) => {
       var cName = circuit.name;
       var cState = circuit.isOn;
+      var cooling = circuit.isCooling;
       changeStuff(cName, cState);
+      changeTemps(cName, cState, cooling);
     });
   }
 
@@ -295,6 +297,31 @@ $(function () {
         break;
     }
   }
+
+  function changeTemps(data, status, cooling) {
+    switch (data) {
+      case "heaters":
+        case "Heaters":
+          if (cooling === true) {
+            toggleClass(
+              "#poolTempLink",
+              status ? "btn-info" : "btn-light",
+              status ? "btn-light" : "btn-primary"
+            )
+          } else {
+            toggleClass(
+              "#poolTempLink",
+              status ? "btn-info" : "btn-light",
+              status ? "btn-light" : "btn-danger"
+            )
+          }
+            break;
+        default:
+          console.warn(`Unhandled data type: ${data}`);
+          break;
+      }
+    }
+
 
   $("#poolSlider").roundSlider({
     stop: function () {
