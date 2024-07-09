@@ -3,6 +3,53 @@ $(function () {
     $(element).removeClass(removeClass).addClass(addClass);
   }
   allState();
+
+  let isPaused = false;
+  let messageQueue = [];
+
+  function pauseWebSockets() {
+    isPaused = true;
+  }
+
+  function unpauseWebSockets() {
+    isPaused = false;
+    processMessageQueue();
+  }
+
+  function processMessageQueue() {
+    while (messageQueue.length > 0) {
+      const message = messageQueue.shift();
+      handleMessage(message);
+    }
+  }
+
+  function handleMessage(message) {
+    if (!isPaused) {
+      // Process the message
+      switch (message.type) {
+        case "pump":
+          parseMsgs(message);
+          break;
+        case "body":
+          parsebodies(message);
+          break;
+        case "temps":
+          parseTemps(message);
+          break;
+        case "circuit":
+          parseOne(message);
+          break;
+        case "heater":
+          parseMsgs(message);
+          break;
+        default:
+          console.warn(`Unhandled message type: ${message.type}`);
+      }
+    } else {
+      messageQueue.push(message);
+    }
+  }
+
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
     transports: ["polling"],
@@ -23,25 +70,29 @@ $(function () {
 
   mainSocket.on("disconnect", function () {});
 
-  mainSocket.on("pump", function (message) {
-    parseMsgs(message);
+  mainSocket.on("message", function (message) {
+    handleMessage(message);
   });
 
-  mainSocket.on("body", function (message) {
-    parsebodies(message);
-  });
+  // mainSocket.on("pump", function (message) {
+  //   parseMsgs(message);
+  // });
 
-  mainSocket.on("temps", function (message) {
-    parseTemps(message);
-  });
+  // mainSocket.on("body", function (message) {
+  //   parsebodies(message);
+  // });
 
-  mainSocket.on("circuit", function (message) {
-    parseOne(message);
-  });
+  // mainSocket.on("temps", function (message) {
+  //   parseTemps(message);
+  // });
 
-  mainSocket.on("heater", function (message) {
-    parseMsgs(message);
-  });
+  // mainSocket.on("circuit", function (message) {
+  //   parseOne(message);
+  // });
+
+  // mainSocket.on("heater", function (message) {
+  //   parseMsgs(message);
+  // });
 
   mainSocket.on("controller", function (message) {});
 
@@ -62,7 +113,7 @@ $(function () {
     width: 40,
     handleSize: "+0",
     sliderType: "range",
-    value: "86, 88",
+    // value: "86, 88",
     min: "80",
     max: "90",
   });
@@ -72,7 +123,7 @@ $(function () {
     width: 40,
     handleSize: "+0",
     sliderType: "range",
-    value: "98, 101",
+    // value: "98, 101",
     min: "94",
     max: "104",
   });
@@ -296,6 +347,7 @@ $(function () {
 
   $("#poolSlider").roundSlider({
     stop: function () {
+      pauseWebSockets();
       var poolHeatTo = $("#poolSlider").roundSlider("getValue", 1);
       var poolCoolTo = $("#poolSlider").roundSlider("getValue", 2);
       var tmpdataLow = {
@@ -311,11 +363,13 @@ $(function () {
         setPoolCond(tmpdataHi);
       }, 500);
       $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
+      unpauseWebSockets();
     },
   });
 
   $("#spaSlider").roundSlider({
     stop: function () {
+      pauseWebSockets();
       var spaHeatTo = $("#spaSlider").roundSlider("getValue", 1);
       var spaCoolTo = $("#spaSlider").roundSlider("getValue", 2);
       var tmpdataLow = {
@@ -331,6 +385,7 @@ $(function () {
         setPoolCond(tmpdataHi);
       }, 500);
       $("#spaSetTemps").text(spaHeatTo + "° - " + spaCoolTo + "°F");
+      unpauseWebSockets();
     },
   });
 
