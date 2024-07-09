@@ -245,8 +245,6 @@ $(function () {
   
       case "Spa Jets":
       case "Spa jets":
-        $("#spaOn").text(status ? " Spa Off" : " Spa On");
-        $("#poOn").text(status ? " Pool On" : " Pool Off");
         toggleClass(
           "#spaJets",
           status ? "btn-info" : "btn-circ",
@@ -256,6 +254,8 @@ $(function () {
   
       case "Pool Clean":
       case "Pool Cond":
+      case "Pool clean":
+      case "Pool cond":
         $("#poOn").text(status ? " Pool Off" : " Pool On");
         $("#spaOn").text(status ? " Spa On" : " Spa Off");
         toggleClass(
@@ -267,6 +267,7 @@ $(function () {
   
       case "Spa Clean":
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
+        $("#poOn").text(status ? " Pool On" : " Pool Off");
         toggleClass(
           "#spaCirculation",
           status ? "btn-info" : "btn-circ",
