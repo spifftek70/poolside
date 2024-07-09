@@ -257,10 +257,10 @@ $(function () {
         );
         break;
   
-      case "Pool Clean":
-      case "Pool Cond":
-      case "Pool clean":
-      case "Pool cond":
+      case "Pool Clean" || "Pool Cond" || "Pool clean" || "Pool cond":
+      // case "Pool Cond":
+      // case "Pool clean":
+      // case "Pool cond":
         $("#poOn").text(status ? " Pool Off" : " Pool On");
         $("#spaOn").text(status ? " Spa On" : " Spa Off");
         toggleClass(
