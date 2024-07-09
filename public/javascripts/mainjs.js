@@ -724,8 +724,8 @@ $(function () {
         toggleClass("#fount", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
         break;
   
-      case "Spa Jets" || "Spa jets":
-      // case "Spa jets":  // Handling case sensitivity
+      case "Spa Jets":
+      case "Spa jets":  // Handling case sensitivity
         $("#spaOn").text(status ? " Spa Off" : " Spa On");
         $("#poOn").text(status ? " Pool On" : " Pool Off");
         toggleClass("#spaJets", status ? "btn-info" : "btn-circ", status ? "btn-circ" : "btn-info");
