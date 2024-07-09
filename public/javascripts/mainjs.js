@@ -203,8 +203,10 @@ $(function () {
       var temps = data.temps;
       var pumps = data.pumps;
       parseTemps(temps);
-      parseMsgs(pumps);
-      console.log("pumps: ", pumps);
+      pumps.forEach((pump) => {
+        parseMsgs(pump);
+        console.log("pump: ", pump);
+      });
     });
   }
 
