@@ -84,7 +84,6 @@ $(function () {
 
   allState();
   function parseMsgs(message) {
-    console.log("parseMsgs", message);
     if (message.name === "Spa Pump") {
       toggleClass(
         "#spaCirculation",
@@ -126,6 +125,7 @@ $(function () {
   }
 
   function setNumbers (message) {
+    console.log("setNumbers", message);
     $("#pumpRPM")
       .text(message.rpm + " RPM | ")
       .append("&nbsp;");
@@ -208,7 +208,6 @@ $(function () {
       parseTemps(temps);
       pumps.forEach((pump) => {
         setNumbers (pump)
-        console.log("pump: ", pump);
       });
     });
   }
