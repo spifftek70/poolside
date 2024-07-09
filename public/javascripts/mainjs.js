@@ -1,7 +1,9 @@
+function toggleClass(element, removeClass, addClass) {
+  $(element).removeClass(removeClass).addClass(addClass);
+}
+
 $(function () {
-  function toggleClass(element, removeClass, addClass) {
-    $(element).removeClass(removeClass).addClass(addClass);
-  }
+
   allState();
 
   let isPaused = false;
@@ -361,9 +363,9 @@ $(function () {
       setPoolCond(tmpdataLow);
       setTimeout(function () {
         setPoolCond(tmpdataHi);
+        unpauseWebSockets();
       }, 500);
       $("#poolSetTemps").text(poolHeatTo + "° - " + poolCoolTo + "°F");
-      unpauseWebSockets();
     },
   });
 
@@ -389,99 +391,99 @@ $(function () {
     },
   });
 
-    $("#poolTempOnOff").on("click", function (e) {
-      e.preventDefault();
-      var $this = $(this);
-      var tempData = { id: 1, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
-      $.ajax({
-        type: "PUT",
-        url: "http://autopool.local:4200/state/body/heatMode",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(tempData),
-        success: function (datartn) {
-          var heatM = datartn.heatStatus;
-          var descc = heatM.desc;
-          if (descc === "Heating") poolWarm();
-          else if (descc === "Cooling") poolCold();
-          else poolOff();
-        },
-      });
+  $("#poolTempOnOff").on("click", function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    var tempData = { id: 1, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
+    $.ajax({
+      type: "PUT",
+      url: "http://autopool.local:4200/state/body/heatMode",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(tempData),
+      success: function (datartn) {
+        var heatM = datartn.heatStatus;
+        var descc = heatM.desc;
+        if (descc === "Heating") poolWarm();
+        else if (descc === "Cooling") poolCold();
+        else poolOff();
+      },
     });
+  });
 
-    $("#spaTempOnOff").on("click", function (e) {
-      e.preventDefault();
-      var $this = $(this);
-      var tempData = { id: 2, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
-      $.ajax({
-        type: "PUT",
-        url: "http://autopool.local:4200/state/body/heatMode",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(tempData),
-        success: function (datartn) {
-          var heatM = datartn.heatStatus;
-          var descc = heatM.desc;
-          if (descc === "Heating") spaHot();
-          else if (descc === "Cooling") spaCool();
-          else spaOff();
-        },
-      });
+  $("#spaTempOnOff").on("click", function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    var tempData = { id: 2, mode: $this.hasClass("btn-secondary") ? 5 : 1 };
+    $.ajax({
+      type: "PUT",
+      url: "http://autopool.local:4200/state/body/heatMode",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(tempData),
+      success: function (datartn) {
+        var heatM = datartn.heatStatus;
+        var descc = heatM.desc;
+        if (descc === "Heating") spaHot();
+        else if (descc === "Cooling") spaCool();
+        else spaOff();
+      },
     });
+  });
 
-    $("#poolCirculation").on("click", function (e) {
-      e.preventDefault();
-      var $this = $(this);
-      var data1, data2;
-      if ($this.hasClass("btn-info")) {
-        data1 = { id: 6, state: true };
-        data2 = { id: 2, state: true };
-        $("#poOn").text(" Pool Off");
-        $("#poolGauges").show();
-      } else {
-        data1 = { id: 6, state: false };
-        data2 = { id: 2, state: false };
-        $("#poOn").text(" Pool On");
-        $("#poolGauges").hide();
-      }
-      setPool(data1);
-      setTimeout(function () {
-        setPool(data2);
-      }, 500);
-      var elem = $("#poolDelay");
-      cntdown(elem, $this);
-    });
-
-    $("#spaCirculation").on("click", function (e) {
-      e.preventDefault();
-      var $this = $(this);
-      var data = { id: 1, state: $this.hasClass("btn-info") };
-      $("#spaOn").text($this.hasClass("btn-info") ? " Spa Off" : " Spa On");
-      setPool(data);
-      var elem = $("#spaDelay");
-      cntdown(elem, $this);
-    });
-
-    function cntdown(a, b) {
-      b.addClass("disabled");
-      a.empty();
-      let timerId = setInterval(function countdown() {
-        if (timeLeft <= 0) {
-          clearInterval(timerId);
-          doSomething();
-        } else {
-          a.show();
-          a.html(timeLeft + " sec delay");
-          timeLeft--;
-        }
-      }, 1000);
-      let timeLeft = 25;
-    
-      function doSomething() {
-        a.hide();
-        b.removeClass("disabled");
-      }
+  $("#poolCirculation").on("click", function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    var data1, data2;
+    if ($this.hasClass("btn-info")) {
+      data1 = { id: 6, state: true };
+      data2 = { id: 2, state: true };
+      $("#poOn").text(" Pool Off");
+      $("#poolGauges").show();
+    } else {
+      data1 = { id: 6, state: false };
+      data2 = { id: 2, state: false };
+      $("#poOn").text(" Pool On");
+      $("#poolGauges").hide();
     }
+    setPool(data1);
+    setTimeout(function () {
+      setPool(data2);
+    }, 500);
+    var elem = $("#poolDelay");
+    cntdown(elem, $this);
+  });
+
+  $("#spaCirculation").on("click", function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    var data = { id: 1, state: $this.hasClass("btn-info") };
+    $("#spaOn").text($this.hasClass("btn-info") ? " Spa Off" : " Spa On");
+    setPool(data);
+    var elem = $("#spaDelay");
+    cntdown(elem, $this);
+  });
+
+  function cntdown(a, b) {
+    b.addClass("disabled");
+    a.empty();
+    let timeLeft = 25;
+    let timerId = setInterval(function countdown() {
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        doSomething();
+      } else {
+        a.show();
+        a.html(timeLeft + " sec delay");
+        timeLeft--;
+      }
+    }, 1000);
+  
+    function doSomething() {
+      a.hide();
+      b.removeClass("disabled");
+    }
+  }
 
   $("#poolLight").on("click", function (e) {
     e.preventDefault();
