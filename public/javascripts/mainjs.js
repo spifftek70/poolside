@@ -221,8 +221,6 @@ $(function () {
     function toggleClass(element, removeClass, addClass) {
       $(element).removeClass(removeClass).addClass(addClass);
     }
-  }
-
     switch (data) {
       case "Blower":
         toggleClass(
@@ -293,6 +291,7 @@ $(function () {
         console.warn(`Unhandled data type: ${data}`);
         break;
     }
+  }
 
     $("#poolTempOnOff").on("click", function (e) {
       e.preventDefault();
