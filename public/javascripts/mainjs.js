@@ -41,7 +41,7 @@ $(function () {
 
   mainSocket.on("circuit", function (message) {
     // console.log("Temps message: ", message);
-    parseAll(message);
+    parseOne(message);
   });
 
   mainSocket.on("heater", function (message) {
@@ -694,6 +694,15 @@ $(function () {
       var cState = circuit.isOn;
       changeStuff(cName, cState);
     });
+  }
+
+  function parseOne(data) {
+    // Parsing the circuits array from the JSON response
+    const circuits = data.circuits;
+    // Looping through each circuit and logging relevant information
+    var cName = circuit.name;
+    var cState = circuit.isOn;
+    changeStuff(cName, cState);
   }
 
   function changeStuff(data, status) {
