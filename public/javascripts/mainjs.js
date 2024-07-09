@@ -1,12 +1,5 @@
 $(function () {
-  var spaJetsMaster;
-  var spaPumpMaster;
-  var poolPumpMaster;
-  var poolLightMaster;
-  var spaLightMaster;
-  var blowerMaster;
-  var fountainMaster;
-  var heaterMaster;
+
   allState();
   const mainSocket = io("http://autopool.local:4200", {
     path: "/socket.io",
@@ -44,6 +37,11 @@ $(function () {
   mainSocket.on("temps", function (message) {
     // console.log("Temps message: ", message);
     parseTemps(message);
+  });
+
+  mainSocket.on("circuit", function (message) {
+    // console.log("Temps message: ", message);
+    parseAll(message);
   });
 
   mainSocket.on("heater", function (message) {
