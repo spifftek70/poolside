@@ -2,11 +2,11 @@
   "name": "poolside",
   "version": "0.0.0",
   "private": true,
-"scripts": {
-  "start": "node app.js",
-  "devstart": "nodemon app.js",
-  "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
-},
+  "scripts": {
+    "start": "node app.js",
+    "devstart": "nodemon app.js",
+    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+  },
   "dependencies": {
     "bootstrap": "^5.3.0",
     "cookie-parser": "~1.4.4",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "description": "Website created to use for Swimply Hosts. `poolspa` page provides interface to controll you pool and hot tub through NodeJS PoolController Nixie. # poolside",
+  "description": "Website created to use for Swimply Hosts. `poolspa` page provides interface to control your pool and hot tub through NodeJS PoolController Nixie.",
   "main": "app.js",
   "author": "",
   "license": "ISC"
