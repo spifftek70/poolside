@@ -2,13 +2,11 @@
   "name": "poolside",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node app.js",
-    "devstart": "nodemon app.js",
-    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
-    "build": "webpack --mode production"
-  },
-
+"scripts": {
+  "start": "node app.js",
+  "devstart": "nodemon app.js",
+  "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+},
   "dependencies": {
     "bootstrap": "^5.3.0",
     "cookie-parser": "~1.4.4",
