@@ -1,16 +1,15 @@
 version: 1
-applications:
-  - backend:
-      phases:
-        preBuild:
-          commands:
-            - npm ci
-        build:
-          commands:
-            - npm start
-      artifacts:
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
+backend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm start
+  artifacts:
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
