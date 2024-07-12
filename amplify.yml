@@ -7,7 +7,7 @@ applications:
             - npm ci
         build:
           commands:
-            - echo "No build step required"
+            - npm start
       artifacts:
         files:
           - '**/*'

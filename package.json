@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm start",
+    "start": "node app.js",
     "devstart": "nodemon app.js",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
     "build": "webpack --mode production"
