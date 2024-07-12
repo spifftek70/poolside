@@ -6,7 +6,6 @@
     "start": "node app.js",
     "devstart": "nodemon app.js",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
-    "build": "webpack --mode production"
   },
   "dependencies": {
     "nodemon": "^3.0.1",
