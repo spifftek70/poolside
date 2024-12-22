@@ -54,14 +54,18 @@ append content
                     a.nav-link.mx-2(href='media') Audio/Video 
                 li.nav-item
                     a.nav-link.mx-2(role='button' href='sms:15015157182') Contact Us 
-  .container.mb-3
-    h1.text-center.mt-3.mb-4.h-title #{title}
-    .row.abbc.shadow.border.mb-4.py-3.px-3
-      p
+    .container.mb-3
+        h1.text-center.mt-3.mb-4.h-title #{title}
+        .row.abbc.shadow.border.mb-4.py-3.px-3
         h2.text-center.pb-3 Turing on the Spa / Hot Tub
         .container-fluid
-          .row.ratio.ratio-16x9.pb-3.text-center.g-2
-            iframe.embed-responsive-item(src='https://www.youtube.com/embed/3x6jotXV3O4' title='YouTube video player' frameborder='0' allowfullscreen='')
+            .row.ratio.ratio-16x9.pb-3.text-center.g-2
+            iframe.embed-responsive-item(
+                src='https://www.youtube.com/embed/3x6jotXV3O4' 
+                title='YouTube video player' 
+                frameborder='0' 
+                allowfullscreen=''
+            )
               //- h2.text-center.mb-4.h-title
               //-   em * Please don&apos;t forget to turn off the Misting System at the end of your time!!!
     include foot
