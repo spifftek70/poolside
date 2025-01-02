@@ -90,8 +90,8 @@ $(function () {
         message.isActive ? "btn-info" : "btn-circ",
         message.isActive ? "btn-circ" : "btn-info"
       );
-      $("#spaOn").text(message.isActive ? " Spa Off" : " Spa On");
-      $("#poOn").text(message.isActive ? " Pool On" : " Pool Off");
+      $("#spaOn").text(message.isActive ? " Spa Pump \n Off" : " Spa Pump \n On");
+      $("#poOn").text(message.isActive ? " Pool Pump \n On" : " Pool Pump \n Off");
       spaPumpMaster = message.isActive;
     }
     if (message.name === "Spa Jets") {
@@ -116,8 +116,8 @@ $(function () {
         message.isActive ? "btn-info" : "btn-circ",
         message.isActive ? "btn-circ" : "btn-info"
       );
-      $("#poOn").text(message.isActive ? " Pool Off" : " Pool On");
-      $("#spaOn").text(message.isActive ? " Spa On" : " Spa Off");
+      $("#poOn").text(message.isActive ? " Pool Pump \n Off" : " Pool Pump \n On");
+      $("#spaOn").text(message.isActive ? " Spa Pump \n On" : " Spa Pump \n Off");
       $(".gauge").toggle(message.isActive);
       setNumbers (message)
       poolPumpMaster = message.isActive;
@@ -278,8 +278,8 @@ $(function () {
       // case "Pool Cond":
       // case "Pool clean":
       // case "Pool cond":
-        $("#poOn").text(status ? " Pool Off" : " Pool On");
-        $("#spaOn").text(status ? " Spa On" : " Spa Off");
+        $("#poOn").text(status ? " Pool Pump \n Off" : " Pool Pump \n On");
+        $("#spaOn").text(status ? " Spa Pump \n On" : " Spa Pump \n Off");
         toggleClass(
           "#poolCirculation",
           status ? "btn-info" : "btn-circ",
@@ -288,8 +288,8 @@ $(function () {
         break;
   
       case "Spa Clean":
-        $("#spaOn").text(status ? " Spa Off" : " Spa On");
-        $("#poOn").text(status ? " Pool On" : " Pool Off");
+        $("#spaOn").text(status ? " Spa Pump \n Off" : " Spa Pump \n On");
+        $("#poOn").text(status ? " Pool Pump \n On" : " Pool Off");
         toggleClass(
           "#spaCirculation",
           status ? "btn-info" : "btn-circ",
@@ -437,12 +437,12 @@ $(function () {
     if ($this.hasClass("btn-info")) {
       data1 = { id: 6, state: true };
       data2 = { id: 2, state: true };
-      $("#poOn").text(" Pool Off");
+      $("#poOn").text(" Pool Pump \n Off");
       $("#poolGauges").show();
     } else {
       data1 = { id: 6, state: false };
       data2 = { id: 2, state: false };
-      $("#poOn").text(" Pool On");
+      $("#poOn").text(" Pool Pump \nOn");
       $("#poolGauges").hide();
     }
     setPool(data1);
