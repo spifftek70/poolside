@@ -139,16 +139,17 @@ $(function () {
   
   function parsebodies(message) {
     $.each(message, function (i, field) {
-      var tempFDfix = parseFloat(field.temp(2));
+      let tempFDfix = field.temp;
+      let tempCfix = parseFloat(tempFDfix.toFixed(2));
       if (field.name === "Pool") {
-        $("#poolCurrentTemps").text("Is now: " + tempFDfix + "° F");
+        $("#poolCurrentTemps").text("Is now: " + tempCfix + "° F");
         const poolVals = field.setPoint + ", " + field.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(field.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (field.name === "Spa") {
-        $("#spaCurrentTemps").text("Is now: " + tempFDfix + "° F");
+        $("#spaCurrentTemps").text("Is now: " + tempCfix + "° F");
         const spaVals = field.setPoint + ", " + field.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
@@ -160,16 +161,17 @@ $(function () {
   function parseTemps(message) {
     const bodes = message.bodies;
     $.each(bodes, function (i, data) {
-      var tempfix = parseFloat(data.temp(2));
+      let tempfix = data.temp;
+      let tempDfix = parseFloat(tempfix.toFixed(2));
       if (data.name === "Pool") {
-        $("#poolCurrentTemps").text("Is now: " + tempfix + "° F");
+        $("#poolCurrentTemps").text("Is now: " + tempDfix + "° F");
         const poolVals = data.setPoint + ", " + data.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(data.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (data.name === "Spa") {
-        $("#spaCurrentTemps").text("Is now: " + tempfix + "° F");
+        $("#spaCurrentTemps").text("Is now: " + tempDfix + "° F");
         const spaVals = data.setPoint + ", " + data.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
