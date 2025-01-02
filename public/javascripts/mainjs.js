@@ -136,18 +136,19 @@ $(function () {
     $("#pumpWatt").text(message.watts + " Watt");
     }
   } 
-
+  
   function parsebodies(message) {
     $.each(message, function (i, field) {
+      var tempFDfix = parseFloat(field.temp(2));
       if (field.name === "Pool") {
-        $("#poolCurrentTemps").text("Is now: " + field.temp + "° F");
+        $("#poolCurrentTemps").text("Is now: " + tempFDfix + "° F");
         const poolVals = field.setPoint + ", " + field.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(field.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (field.name === "Spa") {
-        $("#spaCurrentTemps").text("Is now: " + field.temp + "° F");
+        $("#spaCurrentTemps").text("Is now: " + tempFDfix + "° F");
         const spaVals = field.setPoint + ", " + field.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
@@ -159,15 +160,16 @@ $(function () {
   function parseTemps(message) {
     const bodes = message.bodies;
     $.each(bodes, function (i, data) {
+      var tempfix = parseFloat(data.temp(2));
       if (data.name === "Pool") {
-        $("#poolCurrentTemps").text("Is now: " + data.temp + "° F");
+        $("#poolCurrentTemps").text("Is now: " + tempfix + "° F");
         const poolVals = data.setPoint + ", " + data.coolSetpoint;
         $("#poolSlider").roundSlider("setValue", poolVals);
         $("#poolSetTemps").text("Set for: " + poolVals + "° F");
         handleHeatStatus(data.heatStatus, poolWarm, poolCold, poolOff);
       }
       if (data.name === "Spa") {
-        $("#spaCurrentTemps").text("Is now: " + data.temp + "° F");
+        $("#spaCurrentTemps").text("Is now: " + tempfix + "° F");
         const spaVals = data.setPoint + ", " + data.coolSetpoint;
         $("#spaSlider").roundSlider("setValue", spaVals);
         $("#spaSetTemps").text("Set for: " + spaVals + "° F");
